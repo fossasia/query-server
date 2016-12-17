@@ -31,7 +31,7 @@ def google_search(query):
     '''
     urls = []
     response = get_results_page(query)
-    soup = BeautifulSoup(response.read(), 'html.parser')
+    soup = BeautifulSoup(response.read(), 'html5lib')  # using advanced html parser
     # Search for all relevant 'a' tags
     for a in soup.select('.r a'):
         parsed_url = urlparse.urlparse(a['href'])
