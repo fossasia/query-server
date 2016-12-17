@@ -12,6 +12,7 @@ This mini-tool can be used to process a query string. This string calls the Goog
 * [Mechanize](http://wwwsearch.sourceforge.net/mechanize/)
 * [Feedgen](https://github.com/lkiesow/python-feedgen)
 * [BeautifulSoup4](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
+* [html5lib](https://pypi.python.org/pypi/html5lib)
 
 # Installing
 Make sure you have [Nodejs](https://nodejs.org/en/) installed.
