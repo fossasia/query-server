@@ -26,7 +26,7 @@ rl.on('line', function(line) {
         });
         py.stdout.on('end', function() {
             console.log(dataString);
-            console.log(" saved to file : " + __dirname + '/data/' + data + '.xml');
+           console.log(' saved to file : query-server/data/' + data + '.xml');
             rl.prompt();
         });
 
@@ -40,7 +40,7 @@ rl.on('line', function(line) {
         });
     } else {
         console.log(" already queried -> " + data);
-        console.log(" saved to file : " + __dirname + '/data/' + data + '.xml');
+        console.log(' saved to file : query-server/data/' + data + '.xml');
         rl.prompt();
     }
 });
