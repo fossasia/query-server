@@ -17,7 +17,7 @@ This mini-tool can be used to process a query string. This string calls the Goog
 Make sure you have [Nodejs](https://nodejs.org/en/) installed.
 Running this tool requires installing the nodejs as well as python dependencies.
 ```
-$ git clone https://github.com/enigmaeth/query-server.git 
+$ git clone https://github.com/fossasia/query-server.git 
 $ cd query-server
 $ npm install
 $ pip install -r requirements.txt
