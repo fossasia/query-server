@@ -20,7 +20,7 @@ def generateFeed(urls):
         fe.link({'href': url[1], 'rel':'alternate'})  
     print fg.rss_str(pretty=True)  
     ##Write to file
-    file_name = os.path.dirname(os.path.abspath(__file__)) + '/data/' + query + ".xml"
+    file_name = 'data/%s.xml'%query
     fg.rss_file(file_name)
   
 
