@@ -33,10 +33,8 @@ rl.on('line', function(line) {
         py.stdin.write(JSON.stringify(data));
         py.stdin.end();
 
-        queries.forEach(function(v) {
-            fs.appendFile('data/query_list.txt', v + '\n', function(err) {
-                if (err) console.log(err);
-            });
+        fs.appendFile('data/query_list.txt', queries[queries.length-1] + '\n', function(err) {
+            if (err) console.log(err);
         });
     } else {
         console.log(" already queried -> " + data);
