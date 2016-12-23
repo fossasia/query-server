@@ -18,7 +18,10 @@ rl.on('line', function(line) {
     if (queries.indexOf(data) == -1) {
         dataString = '';
         queries.push(data);
-        console.log("        querying -> " + data);
+        var myquery = data.toString();
+        myquery = myquery.split('~')[1];
+        
+        console.log("        querying -> " + myquery);
 
         var py = spawn('python', ['rss-generator.py']);
         py.stdout.on('data', function(data) {
@@ -26,7 +29,8 @@ rl.on('line', function(line) {
         });
         py.stdout.on('end', function() {
             console.log(dataString);
-           console.log(' saved to file : query-server/data/' + data + '.xml');
+            console.log(' saved to file : query-server/data/' + myquery + '.xml');
+
             rl.prompt();
         });
 
@@ -37,8 +41,10 @@ rl.on('line', function(line) {
             if (err) console.log(err);
         });
     } else {
-        console.log(" already queried -> " + data);
-        console.log(' saved to file : query-server/data/' + data + '.xml');
+
+        console.log(" already queried -> " + myquery);
+        console.log(' saved to file : query-server/data/' + myquery + '.xml');
+
         rl.prompt();
     }
 });

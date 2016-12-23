@@ -33,4 +33,5 @@ The search is prompted then.
 ```
 Search for >>
 ```
-Type in the query after the `>>` and hit enter.
+Type query like (search engine choice)~(query).
+For example: g~harambe or d~fossasia
