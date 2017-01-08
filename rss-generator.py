@@ -132,6 +132,9 @@ def read_in():
     lines = sys.stdin.readlines()
     return json.loads(lines[0])
 
+def small_test():
+    assert  type(google_search('fossasia')) is list
+
 def main():
 
     

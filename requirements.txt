@@ -2,3 +2,7 @@ beautifulsoup4>=4.5.1
 feedgen>=0.4.0
 mechanize>=0.2.5
 html5lib
+pytest-cov
+coveralls
+pytest
+requests
