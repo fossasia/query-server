@@ -1,0 +1,23 @@
+{
+  "name": "query-1",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.16.0",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.0",
+    "express": "~4.14.1",
+    "jade": "~1.11.0",
+    "morgan": "~1.7.0",
+    "serve-favicon": "~2.3.2",
+    "socket.io": "^1.5.1",
+    "socket.io-adapter": "^0.4.0",
+    "socket.io-client": "^1.5.1",
+    "socket.io-parser": "^2.3.1",
+    "serve-static": "^1.11.1",
+    "json3": "^3.3.2"
+  }
+}
