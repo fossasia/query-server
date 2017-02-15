@@ -8,126 +8,6 @@
         <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
         <!--<script>src = "server.js"</script>-->
         <style>
-            #message {
-                width: 86%;
-                float: left;
-            }
-
-            #send {
-                width: 12%;
-                float: left;
-                font-size: 1em;
-                font-weight: bold;
-            }
-
-            #headbar {
-                margin-top: -25px;
-                width: 100%;
-                float: left;
-                display: none;
-                position: fixed;
-                z-index: 9999;
-            }
-
-            #header {
-                width: 80%;
-                float: left;
-                display: inline-block;
-                vertical-align: middle;
-                line-height: 33px;
-                height: 33px;
-                text-align: center;
-                font-size: 1.6em;
-                font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
-                font-weight: 400;
-            }
-
-            #leaveRoom {
-                width: 12%;
-                float: right;
-                font-size: 1em;
-                font-weight: bold;
-            }
-
-            #newChat {
-                width: 12%;
-                font-size: 1em;
-                float: right;
-                font-weight: bold;
-                display: none;
-            }
-
-            #elementary {
-                margin-top: 1.6em;
-            }
-
-            #chatPage {
-                margin-top: 1.6em;
-            }
-
-            #messageArea {
-                display: none;
-            }
-
-            .louu {
-                float: left;
-                vertical-align: middle;
-            }
-
-            #queued {
-                color: white;
-                margin-top: 40vh;
-                display: none;
-                text-align: center;
-                vertical-align: middle;
-                font-size: 2em;
-                font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
-                font-style: normal;
-                text-shadow: border;
-            }
-
-            #userFormArea {
-                margin: -2em;
-                background-color: #eaf2ff;
-                background-color: rgba(0, 0, 0, 0.0);
-                width: 100%;
-                z-index: 9999;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            }
-
-            #loadbar {
-                display: inline-block;
-            }
-
-            #well {
-                font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
-                padding-top: 10px;
-                overflow-y: scroll;
-                height: 600px;
-                font-size: 1em;
-            }
-
-            #textbox {
-                font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
-                padding-top: 20px;
-                overflow-y: scroll;
-                padding-bottom: 3vh;
-            }
-
-            #chatArea {
-                font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
-                padding-top: 20px;
-                overflow-y: scroll;
-                padding-bottom: 3vh;
-            }
-
-            #username {
-                background-color: #f6f9f2;
-            }
-
             #page {
                 position: relative;
                 height: 100vh;
@@ -160,6 +40,7 @@
                             <!--onclick="alert(document.getElementById('query').value);"-->
                         </div>
                         <span id="demo">updates here</span>
+                        <input id="xmlLoader" type="submit" class="btn btn-success" value="Load XML"/>
                     </div>
                 </form>
             </div>
@@ -175,6 +56,10 @@
                          $('#demo').val(data);
                       });
                  });
+                 /*
+                 $('#xmlLoader').click(function(){
+                     $('#demo').load('/home/enigmaeth/WebstormProjects/query-1/data'+ ($('#query').val()).slice(2,($('#query').val()).length) + '.xml');
+                 });*/
              };
             document.onload = numlock();
         </script>
