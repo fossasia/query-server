@@ -12,8 +12,8 @@ app.get('/', function(req, res) {
 });
 
 app.post('/',function(req, res, next) {
-    console.log(req.query.search);
+    //console.log(req.query.search);
     results = searcher(req.query.search);
-    console.log(results);
+    console.log("\n\n===\n" + results);
     res.send(results);
 });
