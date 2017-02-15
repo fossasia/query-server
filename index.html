@@ -159,7 +159,7 @@
                             <input id="searchButton" type="submit" class="btn btn-success" value="submit"/>
                             <!--onclick="alert(document.getElementById('query').value);"-->
                         </div>
-                        <span id="demo"></span>
+                        <span id="demo">updates here</span>
                     </div>
                 </form>
             </div>
@@ -171,7 +171,8 @@
                      var lhref = window.location.href;
                      var urlloc = lhref.slice(0, -1) + "?search=" + $('#query').val();
                      $.post(urlloc, function(data, status){
-                      //alert("Data: " + data + "\nStatus: " + status);
+                      alert("Data: " + data + "\nStatus: " + status);
+                         $('#demo').val(data);
                       });
                  });
              };
