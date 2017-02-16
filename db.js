@@ -47,7 +47,7 @@ MongoClient.connect(url, function(err, db) {
                 db.collection('xml_files').save(dbObject, function(err, result){
                     if (err) return console.log(err);
                     console.log('saved to database');
-                    res.redirect('/')
+                    res.redirect('/result');
                 });
             });
 
@@ -63,6 +63,13 @@ MongoClient.connect(url, function(err, db) {
             console.log(' saved to file : query-server/data/' + myquery + '.xml');
 
         }
+        app.get('/result', function(req, res) {
+            db.collection('xml_files').find({ "query" : myquery }).toArray(function(err, results) {
+            console.log(results);
+            // send HTML file populated with quotes here
+        });
+        })
+
     });
     //db.close();
 });
