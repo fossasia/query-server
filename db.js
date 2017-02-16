@@ -24,45 +24,42 @@ MongoClient.connect(url, function(err, db) {
 
     app.post('/',function(req, res, next) {
         var data = req.query.search;
-        //console.log(results);
-        //var search = function(data) {
-        //console.log(data);
-        if (queries.indexOf(data) == -1) {
-            dataString = '';
-            queries.push(data);
-            var myquery = data.toString();
-            myquery = myquery.split('~')[1];
-            console.log("        querying -> " + myquery);
-            var py = spawn('python', ['rss-generator.py']);
+        var myquery = data.toString();
+        myquery = myquery.split('~')[1];
+        db.collection('xml_files').find({'query': myquery}).count()
+            .then(function(numItems) {
+                console.log(numItems); // Use this to debug
+                //callback(numItems); TODO : write everything in this callback function
+                if (numItems == 0  ) {
+                    dataString = '';
+                    //queries.push(data);
+                    console.log("        querying -> " + myquery);
 
-            py.stdout.on('data', function(data) {
-                dataString += data.toString();
+                    var py = spawn('python', ['rss-generator.py']);
+
+                    py.stdout.on('data', function (data) {
+                        dataString += data.toString();
+                    });
+
+                    py.stdout.on('end', function () {
+                        console.log(dataString);
+                        var dbObject = {query: myquery, xml: dataString};
+                        db.collection('xml_files').save(dbObject, function (err, result) {
+                            if (err) return console.log(err);
+                            console.log('saved to database');
+                            res.redirect('/result');
+                        });
+                    });
+
+                    py.stdin.write(JSON.stringify(data));
+                    py.stdin.end();
+
+                } else {
+                    console.log(" already queried -> " + myquery);
+                    console.log(' saved to file : query-server/data/' + myquery + '.xml');
+
+                }
             });
-
-            py.stdout.on('end', function() {
-                console.log(dataString);
-                var xml_file = __dirname + '/data/' + myquery + '.xml';
-                console.log(' saved to file : ' + xml_file);
-                var dbObject =  { query : myquery , xml : dataString , file : xml_file } ;
-                db.collection('xml_files').save(dbObject, function(err, result){
-                    if (err) return console.log(err);
-                    console.log('saved to database');
-                    res.redirect('/result');
-                });
-            });
-
-            py.stdin.write(JSON.stringify(data));
-            py.stdin.end();
-
-            fs.appendFile('data/query_list.txt', queries[queries.length-1] + '\n', function(err) {
-                if (err) console.log(err);
-            });
-        } else {
-            var myquery = data.toString();
-            console.log(" already queried -> " + myquery);
-            console.log(' saved to file : query-server/data/' + myquery + '.xml');
-
-        }
         app.get('/result', function(req, res) {
             db.collection('xml_files').find({ "query" : myquery }).toArray(function(err, results) {
             console.log(results);
