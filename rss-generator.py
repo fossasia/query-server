@@ -140,7 +140,7 @@ def main():
     command = read_in()
     # split the command
     stype, query = command.split('~')
-    print(query)
+    print()
 
     if stype == 'g':
         urls = google_search(query)
