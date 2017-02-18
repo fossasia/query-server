@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+
+    <head>
+        <title id="title">TestPage</title>
+        <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <style>
+            #page {
+                position: relative;
+                height: 100vh;
+                width: 100%;
+                vertical-align: middle;
+                display: flex;
+                justify-content: center;
+                /*background-image: url("mail.png");*/
+                background-repeat: no-repeat;
+                background-position: center center;
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <div id="page">
+            <div class="row">
+                <form>
+                    <div class="form-group" method = "POST" action="">
+                        <br/>
+                        <input class="form-control" id="query" placeholder="query"/>
+                        <br/>
+                        <div class="col-md-4">
+                            <input id="searchButton" type="button" class="btn btn-success" value="submit"/>
+                        </div>
+                        <span id="demo">updates here</span>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <script>
+                 $('#searchButton').click(function(e){
+                     e.preventDefault();
+                     var lhref = window.location.href;
+                     var urlloc = lhref.slice(0, -2) + "/submit?search=" + $('#query').val();
+                     $.post(urlloc,function(data, status){
+                         $('#demo').html(data);
+                     });
+                 });
+        </script>
+    </body>
+
+</html>
