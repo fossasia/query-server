@@ -7,6 +7,7 @@ var path = require('path');
 var fs = require('fs');
 var util = require('util');
 var ejs = require('ejs');
+var favicon = require('serve-favicon');
 var spawn = require('child_process').spawn;
 
 var url = 'mongodb://localhost:27017/query-server';
@@ -19,6 +20,7 @@ MongoClient.connect(url, function(err, db) {
     app.use(express.static(path.join(__dirname)));
     app.set('view engine', 'ejs');
     app.set('views', path.join(__dirname, 'views'));
+    app.use(favicon(path.join(__dirname,'public','images','favicon.ico')));
 
     app.get('/', function(req, res) {
         res.sendFile(__dirname + '/index.html');
