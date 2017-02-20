@@ -25,8 +25,8 @@ body {
 pre{
   font-size: 1.2em;
   display: none;
-  margin : 100px 100px 100px 100px ;
-  padding : 0px -50px 0px -50px;
+  margin : 0 30px 0 30px ;
+  padding: 0 10px 0 10px;
 }
 
 
