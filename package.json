@@ -1,30 +1,21 @@
 {
-  "name": "query-server",
-  "version": "1.0.1",
-  "description": "",
-  "main": "server.js",
-  "dependencies": {
-    "express": "^4.14.0",
-    "json3": "^3.3.2"
-    },
-  "devDependencies": {},
+  "name": "query-1",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node app.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/enigmaeth/chat-app.git"
-  },
-  "keywords": [
-    "socket.io",
-    "chat-app",
-    "nodejs"
-  ],
-  "author": "enigmaeth",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/enigmaeth/chat-app/issues"
-  },
-  "homepage": "https://github.com/enigmaeth/chat-app#readme"
+  "dependencies": {
+    "body-parser": "~1.16.0",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.0",
+    "ejs": "^2.5.5",
+    "express": "~4.14.1",
+    "json3": "^3.3.2",
+    "mongodb": "^2.2.24",
+    "morgan": "~1.7.0",
+    "pug": "^2.0.0-beta11",
+    "serve-favicon": "^2.3.2",
+    "serve-static": "^1.11.1"
+  }
 }
