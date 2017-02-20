@@ -16,12 +16,12 @@ MongoClient.connect(url, function(err, db) {
     console.log("Connected successfully to server");
 
     app.listen(7001);
-    app.use(express.static(path.join(__dirname, 'public')));
+    app.use(express.static(path.join(__dirname)));
     app.set('view engine', 'ejs');
     app.set('views', path.join(__dirname, 'views'));
 
     app.get('/', function(req, res) {
-        res.render('home');
+        res.sendFile(__dirname + '/index.html');
     });
 
     app.post('/submit',function(req, res, next) {

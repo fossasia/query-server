@@ -6,7 +6,6 @@ var spawn = require('child_process').spawn;
 var query = '';
 var dataString = "";
 
-var queries = fs.readFileSync('data/query_list.txt').toString().split("\n");
 var search = function(data) {
     //console.log(data);
     if (queries.indexOf(data) == -1) {
@@ -30,9 +29,6 @@ var search = function(data) {
         py.stdin.write(JSON.stringify(data));
         py.stdin.end();
 
-        fs.appendFile('data/query_list.txt', queries[queries.length-1] + '\n', function(err) {
-            if (err) console.log(err);
-        });
     } else {
         var myquery = data.toString();
         console.log(" already queried -> " + myquery);

@@ -1,0 +1,39 @@
+/* Move down content because we have a fixed navbar that is 50px tall */
+/*@font-face {
+  font-family: 'Droid Sans Mono';
+  font-style: normal;
+  font-weight: 400;
+  src:
+  local('Droid Sans Mono'),
+  local('DroidSansMono'),
+  url('../fonts/DroidSansMono.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/DroidSansMono.woff') format('woff'),
+  url('../fonts/DroidSansMono.ttf')  format('truetype'),
+  url('../fonts/DroidSansMono.svg#svgFontName') format('svg');
+}*/
+
+* {
+  font-family: 'Droid Sans Mono';
+}
+
+
+body {
+  padding-top: 0px;
+  font: DroidSansMono;
+}
+
+pre{
+  font-size: 1.2em;
+  display: none;
+  margin : 100px 100px 100px 100px ;
+  padding : 0px -50px 0px -50px;
+}
+
+
+p{
+  font-size: medium;
+}
+
+.desc{
+  font-size: 1.2em;
+}
