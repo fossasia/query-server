@@ -41,12 +41,14 @@ To set up MongoDB on your server :
  $ sudo apt-get install -y mongodb-org
  $ sudo service mongod start
  ```
+
 ## Usage
 
 To run the query server: 
 ```
 $ npm start
 ```
+
 Then head over to **http://localhost:70001** in your browser.
 Now type the search query in the following format : 
 Type query like (search engine choice)~(query).
