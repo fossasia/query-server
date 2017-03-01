@@ -6,10 +6,12 @@
   },
   "dependencies": {
     "body-parser": "~1.16.0",
+    "bootstrap": "^3.3.7",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.0",
     "ejs": "^2.5.5",
     "express": "~4.14.1",
+    "jquery": "^3.1.1",
     "json3": "^3.3.2",
     "mongodb": "^2.2.24",
     "morgan": "~1.7.0",
