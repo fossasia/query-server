@@ -8,7 +8,9 @@ from bs4 import BeautifulSoup
 
 search_engines = {'g':("GOOGLE SEARCH RESULTS", "htps://www.google.com", "Google search results for %s"),
                   'd':("DUCKDUCKGO SEARCH RESULTS", "htps://www.duckduckgo.com", "Duckduckgo search results for %s"),
-                  'b': ("BING SEARCH RESULTS", "https://www.bing.com", "Bing search results for %s")
+                  'b': ("BING SEARCH RESULTS", "https://www.bing.com", "Bing search results for %s"),
+                  'y': ("YAHOO SEARCH RESULTS", "https://search.yahoo.com/", "Yahoo search results for %s")
+
                   }
 
 query = ''
@@ -27,6 +29,9 @@ def generateFeed(urls, stype):
         fe.title(url[0])
         fe.link({'href': url[1], 'rel': 'alternate'})
     print(fg.rss_str(pretty=True))
+    ##Write to file
+    file_name = 'data/%s.xml'%query
+    fg.rss_file(file_name)
 
 def get_bing_page(query):
     '''
@@ -119,7 +124,36 @@ def google_search(query):
     for h3 in soup.findAll('h3',{'class':'r'}):
 
         links = h3.find('a')
-        
+        #print(links.getText())
+        urls.append([links.getText(),links.get('href')])
+
+    return urls
+def get_yahoo_page(query):
+    ''' Fetch the google search results page
+    Returns : Results Page
+    '''
+    header = {'User-Agent': 
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36"
+    }
+
+    payload = {'q' : query}
+    response = requests.get('https://search.yahoo.com/search', headers=header, params=payload)
+
+    return response
+
+def yahoo_search(query):
+    ''' Search google for the query and return set of urls
+    Returns: urls (list)
+            [[Tile1,url1], [Title2, url2],..]
+    '''
+    urls = []
+    response = get_google_page(query)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    # Search for all relevant 'h3' tags
+    for h in soup.findAll('h2'):
+
+        links = h.find('li')
+        #print(links.getText())
         urls.append([links.getText(),links.get('href')])
 
     return urls
@@ -140,7 +174,7 @@ def main():
     command = read_in()
     # split the command
     stype, query = command.split('~')
-    print()
+    print(query)
 
     if stype == 'g':
         urls = google_search(query)
@@ -153,4 +187,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
