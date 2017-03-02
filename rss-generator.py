@@ -1,4 +1,3 @@
-
 from __future__ import print_function
 import os, json, sys
 import requests
@@ -29,9 +28,6 @@ def generateFeed(urls, stype):
         fe.title(url[0])
         fe.link({'href': url[1], 'rel': 'alternate'})
     print(fg.rss_str(pretty=True))
-    ##Write to file
-    file_name = 'data/%s.xml'%query
-    fg.rss_file(file_name)
 
 def get_bing_page(query):
     '''
@@ -124,7 +120,7 @@ def google_search(query):
     for h3 in soup.findAll('h3',{'class':'r'}):
 
         links = h3.find('a')
-        #print(links.getText())
+        
         urls.append([links.getText(),links.get('href')])
 
     return urls
@@ -158,7 +154,6 @@ def yahoo_search(query):
 
     return urls
 
-
 def read_in():
     lines = sys.stdin.readlines()
     return json.loads(lines[0])
@@ -174,7 +169,7 @@ def main():
     command = read_in()
     # split the command
     stype, query = command.split('~')
-    print(query)
+    print()
 
     if stype == 'g':
         urls = google_search(query)
