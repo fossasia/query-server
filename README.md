@@ -1,6 +1,8 @@
 # Query-Server
 
 [![Build Status](https://travis-ci.org/fossasia/query-server.svg?branch=master)](https://travis-ci.org/fossasia/query-server)
+[![Dependency Status](https://david-dm.org/fossasia/query-server.svg)](https://david-dm.org/ossasia/query-server)
+[![Join the chat at https://gitter.im/fossasia/query-server](https://badges.gitter.im/fossasia/query-server.svg)](https://gitter.im/fossasia/query-server?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 > Query server that stores a query or string on a server. This mini-tool can be used to process a query string. This string calls the search engine result scraper at [searss](https://github.com/fossasia/searss) and the output from the scraper is written to a file, named with the query string as file name.
 
@@ -40,7 +42,7 @@ To set up MongoDB on your server :
  $ sudo apt-get update
  $ sudo apt-get install -y mongodb-org
  $ sudo service mongod start
- ```
+```
 
 ## Usage
 
@@ -49,20 +51,7 @@ To run the query server:
 $ npm start
 ```
 
-Then head over to **http://localhost:70001** in your browser.
-Now type the search query in the following format : 
-Type query like (search engine choice)~(query).
-For example: g~harambe or d~fossasia
-
-### Options
-```
-  d~(query)         Use DuckDuckGo as search engine
-  
-  g~(query)         Use Google as search engine
-                        
-  b~(query)         Use Bing as search engine
-                        
-```
+Then head over to **<http://localhost:7001>** in your browser.
 
 ## Contribute
 
