@@ -1,10 +1,8 @@
 # Query-Server
 
 [![Build Status](https://travis-ci.org/fossasia/query-server.svg?branch=master)](https://travis-ci.org/fossasia/query-server)
-
+[![Dependency Status](https://david-dm.org/fossasia/query-server.svg)](https://david-dm.org/ossasia/query-server)
 > Query server that stores a query or string on a server. This mini-tool can be used to process a query string. This string calls the search engine result scraper at [searss](https://github.com/fossasia/searss) and the output from the scraper is written to a file, named with the query string as file name.
-
-<img src="workflow.gif" height=500px; />
 
 ## Table of Contents
 
@@ -35,6 +33,14 @@ $ npm install
 $ pip install -r requirements.txt
 ```
 
+To set up MongoDB on your server : 
+```
+ $ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+ $ echo "deb http://repo.mongodb.org/apt/ubuntu "$(lsb_release -sc)"/mongodb-org/3.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list
+ $ sudo apt-get update
+ $ sudo apt-get install -y mongodb-org
+ $ sudo service mongod start
+```
 
 ## Usage
 
@@ -42,22 +48,8 @@ To run the query server:
 ```
 $ npm start
 ```
-The search is prompted then.
-```
-Search for >>
-```
-Type query like (search engine choice)~(query).
-For example: g~harambe or d~fossasia
 
-### Options
-```
-  d~(query)         Use DuckDuckGo as search engine
-  
-  g~(query)         Use Google as search engine
-                        
-  b~(query)         Use Bing as search engine
-                        
-```
+Then head over to **<http://localhost:7001>** in your browser.
 
 ## Contribute
 
