@@ -1,0 +1,79 @@
+/* Move down content because we have a fixed navbar that is 50px tall */
+/*@font-face {
+  font-family: 'Droid Sans Mono';
+  font-style: normal;
+  font-weight: 400;
+  src:
+  local('Droid Sans Mono'),
+  local('DroidSansMono'),
+  url('../fonts/DroidSansMono.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/DroidSansMono.woff') format('woff'),
+  url('../fonts/DroidSansMono.ttf')  format('truetype'),
+  url('../fonts/DroidSansMono.svg#svgFontName') format('svg');
+}*/
+
+* {
+  font-family: 'Droid Sans Mono';
+}
+
+
+body {
+  padding-top: 0px;
+  font: DroidSansMono;
+}
+
+.jumbotron{
+    z-index: 0;
+}
+
+#xmlfeed{
+  font-size: 1.2em;
+  display: none;
+  margin : 0em 2em 0 2em ;
+  padding: -5em 0 -5em 0;
+  z-index: -100000;
+}
+
+#load{
+    position: relative;
+    display: none;
+    left: 50%;
+    top: 50%;
+    margin: auto;
+}
+
+p{
+  font-size: medium;
+}
+
+.desc{
+  font-size: 1.2em;
+}
+
+.btn-toolbar{
+  margin-top: 2em;
+}
+
+.btn {
+  border: none;
+  color: white;
+  padding: 0.5em 1.5em;
+  text-align: center;
+  text-decoration: ghostwhite;
+  display: inline-block;
+  margin:0.5em;
+  font-size: 1.4em;
+  border-radius: 0.4em;
+}
+
+#tweet{
+    font-size: large;
+}
+
+#desc{
+    font-weight: bold;
+    font-size: 1.2em;
+    box-shadow: aliceblue;
+}
+
+
