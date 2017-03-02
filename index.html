@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="robots" content="index,follow">
+    <meta http-equiv="cache-control" content="public">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="Content-Language" content="en, english" />
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="node_modules/prismjs/themes/prism.css" rel="stylesheet" />
+    <link href="public/stylesheets/loklak.css" rel="stylesheet">
+    <meta name="description" content="query-server:Query server that stores a query string on a server.">
+    <meta name="author" content="enigmaeth, @enigmaeth">
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="node_modules/prismjs/prism.js"></script>
+    <link rel="icon" type="image/png" sizes="16x16" href="public/images/favicon.ico">
+    <title>query-server &middot; FOSSASIA</title>
+  </head>
+
+  <body style="position: relative; margin: 0; padding-bottom: 6rem; min-height: 100%; font-family:Droid Sans Mono" >
+    <a href="https://github.com/fossasia/query-server.git">
+      <img style="position:absolute; top:20; right:0; border:0;" src="public/images/forkme_right_green_007200.png" alt="Fork me on GitHub" title="loklak server source code on github">
+    </a>
+    <div class="jumbotron">
+      <div class="container">
+        <h1><code>query-server</code></h1>
+        <span id="desc">
+          Query server that stores a query string on a server.
+        </span><br><br><br>
+          <form class="col-lg-12 hidden-xs" id="searchForm">
+            <div class="input-group input-group-lg col-sm-8" style="float:left">
+              <input id="query" type="text" class="center-block form-control input-lg" placeholder="Search with query-server">
+              <br/><!--<div class = "col-xs-1"/>-->
+              <div class="btn-toolbar">
+                <button type="submit" class="btn btn-lg btn-primary">Google</button>
+                <button type="submit" class="btn btn-lg btn-primary">Bing</button>
+                <button type="submit" class="btn btn-lg btn-primary">DuckDuckGo</button>
+              </div>
+            </div>
+           </form>
+       </div>
+    </div>
+    <div class="container">
+      <footer style="position: absolute; right: 0; bottom: 0; left: 0; padding: 1rem; text-align: center;">
+        <p>Nice? To get latest news about <code>query-server</code>, follow <a href="https://twitter.com/fossasia"><code>@FOSSASIA</code></a>.  Help to spread the news: <a class="btn btn-info" id="tweet" href="https://twitter.com/intent/tweet?hashtags=loklak&text=%20%23query-server%20%23fossasia&tw_p=tweetbutton" role="button">tweet about this &raquo;</a></p>
+      </footer>
+    </div>
+    <div class="pagination-centered" >
+      <img id="load" src="public/images/ripple.gif">
+    </div>
+    <pre id="xmlfeed"><code class="language-xml"></code></pre><br/><br/>
+  </body>
+  <script >
+      $('.btn-toolbar > button.btn').click(function(e){
+          e.preventDefault();
+          if($('#query').val()) {
+              $('#load').show();
+              $('#xmlfeed').hide();
+              var squery = ((this.innerHTML.charAt(0).toLowerCase()) + '~') + $('#query').val();
+              var urlloc = window.location.href.split(/\?|#/)[0] + "submit?search=" + squery;
+              $.post(urlloc, function (data, status) {
+                  $('#load').hide();
+                  $('#xmlfeed').show();
+                  $('#xmlfeed').html(data);
+              });
+          }
+      });
+  </script>
+</html>

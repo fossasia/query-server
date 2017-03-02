@@ -29,9 +29,6 @@ def generateFeed(urls, stype):
         fe.title(url[0])
         fe.link({'href': url[1], 'rel': 'alternate'})
     print(fg.rss_str(pretty=True))
-    ##Write to file
-    file_name = 'data/%s.xml'%query
-    fg.rss_file(file_name)
 
 def get_bing_page(query):
     '''
@@ -174,7 +171,7 @@ def main():
     command = read_in()
     # split the command
     stype, query = command.split('~')
-    print(query)
+    print()
 
     if stype == 'g':
         urls = google_search(query)
