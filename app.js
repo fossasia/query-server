@@ -29,9 +29,10 @@ MongoClient.connect(url, function(err, db) {
     app.post('/submit',function(req, res, next) {
         var data = req.query.search;
         var myquery = data.toString();
-        myquery = myquery.split('~')[1];
         db.collection('xml_files').find({'query': myquery}).count()
             .then(function(numItems) {
+                var query_raw = myquery;
+                myquery = myquery.split('~')[1];
                 if (numItems == 0  ) {
                     dataString = '';
                     console.log("        querying -> " + myquery);
@@ -44,11 +45,11 @@ MongoClient.connect(url, function(err, db) {
 
                     py.stdout.on('end', function () {
                         console.log(dataString);
-                        var dbObject = {query: myquery, xml: dataString};
+                        var dbObject = {query: query_raw, xml: dataString};
                         db.collection('xml_files').save(dbObject, function (err, result) {
                             if (err) return console.log(err);
                             console.log('saved to database');
-                            rval(myquery);
+                            rval(query_raw);
                         });
                     });
 
@@ -57,7 +58,7 @@ MongoClient.connect(url, function(err, db) {
 
                 } else {
                     console.log(" already queried -> " + myquery);
-                    rval(myquery);
+                    rval(query_raw);
                 }
             });
         var rval = function(myquery) {

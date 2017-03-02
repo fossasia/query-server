@@ -9,10 +9,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="Content-Language" content="en, english" />
     <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="public/stylesheets/prism.css" rel="stylesheet" />
     <link href="public/stylesheets/loklak.css" rel="stylesheet">
     <meta name="description" content="query-server:Query server that stores a query string on a server.">
     <meta name="author" content="enigmaeth, @enigmaeth">
     <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="public/js/prism.js"></script>
     <link rel="icon" type="image/png" sizes="16x16" href="public/images/favicon.ico">
     <title>query-server &middot; FOSSASIA</title>
   </head>
@@ -24,40 +26,46 @@
     <div class="jumbotron">
       <div class="container">
         <h1><code>query-server</code></h1>
-        <span style="font-weight: bold;">
+        <span id="desc">
           Query server that stores a query string on a server.
         </span><br><br><br>
-          <form class="col-lg-12 hidden-xs">
+          <form class="col-lg-12 hidden-xs" id="searchForm">
             <div class="input-group input-group-lg col-sm-8" style="float:left">
               <input id="query" type="text" class="center-block form-control input-lg" placeholder="Search with query-server">
-              <span id="run" class="input-group-btn">
-                 <button id="submit" class="btn btn-lg btn-primary" type="button" >Get XML Data</button>
-              </span>
-            </div><br/><br/><br/>
-            <p class="desc">Type query like (search engine choice)~(query). For example: g~harambe or d~fossasia</p>
-            <ul class="desc">
-              <li>d~(query) : Use DuckDuckGo as search engine</li>
-              <li>g~(query) : Use Google as search engine</li>
-              <li>b~(query) : Use Bing as search engine</li>
-            </ul>
-          </form>
+              <br/><!--<div class = "col-xs-1"/>-->
+              <div class="btn-toolbar">
+                <button type="submit" class="btn btn-lg btn-primary">Google</button>
+                <button type="submit" class="btn btn-lg btn-primary">Bing</button>
+                <button type="submit" class="btn btn-lg btn-primary">DuckDuckGo</button>
+              </div>
+            </div>
+           </form>
        </div>
     </div>
     <div class="container">
       <footer style="position: absolute; right: 0; bottom: 0; left: 0; padding: 1rem; text-align: center;">
-        <p>Nice? To get latest news about <code>query-server</code>, follow <a href="https://twitter.com/enigmaeth"><code>@enigmaeth</code></a>.  Help to spread the news: <a class="btn btn-default" href="https://twitter.com/intent/tweet?hashtags=loklak&text=%20%23query-server%20%23fossasia&tw_p=tweetbutton" role="button">tweet about this &raquo;</a></p>
+        <p>Nice? To get latest news about <code>query-server</code>, follow <a href="https://twitter.com/fossasia"><code>@FOSSASIA</code></a>.  Help to spread the news: <a class="btn btn-info" id="tweet" href="https://twitter.com/intent/tweet?hashtags=loklak&text=%20%23query-server%20%23fossasia&tw_p=tweetbutton" role="button">tweet about this &raquo;</a></p>
       </footer>
     </div>
-    <pre id="xmlfeed"></pre>
+    <div class="pagination-centered" >
+      <img id="load" src="public/images/ripple.gif">
+    </div>
+    <pre id="xmlfeed"><code class="language-xml"></code></pre><br/><br/>
   </body>
   <script >
-      $('#submit').click(function(e){
+      $('.btn-toolbar > button.btn').click(function(e){
           e.preventDefault();
-          var urlloc = window.location.href.split(/\?|#/)[0]+ "submit?search=" + $('#query').val();
-          $.post(urlloc,function(data, status){
-              $('#xmlfeed').show();
-              $('#xmlfeed').html(data);
-          });
+          if($('#query').val()) {
+              $('#load').show();
+              $('#xmlfeed').hide();
+              var squery = ((this.innerHTML.charAt(0).toLowerCase()) + '~') + $('#query').val();
+              var urlloc = window.location.href.split(/\?|#/)[0] + "submit?search=" + squery;
+              $.post(urlloc, function (data, status) {
+                  $('#load').hide();
+                  $('#xmlfeed').show();
+                  $('#xmlfeed').html(data);
+              });
+          }
       });
   </script>
 </html>

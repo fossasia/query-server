@@ -22,13 +22,25 @@ body {
   font: DroidSansMono;
 }
 
-pre{
-  font-size: 1.2em;
-  display: none;
-  margin : 0 30px 0 30px ;
-  padding: 0 10px 0 10px;
+.jumbotron{
+    z-index: 0;
 }
 
+#xmlfeed{
+  font-size: 1.2em;
+  display: none;
+  margin : 0em 2em 0 2em ;
+  padding: -5em 0 -5em 0;
+  z-index: -100000;
+}
+
+#load{
+    position: relative;
+    display: none;
+    left: 50%;
+    top: 50%;
+    margin: auto;
+}
 
 p{
   font-size: medium;
@@ -37,3 +49,31 @@ p{
 .desc{
   font-size: 1.2em;
 }
+
+.btn-toolbar{
+  margin-top: 2em;
+}
+
+.btn {
+  border: none;
+  color: white;
+  padding: 0.5em 1.5em;
+  text-align: center;
+  text-decoration: ghostwhite;
+  display: inline-block;
+  margin:0.5em;
+  font-size: 1.4em;
+  border-radius: 0.4em;
+}
+
+#tweet{
+    font-size: large;
+}
+
+#desc{
+    font-weight: bold;
+    font-size: 1.2em;
+    box-shadow: aliceblue;
+}
+
+
