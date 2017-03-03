@@ -9,14 +9,13 @@ var util = require('util');
 var ejs = require('ejs');
 var favicon = require('serve-favicon');
 var spawn = require('child_process').spawn;
-
-var url = 'mongodb://localhost:27017/query-server';
+var url = process.env.MONGODB_URI;
 
 MongoClient.connect(url, function(err, db) {
     assert.equal(null, err);
     console.log("Connected successfully to server");
 
-    app.listen(7001);
+    app.listen(process.env.PORT || 7001);
     app.use(express.static(path.join(__dirname)));
     app.set('view engine', 'ejs');
     app.set('views', path.join(__dirname, 'views'));
