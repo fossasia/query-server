@@ -9,9 +9,7 @@ var util = require('util');
 var ejs = require('ejs');
 var favicon = require('serve-favicon');
 var spawn = require('child_process').spawn;
-
-//var url = 'mongodb://localhost:27017/query-server';
-var url = 'mongodb://user:pass@host:port/db'
+var url = process.env.MONGODB_URI;
 
 MongoClient.connect(url, function(err, db) {
     assert.equal(null, err);

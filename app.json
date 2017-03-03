@@ -7,18 +7,11 @@
     "query-server",
     "fossasia"
   ],
-  "env": {
-    "APP_SECRET_TOKEN": {
-      "generator": "secret"
-    },
-    "ON_HEROKU": "true",
-    "FORCE_SSL": "true",
-    "INVITATION_CODE": {
-      "generator": "secret"
-    }
-  },
   "addons": [
-    "heroku-mongodb:sandbox"
+    {
+      "plan": "mongolab:sandbox",
+      "as": "MONGO"
+    }
   ],
   "buildpacks": [
     {
