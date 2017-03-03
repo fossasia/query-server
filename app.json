@@ -1,0 +1,31 @@
+{
+  "name": "query-server",
+  "description": "Query server that stores a query string on a server.",
+  "repository": "https://github.com/fossasia/query-server/",
+  "logo": "http://labs.fossasia.org/images/fossasia.png",
+  "keywords": [
+    "query-server",
+    "fossasia"
+  ],
+  "env": {
+    "APP_SECRET_TOKEN": {
+      "generator": "secret"
+    },
+    "ON_HEROKU": "true",
+    "FORCE_SSL": "true",
+    "INVITATION_CODE": {
+      "generator": "secret"
+    }
+  },
+  "addons": [
+    "heroku-mongodb:sandbox"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    },
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
