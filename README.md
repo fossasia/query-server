@@ -1,9 +1,9 @@
 # Query-Server
 
-[![Join the chat at https://gitter.im/fossasia/query-server](https://badges.gitter.im/fossasia/query-server.svg)](https://gitter.im/fossasia/query-server?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 [![Build Status](https://travis-ci.org/fossasia/query-server.svg?branch=master)](https://travis-ci.org/fossasia/query-server)
 [![Dependency Status](https://david-dm.org/fossasia/query-server.svg)](https://david-dm.org/ossasia/query-server)
+[![Join the chat at https://gitter.im/fossasia/query-server](https://badges.gitter.im/fossasia/query-server.svg)](https://gitter.im/fossasia/query-server?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 > Query server that stores a query or string on a server. This mini-tool can be used to process a query string. This string calls the search engine result scraper at [searss](https://github.com/fossasia/searss) and the output from the scraper is written to a file, named with the query string as file name.
 
 ## Table of Contents
