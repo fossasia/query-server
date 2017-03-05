@@ -1,0 +1,17 @@
+version: "2"
+services:
+  web:
+    build: .
+    ports:
+      - "7001:7001"
+    links:
+      - mongo
+    environment:
+      MONGO_URI: mongodb://localhost:27017/query-server
+
+  mongo:
+    image: mongo
+    volumes:
+      - /data/mongodb/db:/data/db
+    ports:
+      - "27017:27017"
