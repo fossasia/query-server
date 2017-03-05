@@ -2,7 +2,7 @@
   "name": "query-1",
   "version": "0.0.0",
   "scripts": {
-    "start": "node app.js"
+    "start": "node src/app.js"
   },
   "dependencies": {
     "body-parser": "~1.16.0",
