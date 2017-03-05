@@ -125,7 +125,7 @@ def google_search(query):
 
     return urls
 def get_yahoo_page(query):
-    ''' Fetch the google search results page
+    ''' Fetch the yahoo search results 
     Returns : Results Page
     '''
     header = {'User-Agent': 
@@ -138,18 +138,18 @@ def get_yahoo_page(query):
     return response
 
 def yahoo_search(query):
-    ''' Search google for the query and return set of urls
+    ''' Gives search query to yahoo and returns the urls
     Returns: urls (list)
             [[Tile1,url1], [Title2, url2],..]
     '''
     urls = []
     response = get_google_page(query)
     soup = BeautifulSoup(response.text, 'html.parser')
-    # Search for all relevant 'h3' tags
+    # Search for all relevant 'h2' tags
     for h in soup.findAll('h2'):
 
         links = h.find('li')
-        #print(links.getText())
+        
         urls.append([links.getText(),links.get('href')])
 
     return urls
@@ -175,6 +175,8 @@ def main():
         urls = google_search(query)
     elif stype == 'd':
         urls = duckduckgo_search(query)
+    elif stype == 'y':
+        urls = yahoo_search(query)    
     else:
         urls = bing_search(query)
     generateFeed(urls, stype)
