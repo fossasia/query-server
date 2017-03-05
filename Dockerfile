@@ -7,7 +7,7 @@ WORKDIR /usr/src/app
 RUN apt-get update
 
 # install deps
-RUN apt-get install -y --no-install-recommends build-essential python-dev libpq-dev libevent-dev libmagic-dev python-pip && apt-get clean -y && curl -sL https://deb.nodesource.com/setup_4.x | bash && apt-get install -y --force-yes nodejs
+RUN apt-get install -y --no-install-recommends build-essential python-dev libpq-dev libevent-dev libmagic-dev python-pip && apt-get clean -y
 
 # copy requirements
 COPY package.json /usr/src/app/
