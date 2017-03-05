@@ -120,6 +120,35 @@ def google_search(query):
     for h3 in soup.findAll('h3',{'class':'r'}):
 
         links = h3.find('a')
+        #print(links.getText())
+        urls.append([links.getText(),links.get('href')])
+
+    return urls
+def get_yahoo_page(query):
+    ''' Fetch the yahoo search results page
+    Returns : Results Page
+    '''
+    header = {'User-Agent': 
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36"
+    }
+
+    payload = {'q' : query}
+    response = requests.get('https://search.yahoo.com/search', headers=header, params=payload)
+
+    return response
+
+def yahoo_search(query):
+    ''' Search yahoo for the query and return set of urls
+    Returns: urls (list)
+            [[Tile1,url1], [Title2, url2],..]
+    '''
+    urls = []
+    response = get_google_page(query)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    # Search for all relevant 'h2' tags
+    for h in soup.findAll('h2'):
+
+        links = h.find('li')
         
         urls.append([links.getText(),links.get('href')])
 
