@@ -16,7 +16,7 @@ MongoClient.connect(url, function(err, db) {
     console.log("Connected successfully to server");
 
     app.listen(process.env.PORT || 7001);
-    app.use(express.static(path.join(__dirname)));
+    app.use(express.static(path.join(__dirname,'/..')));
     app.set('view engine', 'ejs');
     app.set('views', path.join(__dirname, 'views'));
     app.use(favicon(path.join(__dirname,'public','images','favicon.ico')));
