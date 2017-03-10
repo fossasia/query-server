@@ -9,10 +9,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="Content-Language" content="en, english" />
     <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/node_modules/prismjs/themes/prism.css" rel="stylesheet" />
     <link href="/src/public/stylesheets/loklak.css" rel="stylesheet">
     <meta name="description" content="query-server:Query server that stores a query string on a server.">
     <meta name="author" content="enigmaeth, @enigmaeth">
     <script src="/node_modules/jquery/dist/jquery.js"></script>
+    <script src="/node_modules/prismjs/prism.js"></script>
     <link rel="icon" type="image/png" sizes="16x16" href="/src/public/images/favicon.ico">
     <title>query-server &middot; FOSSASIA</title>
   </head>
@@ -48,7 +50,7 @@
     <div class="pagination-centered" >
       <img id="load" src="/src/public/images/ripple.gif">
     </div>
-    <span id="xmlfeed"></span><br/><br/>
+    <pre id="xmlfeed"><code class="language-xml"></code></pre><br/><br/>
   </body>
   <script >
       $('.btn-toolbar > button.btn').click(function(e){
@@ -62,6 +64,7 @@
                   $('#load').hide();
                   $('#xmlfeed').show();
                   $('#xmlfeed').html(data);
+                  Prism.highlightElement($('#xmlfeed')[0]);
               });
           }
       });

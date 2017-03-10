@@ -26,9 +26,16 @@ body {
     z-index: 0;
 }
 
-xmlfeed{
-  display: none;
-  z-index: -100000;
+#xmlfeed{
+    display: none;
+    font-size: 1.2em;
+    margin : 0em 2em 0 2em ;
+    padding: -3em 0 -3em 0;
+    z-index: -100000;
+}
+
+#xspan{
+
 }
 
 #load{
