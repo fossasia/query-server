@@ -36,7 +36,7 @@ MongoClient.connect(url, function(err, db) {
                     dataString = '';
                     console.log("        querying -> " + myquery);
 
-                    var py = spawn('python', ['rss-generator.py']);
+                    var py = spawn('python', ['src/rss-generator.py']);
 
                     py.stdout.on('data', function (data) {
                         dataString += data.toString();
