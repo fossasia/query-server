@@ -59,8 +59,9 @@
               $('#load').show();
               $('#xmlfeed').hide();
               var squery = ((this.innerHTML.charAt(0).toLowerCase()) + '~') + $('#query').val();
-              var urlloc = window.location.href.split(/\?|#/)[0] + "api/search?query=" + squery;
+              var urlloc = window.location.href.split(/\?|#/)[0] + "api/v1/search?query=" + squery;
               $.get(urlloc, function (data, status) {
+                  data = new XMLSerializer().serializeToString(data);
                   $('#load').hide();
                   $('#xmlfeed').show();
                   $('#xmlfeed').text(data);

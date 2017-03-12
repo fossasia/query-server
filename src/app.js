@@ -22,7 +22,7 @@ MongoClient.connect(url, function(err, db) {
         res.sendFile(__dirname + '/index.html');
     });
 
-    app.get('/api/search/',function(req, res, next) {
+    app.get('/api/v1/search/',function(req, res, next) {
         var data = req.query.query;
         var myquery = data.toString();
         db.collection('xml_files').find({'query': myquery}).count()
@@ -60,7 +60,9 @@ MongoClient.connect(url, function(err, db) {
         var rval = function(myquery) {
             db.collection('xml_files').find({"query": myquery}).toArray(function (err, results) {
                 if (err) console.log(err);
-                res.send(results[0].xml);
+                res.setHeader('Cache-Control', 'no-cache');
+                res.set('Content-Type', 'text/xml');
+                res.send((results[0].xml).slice(1));
             });
         };
     });
