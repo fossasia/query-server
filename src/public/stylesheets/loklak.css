@@ -34,10 +34,6 @@ body {
     z-index: -100000;
 }
 
-#xspan{
-
-}
-
 #load{
     position: relative;
     display: none;

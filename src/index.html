@@ -21,7 +21,7 @@
 
   <body style="position: relative; margin: 0; padding-bottom: 6rem; min-height: 100%; font-family:Droid Sans Mono" >
     <a href="https://github.com/fossasia/query-server.git">
-      <img style="position:absolute; top:20; right:0; border:0;" src="/src/public/images/forkme_right_green_007200.png" alt="Fork me on GitHub" title="loklak server source code on github">
+      <img style="position:absolute; top:0; right:0; border:0;" src="/src/public/images/forkme_right_green_007200.png" alt="Fork me on GitHub" title="loklak server source code on github">
     </a>
     <div class="jumbotron">
       <div class="container">
@@ -32,7 +32,7 @@
           <form class="col-lg-12 hidden-xs" id="searchForm">
             <div class="input-group input-group-lg col-sm-8" style="float:left">
               <input id="query" type="text" class="center-block form-control input-lg" placeholder="Search with query-server">
-              <br/><!--<div class = "col-xs-1"/>-->
+              <br/>
               <div class="btn-toolbar">
                 <button type="submit" class="btn btn-lg btn-primary">Google</button>
                 <button type="submit" class="btn btn-lg btn-primary">Bing</button>
@@ -59,11 +59,11 @@
               $('#load').show();
               $('#xmlfeed').hide();
               var squery = ((this.innerHTML.charAt(0).toLowerCase()) + '~') + $('#query').val();
-              var urlloc = window.location.href.split(/\?|#/)[0] + "submit?search=" + squery;
-              $.post(urlloc, function (data, status) {
+              var urlloc = window.location.href.split(/\?|#/)[0] + "api/search?query=" + squery;
+              $.get(urlloc, function (data, status) {
                   $('#load').hide();
                   $('#xmlfeed').show();
-                  $('#xmlfeed').html(data);
+                  $('#xmlfeed').text(data);
                   Prism.highlightElement($('#xmlfeed')[0]);
               });
           }
