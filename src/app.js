@@ -2,7 +2,6 @@ var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
 var express = require('express');
 var app = express();
-var searcher = require(__dirname + '/search');
 var path = require('path');
 var fs = require('fs');
 var util = require('util');
@@ -17,16 +16,14 @@ MongoClient.connect(url, function(err, db) {
 
     app.listen(process.env.PORT || 7001);
     app.use(express.static(path.join(__dirname,'/..')));
-    app.set('view engine', 'ejs');
-    app.set('views', path.join(__dirname, 'views'));
     app.use(favicon(path.join(__dirname,'public','images','favicon.ico')));
 
     app.get('/', function(req, res) {
         res.sendFile(__dirname + '/index.html');
     });
 
-    app.post('/submit',function(req, res, next) {
-        var data = req.query.search;
+    app.get('/api/v1/search/',function(req, res, next) {
+        var data = req.query.query;
         var myquery = data.toString();
         db.collection('xml_files').find({'query': myquery}).count()
             .then(function(numItems) {
@@ -62,8 +59,10 @@ MongoClient.connect(url, function(err, db) {
             });
         var rval = function(myquery) {
             db.collection('xml_files').find({"query": myquery}).toArray(function (err, results) {
-                if (err) return console.log(err);
-                res.render('index', {dbObject: results});
+                if (err) console.log(err);
+                res.setHeader('Cache-Control', 'no-cache');
+                res.set('Content-Type', 'text/xml');
+                res.send((results[0].xml).slice(1));
             });
         };
     });
