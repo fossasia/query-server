@@ -4,7 +4,7 @@
 [![Dependency Status](https://david-dm.org/fossasia/query-server.svg)](https://david-dm.org/ossasia/query-server)
 [![Join the chat at https://gitter.im/fossasia/query-server](https://badges.gitter.im/fossasia/query-server.svg)](https://gitter.im/fossasia/query-server?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-> Query server that stores a query or string on a server. This mini-tool can be used to process a query string. This string calls the search engine result scraper at [searss](https://github.com/fossasia/searss) and the output from the scraper is written to a file, named with the query string as file name.
+> Query server that stores a query or string on a server. This mini-tool can be used to process a query string. This string calls the search engine result scraper `rss-generator.py` that is a modified version of the scraper at [searss](https://github.com/fossasia/searss). The output from the scraper is written into a MongoDB database with the query string as index.
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/fossasia/query-server)
 
