@@ -1,0 +1,22 @@
+{
+  "name": "query-server",
+  "description": "an application to scape search result from search engine",
+  "main": "",
+  "authors": [
+    "abhishek1995s <abhisheks6477@gmail.com>"
+  ],
+  "license": "OPL-1.0",
+  "homepage": "https://github.com/fossasia/query-server",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "static/bower_components"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    
+  }
+}
