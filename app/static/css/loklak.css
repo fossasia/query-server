@@ -1,33 +1,9 @@
-/* Move down content because we have a fixed navbar that is 50px tall */
-/*@font-face {
-  font-family: 'Droid Sans Mono';
-  font-style: normal;
-  font-weight: 400;
-  src:
-  local('Droid Sans Mono'),
-  local('DroidSansMono'),
-  url('../fonts/DroidSansMono.eot?#iefix') format('embedded-opentype'),
-  url('../fonts/DroidSansMono.woff') format('woff'),
-  url('../fonts/DroidSansMono.ttf')  format('truetype'),
-  url('../fonts/DroidSansMono.svg#svgFontName') format('svg');
-}*/
-
-* {
-  font-family: 'Droid Sans Mono';
-}
-
-
 body {
   padding-top: 0px;
   font: DroidSansMono;
 }
 
-.jumbotron{
-    z-index: 0;
-}
-
-#xmlfeed{
-    display: none;
+#feed{
     font-size: 1.2em;
     margin : 0em 2em 0 2em ;
     padding: -3em 0 -3em 0;
@@ -51,7 +27,7 @@ p{
 }
 
 .btn-toolbar{
-  margin-top: 2em;
+  margin-top: 1em;
 }
 
 .btn {
@@ -61,9 +37,12 @@ p{
   text-align: center;
   text-decoration: ghostwhite;
   display: inline-block;
-  margin:0.5em;
   font-size: 1.4em;
   border-radius: 0.4em;
+}
+
+.search{
+    margin:0.3em;
 }
 
 #tweet{

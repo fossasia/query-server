@@ -1,0 +1,23 @@
+{
+  "name": "query-server",
+  "description": "A simple server to store query strings",
+  "main": "",
+  "authors": [
+    "enigmaeth <enigmaeth@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/fossasia/query-server",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.1.1",
+    "json3": "^3.3.2",
+    "prismjs": "^1.6.0"
+  }
+}
