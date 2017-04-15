@@ -34,6 +34,7 @@ Running this tool requires installing the nodejs as well as python dependencies.
 $ git clone https://github.com/fossasia/query-server.git 
 $ cd query-server
 $ npm install
+$ bower install
 $ pip install -r requirements.txt
 ```
 
