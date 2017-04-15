@@ -39,12 +39,12 @@
                     </div>
                 </div>
                 <div class="col-sm-4" style="display: inline;">
-                    <div class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-lg btn-primary active">
-                            <input type="radio" value="json" class="format" autocomplete="off">JSON
+                    <div class="btn-group" id="format" data-toggle="buttons">
+                        <label class="btn btn-lg btn-primary active formatButton">
+                            <input type="radio" value="json" autocomplete="off">JSON
                         </label>
-                        <label class="btn btn-lg btn-primary">
-                            <input type="radio" value="xml" class="format" autocomplete="off">XML
+                        <label class="btn btn-lg btn-primary formatButton">
+                            <input type="radio" value="xml" autocomplete="off">XML
                         </label>
                     </div>
                 </div>
@@ -83,7 +83,7 @@
                 $('#feed').hide();
                 var sengine = $('.btn-toolbar > button.btn').val();
                 var squery = $('#query').val();
-                var sformat = $('input[name="format"]:checked').val();
+                var sformat = $(' #format label.active input').val();
                 console.log(sformat);
                 var urlloc = window.location.href.split(/\?|#/)[0] + "api/v1/search/" + sengine + "?query=" + squery + "&format=" + sformat;
                 $.ajax({
@@ -103,6 +103,15 @@
                 });
             };
         });
+    });
+    $('.formatButton').click(function(e){
+        e.preventDefault();
+        if($(this).hasClass('active')){
+            $(this).removeClass('active')
+        } else {
+            $(".active").removeClass("active");
+            $(this).addClass('active')
+        }
     });
 </script>
 </body>
