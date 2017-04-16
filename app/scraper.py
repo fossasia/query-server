@@ -128,7 +128,6 @@ def yahoo_search(query):
                                                                                                              '?').replace(
                 '%3d', '=').replace('%26', '&').replace('%29', ')').replace('%26', "'").replace('%21', '!').replace(
                 '%23', '$').replace('%40', '[').replace('%5b', ']')
-            urls.append([y.getText(), u])
             urls.append({'title': y.getText(),
                          'link': u})
 
@@ -154,4 +153,5 @@ def feedgen(query, engine):
     else:
         urls = bing_search(query)
     result = urls
+    print(result)
     return result

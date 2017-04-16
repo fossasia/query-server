@@ -20,5 +20,10 @@
     {
       "url": "heroku/nodejs"
     }
+  ],
+  "scripts": [
+    {
+        "postinstall": "bower install"
+    }
   ]
 }
