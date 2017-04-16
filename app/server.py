@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for
+from flask import Flask, render_template, request, url_for, abort
 from scraper import feedgen
 from pymongo import MongoClient
 from dicttoxml import dicttoxml
@@ -18,10 +18,23 @@ def index():
 def search(search_engine):
     try:
         if request.method == 'GET':
+
             engine = search_engine
-            query = request.args.get('query', '')
-            qformat = request.args.get('format', '') or 'json'
+            if engine not in ['google','bing','duckduckgo','yahoo']:
+                abort(404)
+
+            query = request.args.get('query')
+            if not query:
+                abort(400)
+
+            qformat = request.args.get('format') or 'json'
+            if qformat not in ['json','xml']:
+                abort(400)
+
             result = feedgen(query,engine[0])
+            if not result:
+                abort(404)
+
             if((db['queries'].find({query: query}).limit(1)) == False):
                 db['queries'].insert({"query" : query,  "engine" : engine, "qformat" : qformat})
 
@@ -38,13 +51,10 @@ def search(search_engine):
             elif(qformat == 'xml'):
                 xmlfeed = parseString((dicttoxml(result, custom_root='channel', attr_type=False)).encode('utf-8')).toprettyxml()
                 return xmlfeed
-                #return render_template('index.html', result=xmlfeed, qformat=qformat)
 
     except Exception as e:
-        print(e)
-        return "error occurred"
-        #have to add code for returning the error response
-
+        return (e)
+      
 if __name__ == '__main__':
     app.debug = True
     app.run(host='0.0.0.0', port=(int)(os.environ.get('PORT', 7001)), debug=True)
