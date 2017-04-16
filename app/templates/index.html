@@ -10,7 +10,7 @@
     <meta name="Content-Language" content="en, english"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='bower_components/prismjs/themes/prism.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/loklak.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <meta name="description" content="query-server:Query server that stores a query string on a server.">
     <meta name="author" content="enigmaeth, @enigmaeth">
     <script src="{{ url_for('static', filename='bower_components/jquery/dist/jquery.js') }}"></script>
@@ -81,10 +81,9 @@
             if($('#query').val()) {
                 $('#load').show();
                 $('#feed').hide();
-                var sengine = $('.btn-toolbar > button.btn').val();
+                var sengine = $(this).val();
                 var squery = $('#query').val();
                 var sformat = $(' #format label.active input').val();
-                console.log(sformat);
                 var urlloc = window.location.href.split(/\?|#/)[0] + "api/v1/search/" + sengine + "?query=" + squery + "&format=" + sformat;
                 $.ajax({
                     url: urlloc,
@@ -113,6 +112,12 @@
             $(this).addClass('active')
         }
     });
+    $(window).keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
 </script>
 </body>
 </html>
