@@ -91,7 +91,12 @@
                     success: function(response) {
                         $('#load').hide();
                         if(sformat == "json")
+                        {
                             $(".code").attr("class", "language-json");
+                            response = JSON.stringify(response, null, 4);
+                        }
+                        else
+                            response = new XMLSerializer().serializeToString(response);
                         $('#feed').show();
                         $('#feed').text(response);
                         Prism.highlightElement($('#feed')[0]);
