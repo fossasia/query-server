@@ -10,18 +10,35 @@
 
 ## Table of Contents
 
+- [API](#api)
+- [Error Codes](#error-codes)
 - [Dependencies](#dependencies)
 - [Installation](#installation)
 - [Usage](#usage)
-  - [Options](#options)
 - [Contribute](#contribute)
 
-## Dependencies  
+## API
+
+The API(s) provided by query-server are as follows:
+
+` GET /api/v1/search/<search-engine>/query=query&format=format `
+
+> <search-engine> : ['google' , 'bing', 'duckduckgo' , 'yahoo']
+> query : query can be any string
+> format : [ `json`, `xml` ]
+
+A sample query : `/api/v1/search/bing/query=fossasia&format=xml`
+
+## Error Codes
+    404 Not Found : Incorrect Search Engine, Zero Response
+    400 Bad Request : query and/or format is not in the correct format
+
+## Dependencies
 
 * Python 2.x or Python 3.x
 * [Node.js](https://nodejs.org/en/)
 * [Pip](https://pip.pypa.io/en/stable/installing/)
-* [Feedgen](https://github.com/lkiesow/python-feedgen)
+* [Flask] (http://flask.pocoo.org/)
 * [BeautifulSoup4](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
 
 
@@ -34,7 +51,6 @@ Running this tool requires installing the nodejs as well as python dependencies.
 git clone https://github.com/<user-name>/query-server.git 
 cd query-server
 npm install -g bower
-npm install
 bower install
 pip install -r requirements.txt
 ```
