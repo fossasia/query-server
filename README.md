@@ -38,7 +38,7 @@ A sample query : `/api/v1/search/bing/query=fossasia&format=xml`
 * Python 2.x or Python 3.x
 * [Node.js](https://nodejs.org/en/)
 * [Pip](https://pip.pypa.io/en/stable/installing/)
-* [Flask] (http://flask.pocoo.org/)
+* [Flask](http://flask.pocoo.org/)
 * [BeautifulSoup4](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
 
 
