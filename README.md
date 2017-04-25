@@ -74,3 +74,8 @@ python app/server.py
 ## Contribute
 
 Found an issue? Post it in the [issue tracker](https://github.com/fossasia/query-server/issues)
+
+## License
+
+This project is currently licensed under the Apache License version 2.0. A copy of `LICENSE` should be present along with the source code. To obtain the software under a different license, please contact [FOSSASIA](http://blog.fossasia.org/contact/).
+
