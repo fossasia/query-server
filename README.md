@@ -23,9 +23,11 @@ The API(s) provided by query-server are as follows:
 
 ` GET /api/v1/search/<search-engine>/query=query&format=format `
 
-> <search-engine> : ['google' , 'bing', 'duckduckgo' , 'yahoo']
-> query : query can be any string
-> format : [ `json`, `xml` ]
+> *search-engine* : ['google' , 'bing', 'duckduckgo' , 'yahoo']
+
+> *query* : query can be any string 
+
+> *format* : [ `json`, `xml` ]
 
 A sample query : `/api/v1/search/bing/query=fossasia&format=xml`
 
