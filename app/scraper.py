@@ -80,6 +80,16 @@ def get_google_page(query):
     payload = {'q': query}
     response = requests.get('https://www.google.com/search', headers=header, params=payload)
     return response
+    
+def get_google_page(query,startIndex):
+    """ Fetch the google search results page
+    Returns : Results Page
+    """
+    header = {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36'}
+    payload = {'q': query,'start':startIndex}
+    response = requests.get('https://www.google.com/search', headers=header, params=payload)
+    return response
 
 
 def google_search(query):
@@ -88,12 +98,13 @@ def google_search(query):
             [[Tile1,url1], [Title2, url2],..]
     """
     urls = []
-    response = get_google_page(query)
-    soup = BeautifulSoup(response.text, 'html.parser')
-    for h3 in soup.findAll('h3', {'class': 'r'}):
-        links = h3.find('a')
-        urls.append({'title': links.getText(),
-                     'link': links.get('href')})
+    for count in range(0,10):
+        response = get_google_page(query,count*10)
+        soup = BeautifulSoup(response.text, 'html.parser')
+        for h3 in soup.findAll('h3', {'class': 'r'}):
+            links = h3.find('a')
+            urls.append({'title': links.getText(),
+                         'link': links.get('href')})
 
     return urls
 
@@ -154,4 +165,5 @@ def feedgen(query, engine):
         urls = bing_search(query)
     result = urls
     print(result)
+    print(len(result))
     return result
