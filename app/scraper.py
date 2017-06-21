@@ -24,22 +24,35 @@ def get_bing_page(query):
     return response
 
 
+def get_bing_page(query,startIndex):
+    """
+    Fetches search response from bing.com 
+    returns : result page in html
+    """
+    header = {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36'}
+    payload = {'q': query,'first':startIndex}
+    response = requests.get('http://www.bing.com/search', params=payload, headers=header)
+    return response
+
 def bing_search(query):
     """ Search bing for the query and return set of urls
     Returns: urls (list)
             [[Tile1,url1], [Title2, url2],..]
     """
     urls = []
-    response = get_bing_page(query)
-    soup = BeautifulSoup(response.text, 'html.parser')
-    for li in soup.findAll('li', {'class': 'b_algo'}):
-        title = li.h2.text.replace('\n', '').replace('  ', '')
-        url = li.h2.a['href']
-        desc = li.find('p').text
-        url_entry = {'title': title,
-                     'link': url,
-                     'desc': desc}
-        urls.append(url_entry)
+    for count in range(0,10):
+         startIndex=(count*10)+1
+         response = get_bing_page(query,startIndex)
+         soup = BeautifulSoup(response.text, 'html.parser')
+         for li in soup.findAll('li', {'class': 'b_algo'}):
+             title = li.h2.text.replace('\n', '').replace('  ', '')
+             url = li.h2.a['href']
+             desc = li.find('p').text
+             url_entry = {'title': title,
+                            'link': url,
+                            'desc': desc}
+             urls.append(url_entry)                                     
 
     return urls
 
