@@ -21,7 +21,7 @@
 
 The API(s) provided by query-server are as follows:
 
-` GET /api/v1/search/<search-engine>/query=query&format=format `
+` GET /api/v1/search/<search-engine>?query=query&format=format `
 
 > *search-engine* : ['google' , 'bing', 'duckduckgo' , 'yahoo']
 
@@ -29,7 +29,7 @@ The API(s) provided by query-server are as follows:
 
 > *format* : [ `json`, `xml` ]
 
-A sample query : `/api/v1/search/bing/query=fossasia&format=xml`
+A sample query : `/api/v1/search/bing?query=fossasia&format=xml`
 
 ## Error Codes
     404 Not Found : Incorrect Search Engine, Zero Response
@@ -50,7 +50,7 @@ Make sure you have [Nodejs](https://nodejs.org/en/) installed.
 Running this tool requires installing the nodejs as well as python dependencies.
 
 ```
-git clone https://github.com/<user-name>/query-server.git 
+git clone https://github.com/fossasia/query-server.git 
 cd query-server
 npm install -g bower
 bower install
