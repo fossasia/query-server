@@ -4,6 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 
 class Bing:
+    """Scrapper class for Bing"""
     def __init__(self):
         pass
 

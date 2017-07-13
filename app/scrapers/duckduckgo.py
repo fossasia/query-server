@@ -4,6 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 
 class Duckduckgo:
+    """Scrapper class for Duckduckgo"""
     def __init__(self):
         pass
 

@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 
 
 class Yahoo:
+    """Scrapper class for Yahoo"""
     def __init__(self):
         pass
 

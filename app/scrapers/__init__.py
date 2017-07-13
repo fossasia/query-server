@@ -4,13 +4,11 @@ from google import Google
 from duckduckgo import Duckduckgo
 from bing import Bing
 from yahoo import Yahoo
-import requests
-from bs4 import BeautifulSoup
 scrapers = {
-        'google':Google(),
-        'bing':Bing(),
-        'yahoo':Yahoo(),
-        'duckduckgo':Duckduckgo(),
+        'g':Google(),
+        'b':Bing(),
+        'y':Yahoo(),
+        'd':Duckduckgo(),
     }
 
 def read_in():
@@ -23,14 +21,7 @@ def small_test():
 
 
 def feedgen(query, engine):
-    if engine == 'g':
-        urls = scrapers['google'].results_search(query)
-    elif engine == 'd':
-        urls = scrapers['duckduckgo'].results_search(query)
-    elif engine == 'y':
-        urls = scrapers['yahoo'].results_search(query)
-    else:
-        urls = scrapers['bing'].results_search(query)
+    urls = scrapers[engine].results_search(query)
     result = urls
     print(result)
     print(len(result))

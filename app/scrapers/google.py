@@ -4,7 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 
 class Google:
-    'Scrapper class for Google'
+    """Scrapper class for Google"""
     def __init__(self):
         pass
 
