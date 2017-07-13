@@ -33,7 +33,8 @@ class Yahoo:
                 r = y.get('href')
                 f = r.split('RU=')
                 e = f[-1].split('/RK=0')
-                u = e[0].replace('%3a', ':').replace('%2f', '/').replace('%28', '(').replace('%29', ')').replace('%3f',
+                g = e[-1].split('/RK=1')
+                u = g[0].replace('%3a', ':').replace('%2f', '/').replace('%28', '(').replace('%29', ')').replace('%3f',
                                                                                                                  '?').replace(
                     '%3d', '=').replace('%26', '&').replace('%29', ')').replace('%26', "'").replace('%21', '!').replace(
                     '%23', '$').replace('%40', '[').replace('%5b', ']')
