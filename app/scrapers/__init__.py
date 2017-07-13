@@ -23,14 +23,6 @@ def small_test():
 
 def feedgen(query, engine):
     urls = scrapers[engine].results_search(query)
-    if engine == 'g':
-        urls = scrapers['google'].results_search(query)
-    elif engine == 'd':
-        urls = scrapers['duckduckgo'].results_search(query)
-    elif engine == 'y':
-        urls = scrapers['yahoo'].results_search(query)
-    else:
-        urls = scrapers['bing'].results_search(query)
     result = urls
     print(result)
     print(len(result))
