@@ -48,6 +48,17 @@
                         </label>
                     </div>
                 </div>
+                <div class="col-sm-4" style="display: inline;">
+                    <div class="btn-group" id="type" data-toggle="buttons">
+                        <label class="btn btn-lg btn-primary active typeButton">
+                            <input type="radio" value="text" autocomplete="off">Text
+                        </label>
+                        <label class="btn btn-lg btn-primary typeButton">
+                            <input type="radio" value="images" autocomplete="off">Images
+                        </label>
+                    </div>
+                </div>
+
             </div>
             <br/>
             <div class="btn-toolbar">
@@ -70,7 +81,7 @@
     </footer>
 </div>
 <div class="pagination-centered" >
-  <img id="load" src="{{ url_for('static', filename='images/ripple.gif') }}">
+    <img id="load" src="{{ url_for('static', filename='images/ripple.gif') }}">
 </div>
 <pre id="feed" style="display:none;"><code class="language-xml"></code></pre>
 <br/><br/>
@@ -84,7 +95,8 @@
                 var sengine = $(this).val();
                 var squery = $('#query').val();
                 var sformat = $(' #format label.active input').val();
-                var urlloc = window.location.href.split(/\?|#/)[0] + "api/v1/search/" + sengine + "?query=" + squery + "&format=" + sformat;
+                var stype = $(' #type label.active input').val();
+                var urlloc = window.location.href.split(/\?|#/)[0] + "api/v1/search/" + sengine + "?query=" + squery + "&format=" + sformat + "&type=" +stype;
                 $.ajax({
                     url: urlloc,
                     type: 'GET',
@@ -113,16 +125,25 @@
         if($(this).hasClass('active')){
             $(this).removeClass('active')
         } else {
-            $(".active").removeClass("active");
+            $("#format .active").removeClass("active");
+            $(this).addClass('active')
+        }
+    });
+    $('.typeButton').click(function(e){
+        e.preventDefault();
+        if($(this).hasClass('active')){
+            $(this).removeClass('active')
+        } else {
+            $("#type .active").removeClass("active");
             $(this).addClass('active')
         }
     });
     $(window).keydown(function(event){
-    if(event.keyCode == 13) {
-      event.preventDefault();
-      return false;
-    }
-  });
+        if(event.keyCode == 13) {
+            event.preventDefault();
+            return false;
+        }
+    });
 </script>
 </body>
 </html>

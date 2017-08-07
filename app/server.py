@@ -39,11 +39,12 @@ def search(search_engine):
                 return bad_request(err)
 
             query = request.args.get('query')
+            stype = request.args.get('type')
             if not query:
                 err = [400, 'Not Found - missing query', qformat]
                 return bad_request(err)
 
-            result = feedgen(query,engine[0])
+            result = feedgen(query,stype,engine[0])
             if not result:
                 err = [404, 'No response', qformat]
                 return bad_request(err)
