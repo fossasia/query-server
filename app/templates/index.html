@@ -110,11 +110,9 @@
     });
     $('.formatButton').click(function(e){
         e.preventDefault();
-        if($(this).hasClass('active')){
-            $(this).removeClass('active')
-        } else {
-            $(".active").removeClass("active");
-            $(this).addClass('active')
+        if(!$(this).hasClass('active')){
+          $(".active").removeClass("active");
+          $(this).addClass('active');
         }
     });
     $(window).keydown(function(event){
