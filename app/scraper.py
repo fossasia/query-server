@@ -3,7 +3,13 @@ import os, json, sys
 import requests
 from bs4 import BeautifulSoup
 
+try:
+  reload                        # Python 2
+except NameError:
+  from importlib import reload  # Python 3
+
 reload(sys)
+  
 sys.setdefaultencoding('utf8')
 search_engines = {'g': ('GOOGLE SEARCH RESULTS', 'htps://www.google.com', 'Google search results for %s'),
                   'd': ('DUCKDUCKGO SEARCH RESULTS', 'htps://www.duckduckgo.com', 'Duckduckgo search results for %s'),
