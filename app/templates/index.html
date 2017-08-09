@@ -110,9 +110,8 @@
     });
     $('.formatButton').click(function(e){
         e.preventDefault();
-        if($(this).hasClass('active')){
-            $(this).removeClass('active')
-        } else {
+        if(!$(this).hasClass('active')){
+
             $(".active").removeClass("active");
             $(this).addClass('active')
         }
