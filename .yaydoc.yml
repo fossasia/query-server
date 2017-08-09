@@ -1,0 +1,11 @@
+metadata:
+  author: FOSSASIA
+  projectname: "Query Server"
+  version: development
+build:
+  theme:
+    name: sphinx_fossasia_theme
+  source: .
+publish:
+  ghpages:
+    docurl: query-server.fossasia.org
