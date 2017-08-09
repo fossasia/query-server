@@ -1,5 +1,3 @@
 {
-  "directory" : "app/static/bower_components",
-  "https-proxy":"http://proxy.iiit.ac.in:8080",
-  "proxy":"http://proxy.iiit.ac.in:8080"
+  "directory" : "app/static/bower_components"
 }
