@@ -1,3 +1,5 @@
 {
-  "directory" : "app/static/bower_components"
+  "directory" : "app/static/bower_components",
+  "https-proxy" : "",
+  "proxy" : ""
 }
