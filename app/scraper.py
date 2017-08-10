@@ -8,9 +8,40 @@ sys.setdefaultencoding('utf8')
 search_engines = {'g': ('GOOGLE SEARCH RESULTS', 'htps://www.google.com', 'Google search results for %s'),
                   'd': ('DUCKDUCKGO SEARCH RESULTS', 'htps://www.duckduckgo.com', 'Duckduckgo search results for %s'),
                   'b': ('BING SEARCH RESULTS', 'https://www.bing.com', 'Bing search results for %s'),
-                  'y': ('YAHOO SEARCH RESULTS', 'https://search.yahoo.com/', 'Yahoo search results for %s')}
+                  'y': ('YAHOO SEARCH RESULTS', 'https://search.yahoo.com/', 'Yahoo search results for %s'),
+                  'a': ('ASK SEARCH RESULTS','http://www.ask.com/','Ask search results for %s')}
 query = ''
 
+
+def get_ask_page(query):
+    """
+    Fetches search response from ask.com
+    returns : result page in html
+    """
+
+    header = {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36'}
+    payload = {'q': query}
+    response = requests.get('http://www.ask.com/web', params=payload, headers=header)
+    return response
+
+def ask_search(query):
+    """ Search bing for the query and return set of urls
+    Returns: urls (list)
+            [[Tile1,url1], [Title2, url2],..]
+    """
+    urls=[]
+    #response = requests.get('http://www.ask.com/web', params=payload, headers=header,proxies=proxyDict)
+    response = get_ask_page(query)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    for div in soup.findAll('div', {'class': 'PartialSearchResults-item'}):
+        title = div.div.a.text
+        url = div.div.a['href']
+        url_entry = {'title': title,
+                     'link': url}
+        urls.append(url_entry)
+
+    return urls
 
 def get_bing_page(query):
     """
@@ -80,7 +111,7 @@ def get_google_page(query):
     payload = {'q': query}
     response = requests.get('https://www.google.com/search', headers=header, params=payload)
     return response
-    
+
 def get_google_page(query,startIndex):
     """ Fetch the google search results page
     Returns : Results Page
@@ -162,8 +193,10 @@ def feedgen(query, engine):
         urls = duckduckgo_search(query)
     elif engine == 'y':
         urls = yahoo_search(query)
-    else:
+    elif engine == 'b':
         urls = bing_search(query)
+    else:
+        urls = ask_search(query)
     result = urls
     print(result)
     print(len(result))
