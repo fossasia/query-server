@@ -82,14 +82,17 @@ def get_google_page(query):
     payload = {'q': query}
     response = requests.get('https://www.google.com/search', headers=header, params=payload)
     return response
-    
-def get_google_page(query,startIndex):
+
+
+def get_google_page(query, startIndex, image=False):
     """ Fetch the google search results page
     Returns : Results Page
     """
     header = {
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36'}
-    payload = {'q': query,'start':startIndex}
+    payload = {'q': query, 'start': startIndex}
+    if image:
+        payload = {'q': query, 'start': startIndex, 'tbm': 'isch'}
     response = requests.get('https://www.google.com/search', headers=header, params=payload)
     return response
 
@@ -100,8 +103,8 @@ def google_search(query):
             [[Tile1,url1], [Title2, url2],..]
     """
     urls = []
-    for count in range(0,10):
-        response = get_google_page(query,count*10)
+    for count in range(0, 10):
+        response = get_google_page(query, count * 10)
         soup = BeautifulSoup(response.text, 'html.parser')
         for h3 in soup.findAll('h3', {'class': 'r'}):
             links = h3.find('a')
@@ -109,6 +112,23 @@ def google_search(query):
             urls.append({'title': links.getText(),
                          'link': links.get('href'),
                          'desc': desc.getText()})
+
+    return urls
+
+
+def google_image_search(query):
+    """ Search google for the query and return set of urls
+    Returns: urls (list)
+            [[Tile1,url1], [Title2, url2],..]
+    """
+    urls = []
+    for count in range(0, 10):
+        response = get_google_page(query, count * 10, image=True)
+        soup = BeautifulSoup(response.text, 'html.parser')
+        for image_data in soup.findAll('div', {'class': 'rg_meta'}):
+            j = json.loads(image_data.getText())
+            urls.append({'title': j['pt'],
+                         'link': j['ou']})
 
     return urls
 
@@ -162,8 +182,10 @@ def small_test():
     assert type(google_search('fossasia')) is list
 
 
-def feedgen(query, engine):
-    if engine == 'g':
+def feedgen(query,type, engine):
+    if engine == 'g' and type == "images":
+        urls = google_image_search(query)
+    elif engine == 'g':
         urls = google_search(query)
     elif engine == 'd':
         urls = duckduckgo_search(query)
