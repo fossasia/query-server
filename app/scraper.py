@@ -72,8 +72,10 @@ def duckduckgo_search(query):
     response = get_duckduckgo_page(query)
     soup = BeautifulSoup(response.text, 'html.parser')
     for links in soup.findAll('a', {'class': 'result__a'}):
+        desc = links.find_next('a')
         urls.append({'title': links.getText(),
-                     'link': links.get('href')})
+                     'link': links.get('href'),
+                     'desc': desc.getText()})
 
     return urls
 
@@ -110,8 +112,10 @@ def google_search(query):
         soup = BeautifulSoup(response.text, 'html.parser')
         for h3 in soup.findAll('h3', {'class': 'r'}):
             links = h3.find('a')
+            desc = h3.find_next('span', {'class': 'st'})
             urls.append({'title': links.getText(),
-                         'link': links.get('href')})
+                         'link': links.get('href'),
+                         'desc': desc.getText()})
 
     return urls
 
@@ -147,8 +151,11 @@ def yahoo_search(query):
                                                                                                              '?').replace(
                 '%3d', '=').replace('%26', '&').replace('%29', ')').replace('%26', "'").replace('%21', '!').replace(
                 '%23', '$').replace('%40', '[').replace('%5b', ']')
+            d = y.find_next('p')
+            print(d)
             urls.append({'title': y.getText(),
-                         'link': u})
+                         'link': u,
+                         'desc': d.getText()})
 
     return urls
 
