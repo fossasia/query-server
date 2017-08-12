@@ -43,7 +43,7 @@ A sample query : `/api/v1/search/bing?query=fossasia&format=xml`
     * [dicttoxml](https://github.com/quandyfactory/dicttoxml)
     * [Flask](http://flask.pocoo.org)
     * [pymongo](https://api.mongodb.com/python/current)
-    * [requests.org](http://docs.python-requests.org)
+    * [requests](http://docs.python-requests.org)
 * [Node.js](https://nodejs.org/en)
     * [bower.io](https://bower.io)
 
