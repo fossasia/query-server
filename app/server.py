@@ -3,7 +3,7 @@ from scraper import feedgen
 from pymongo import MongoClient
 from dicttoxml import dicttoxml
 from xml.dom.minidom import parseString
-import json,os
+import json,os,sys
 
 app = Flask(__name__)
 err = ""
@@ -34,7 +34,7 @@ def search(search_engine):
                 abort(400, 'Not Found - undefined format')
 
             engine = search_engine
-            if engine not in ['google','bing','duckduckgo','yahoo']:
+            if engine not in ['google','bing','duckduckgo','yahoo','ask']:
                 err = [404, 'Incorrect search engine', qformat]
                 return bad_request(err)
 
