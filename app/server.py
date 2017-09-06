@@ -48,7 +48,7 @@ def search(search_engine):
                 err = [404, 'No response', qformat]
                 return bad_request(err)
 
-            if((db['queries'].find({query: query}).limit(1)) == False):
+            if((db['queries'].find({"query": query}).limit(1)) == False):
                 db['queries'].insert({"query" : query,  "engine" : engine, "qformat" : qformat})
 
             for line in result:
