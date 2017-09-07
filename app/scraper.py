@@ -5,8 +5,8 @@ from bs4 import BeautifulSoup
 
 reload(sys)
 sys.setdefaultencoding('utf8')
-search_engines = {'g': ('GOOGLE SEARCH RESULTS', 'htps://www.google.com', 'Google search results for %s'),
-                  'd': ('DUCKDUCKGO SEARCH RESULTS', 'htps://www.duckduckgo.com', 'Duckduckgo search results for %s'),
+search_engines = {'g': ('GOOGLE SEARCH RESULTS', 'https://www.google.com', 'Google search results for %s'),
+                  'd': ('DUCKDUCKGO SEARCH RESULTS', 'https://www.duckduckgo.com', 'Duckduckgo search results for %s'),
                   'b': ('BING SEARCH RESULTS', 'https://www.bing.com', 'Bing search results for %s'),
                   'y': ('YAHOO SEARCH RESULTS', 'https://search.yahoo.com/', 'Yahoo search results for %s')}
 query = ''
