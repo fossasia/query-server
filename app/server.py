@@ -13,6 +13,10 @@ db = client['query-server-v2']
 
 @app.route('/')
 def index():
+    """since collections and databases in mongodb are created lazily hence if we do not
+    insert the document then the database and the collection would not be created"""
+    
+    db['queries'].insert({"query": "", "engine": "", "qformat": ""})
     return render_template('index.html')
 
 def bad_request(err):
@@ -48,9 +52,23 @@ def search(search_engine):
             if not result:
                 err = [404, 'No response', qformat]
                 return bad_request(err)
+            
+            flag = 0
+            honey = db['queries'].find({"query": query}).limit(1)
+            
+            if documents in honey:
+                flag = 1 
+                """this is done because db['queries'].find({"query": query}).limit(1)
+                returns the documents and not boolean hence for will count if for dosen't run
+                then the element is unique"""
 
-            if((db['queries'].find({query: query}).limit(1)) == False):
+
+            if(flag == 0):#ie for dosen't run
+                db['queries'].delete_many({"query":""})
+                #this is done in order to delete document which has empty query
                 db['queries'].insert({"query" : query,  "engine" : engine, "qformat" : qformat})
+            
+
 
             for line in result:
                 line['link'] = line['link'].encode('utf-8')
