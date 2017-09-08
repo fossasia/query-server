@@ -56,7 +56,7 @@ def search(search_engine):
             flag = 0
             honey = db['queries'].find({"query": query}).limit(1)
             
-            if documents in honey:
+            for documents in honey:
                 flag = 1 
                 """this is done because db['queries'].find({"query": query}).limit(1)
                 returns the documents and not boolean hence for will count if for dosen't run
