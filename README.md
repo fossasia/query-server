@@ -23,7 +23,7 @@ The API(s) provided by query-server are as follows:
 
 ` GET /api/v1/search/<search-engine>?query=query&format=format `
 
-> *search-engine* : ['google' , 'bing', 'duckduckgo' , 'yahoo']
+> *search-engine* : ['google' , 'bing', 'duckduckgo' , 'yahoo', 'quora']
 
 > *query* : query can be any string 
 
