@@ -60,6 +60,8 @@ class Quora:
                 is_proper = False
             
             for ans, body in zip(ans_temp, ans_bodies):
+            ans_temp = soup.findAll('div', {'class' : "Answer AnswerBase"})
+            for ans in ans_temp:
                 answer = {}
                 answer['author'] = {
                     'name' : ans.findAll('a', {'class' : 'user'})[0].getText(),
@@ -68,7 +70,6 @@ class Quora:
                 }
                 answer['links'] = [_.get('href') for _ in ans.findAll('a', {'class' : 'external_link'})]
                 answer['images'] = [_.get('src') for _ in ans.findAll('img')]
-                
                 elements = []
                 for ele in body.descendants:
                     try:
