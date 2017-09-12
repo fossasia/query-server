@@ -48,8 +48,18 @@ class Quora:
             result['answer_count'] = int(re.findall(r'\d+', ''.join([g.getText() for g \
                 in soup.findAll('div', {'class' : 'answer_count' })]))[0])
             answers = []
+            
             ans_temp = soup.findAll('div', {'class' : "Answer AnswerBase"})
-            for ans in ans_temp:
+            ans_bodies = soup.select("div.ExpandedAnswer")
+            
+            # make sure answers are parsed properly
+            try:
+                assert(len(ans_temp) == ans_bodies)
+                is_proper = True
+            except:
+                is_proper = False
+            
+            for ans, body in zip(ans_temp, ans_bodies):
                 answer = {}
                 answer['author'] = {
                     'name' : ans.findAll('a', {'class' : 'user'})[0].getText(),
@@ -58,8 +68,16 @@ class Quora:
                 }
                 answer['links'] = [_.get('href') for _ in ans.findAll('a', {'class' : 'external_link'})]
                 answer['images'] = [_.get('src') for _ in ans.findAll('img')]
-                answer['content'] =  ' '.join([_.getText() for _ \
-                    in ans.select("span.rendered_qtext p.qtext_para")])
+                
+                elements = []
+                for ele in body.descendants:
+                    try:
+                        if 'rendered_qtext' in ele.get('class'):
+                            elements.append(ele.getText())
+                    except:
+                        pass
+
+                answer['content'] = ' '.join(elements)
                 try:
                     answer['views'] = ans.findAll('span', {'class' : 'meta_num'})[0].getText()
                 except:
