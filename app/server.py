@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, url_for, abort, Response, make_response
-from scraper import feedgen
+from scrapers import feedgen
 from pymongo import MongoClient
 from dicttoxml import dicttoxml
 from xml.dom.minidom import parseString
@@ -28,7 +28,8 @@ def bad_request(err):
 def search(search_engine):
     try:
         if request.method == 'GET':
-
+            num = request.args.get('num')
+            count = int(num)
             qformat = request.args.get('format') or 'json'
             if qformat not in ['json', 'xml']:
                 abort(400, 'Not Found - undefined format')
@@ -43,7 +44,7 @@ def search(search_engine):
                 err = [400, 'Not Found - missing query', qformat]
                 return bad_request(err)
 
-            result = feedgen(query,engine[0])
+            result = feedgen(query,engine[0],count)
             if not result:
                 err = [404, 'No response', qformat]
                 return bad_request(err)
