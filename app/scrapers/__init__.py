@@ -1,9 +1,10 @@
 from __future__ import print_function
+from __future__ import absolute_import
 import os, json, sys
-from google import Google
-from duckduckgo import Duckduckgo
-from bing import Bing
-from yahoo import Yahoo
+from .google import Google
+from .duckduckgo import Duckduckgo
+from .bing import Bing
+from .yahoo import Yahoo
 scrapers = {
         'g':Google(),
         'b':Bing(),

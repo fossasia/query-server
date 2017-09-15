@@ -37,11 +37,17 @@ A sample query : `/api/v1/search/bing?query=fossasia&format=xml`
 
 ## Dependencies
 
-* Python 2.x or Python 3.x
-* [Node.js](https://nodejs.org/en/)
-* [Pip](https://pip.pypa.io/en/stable/installing/)
-* [Flask](http://flask.pocoo.org/)
-* [BeautifulSoup4](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
+* [MongoDB](https://www.mongodb.com)
+* [Python 2.7 or Python 3.x](https://python.org)
+    * [Pip](https://pip.pypa.io/en/stable/installing)
+    * [BeautifulSoup4](https://www.crummy.com/software/BeautifulSoup/bs4/doc)
+    * [dicttoxml](https://github.com/quandyfactory/dicttoxml)
+    * [Flask](http://flask.pocoo.org)
+    * [pymongo](https://api.mongodb.com/python/current)
+    * [requests](http://docs.python-requests.org)
+* [Node.js](https://nodejs.org/en)
+    * [bower.io](https://bower.io)
+
 
 
 ## Installation
