@@ -1,9 +1,16 @@
 from __future__ import print_function
-import os, json, sys
+import json
+import sys
 import requests
 from bs4 import BeautifulSoup
 
+try:
+  reload                        # Python 2
+except NameError:
+  from importlib import reload  # Python 3
+
 reload(sys)
+  
 sys.setdefaultencoding('utf8')
 search_engines = {'g': ('GOOGLE SEARCH RESULTS', 'https://www.google.com', 'Google search results for %s'),
                   'd': ('DUCKDUCKGO SEARCH RESULTS', 'https://www.duckduckgo.com', 'Duckduckgo search results for %s'),
