@@ -56,6 +56,7 @@
                     <button type="submit" value="bing" class="btn btn-lg btn-primary search">Bing</button>
                     <button type="submit" value="duckduckgo" class="btn btn-lg btn-primary search">DuckDuckGo</button>
                     <button type="submit" value="yahoo" class="btn btn-lg btn-primary search">Yahoo</button>
+                    <button type="submit" value="ask" class="btn btn-lg btn-primary search">Ask</button>
                 </div>
                 <div class="form-group col-sm-1" style="display:inline;">
                     <label for="resp">Max:</label>
@@ -71,7 +72,7 @@
                         <option>90</option>
                         <option>100s</option>
                     </select>
-                </div> 
+                </div>
             </div>
             </div>
         </form>
@@ -132,7 +133,7 @@
         if(!$(this).hasClass('active')){
             $(".active").removeClass("active");
             $(this).addClass('active')
-        } 
+        }
     });
     $(window).keydown(function(event){
     if(event.keyCode == 13) {

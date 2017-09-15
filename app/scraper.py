@@ -3,12 +3,22 @@ import os, json, sys
 import requests
 from bs4 import BeautifulSoup
 
+try:
+    from imp import reload
+except ImportError:
+    from importlib import reload
+
 reload(sys)
-sys.setdefaultencoding('utf8')
+try:
+    sys.setdefaultencoding('utf8')
+except AttributeError:
+    pass
+
 search_engines = {'g': ('GOOGLE SEARCH RESULTS', 'https://www.google.com', 'Google search results for %s'),
                   'd': ('DUCKDUCKGO SEARCH RESULTS', 'https://www.duckduckgo.com', 'Duckduckgo search results for %s'),
                   'b': ('BING SEARCH RESULTS', 'https://www.bing.com', 'Bing search results for %s'),
-                  'y': ('YAHOO SEARCH RESULTS', 'https://search.yahoo.com/', 'Yahoo search results for %s')}
+                  'y': ('YAHOO SEARCH RESULTS', 'https://search.yahoo.com/', 'Yahoo search results for %s'),
+                  'a': ('ASK SEARCH RESULTS', 'http://www.ask.com/', 'Ask search results for %s')}
 query = ''
 
 
@@ -58,7 +68,7 @@ def get_duckduckgo_page(query):
 
 
 def duckduckgo_search(query):
-    """ Search google for the query and return set of urls
+    """ Search duckduckgo for the query and return set of urls
     Returns: urls (list)
             [[Tile1,url1], [Title2, url2],..]
     """
@@ -145,6 +155,31 @@ def yahoo_search(query,count):
                 if len(urls) == count:
                     return urls
 
+def get_ask_page(query):
+    """Fetch the ask search results
+    Returns : Results Page
+    """
+    header = {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36'}
+    payload = {'q': query}
+    response = requests.get('http://ask.com/web', headers=header, params=payload)
+    return response
+
+
+def ask_search(query):
+    """ Search ask for the query and return set of urls
+    Returns: urls (list)
+            [[Tile1,url1], [Title2, url2],..]
+    """
+    urls=[]
+    response = get_ask_page(query)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    for div in soup.findAll('div', {'class': 'PartialSearchResults-item'}):
+        title = div.div.a.text
+        url = div.div.a['href']
+        urls.append({'title': title, 'link': url})
+
+    return urls
 
 
 def read_in():
@@ -163,8 +198,10 @@ def feedgen(query, engine,count):
         urls = duckduckgo_search(query)
     elif engine == 'y':
         urls = yahoo_search(query,count)
-    else:
+    elif engine == 'b':
         urls = bing_search(query,count)
+    else:
+        urls = ask_search(query)
     result = urls
     print(result)
     print(len(result))
