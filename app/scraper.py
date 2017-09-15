@@ -43,6 +43,7 @@ def bing_search(query,count):
             urls.append(url_entry)
             if len(urls) == count:
                 return urls
+    return urls
 
 
 def get_duckduckgo_page(query):
@@ -102,7 +103,7 @@ def google_search(query,count):
                          'desc': desc.getText()})
             if len(urls) == count:
                 return urls
-
+    return urls
 
 
 def get_yahoo_page(query,index):
@@ -144,7 +145,7 @@ def yahoo_search(query,count):
                              'desc': d.getText()})
                 if len(urls) == count:
                     return urls
-
+    return urls
 
 
 def read_in():
