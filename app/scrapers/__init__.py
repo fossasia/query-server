@@ -7,13 +7,15 @@ from duckduckgo import Duckduckgo
 from bing import Bing
 from yahoo import Yahoo
 from ask import Ask
+from quora import Quora
 
 scrapers = {
     'g': Google(),
     'b': Bing(),
     'y': Yahoo(),
     'd': Duckduckgo(),
-    'a': Ask()
+    'a': Ask(),
+    'q': Quora()
 }
 
 def read_in():
