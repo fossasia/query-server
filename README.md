@@ -38,7 +38,7 @@ A sample query : `/api/v1/search/bing?query=fossasia&format=xml`
 ## Dependencies
 
 * [MongoDB](https://www.mongodb.com)
-* [Python 2.7 or Python 3.x](https://python.org)
+* [Python 2.7](https://python.org) `  ` Best practice: [__pip install -r requirements.txt__](requirements.txt)
     * [Pip](https://pip.pypa.io/en/stable/installing)
     * [BeautifulSoup4](https://www.crummy.com/software/BeautifulSoup/bs4/doc)
     * [dicttoxml](https://github.com/quandyfactory/dicttoxml)
@@ -48,7 +48,7 @@ A sample query : `/api/v1/search/bing?query=fossasia&format=xml`
 * [Node.js](https://nodejs.org/en)
     * [bower.io](https://bower.io)
 
-
+__Python 3__ is not supported until issue #147 is resolved.
 
 ## Installation
 
