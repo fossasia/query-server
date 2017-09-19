@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, url_for, abort, Response, make_response
-from scraper import feedgen
+from scrapers import feedgen
 from pymongo import MongoClient
 from dicttoxml import dicttoxml
 from xml.dom.minidom import parseString
