@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, url_for, abort, Response, make_response
-from scrapers import feedgen
+from scraper import feedgen
 from pymongo import MongoClient
 from dicttoxml import dicttoxml
 from xml.dom.minidom import parseString
@@ -28,7 +28,7 @@ def bad_request(err):
 def search(search_engine):
     try:
         if request.method == 'GET':
-            num = request.args.get('num')
+            num = request.args.get('num') or 10
             count = int(num)
             qformat = request.args.get('format') or 'json'
             if qformat not in ['json', 'xml']:
