@@ -50,11 +50,29 @@
                 </div>
             </div>
             <br/>
-            <div class="btn-toolbar">
-                <button type="submit" value="google" class="btn btn-lg btn-primary search">Google</button>
-                <button type="submit" value="bing" class="btn btn-lg btn-primary search">Bing</button>
-                <button type="submit" value="duckduckgo" class="btn btn-lg btn-primary search">DuckDuckGo</button>
-                <button type="submit" value="yahoo" class="btn btn-lg btn-primary search">Yahoo</button>
+            <div class="row">
+                <div class="btn-toolbar col-sm-8">
+                    <button type="submit" value="google" class="btn btn-lg btn-primary search">Google</button>
+                    <button type="submit" value="bing" class="btn btn-lg btn-primary search">Bing</button>
+                    <button type="submit" value="duckduckgo" class="btn btn-lg btn-primary search">DuckDuckGo</button>
+                    <button type="submit" value="yahoo" class="btn btn-lg btn-primary search">Yahoo</button>
+                </div>
+                <div class="form-group col-sm-1" style="display:inline;">
+                    <label for="resp">Max:</label>
+                    <select class="form-control" id="resp">
+                        <option>10</option>
+                        <option>20</option>
+                        <option>30</option>
+                        <option>40</option>
+                        <option>50</option>
+                        <option>60</option>
+                        <option>70</option>
+                        <option>80</option>
+                        <option>90</option>
+                        <option>100s</option>
+                    </select>
+                </div> 
+            </div>
             </div>
         </form>
     </div>
@@ -84,7 +102,8 @@
                 var sengine = $(this).val();
                 var squery = $('#query').val();
                 var sformat = $(' #format label.active input').val();
-                var urlloc = window.location.href.split(/\?|#/)[0] + "api/v1/search/" + sengine + "?query=" + squery + "&format=" + sformat;
+                var count = $('#resp').val();
+                var urlloc = window.location.href.split(/\?|#/)[0] + "api/v1/search/" + sengine + "?query=" + squery + "&format=" + sformat + "&num=" + count;
                 $.ajax({
                     url: urlloc,
                     type: 'GET',
@@ -110,11 +129,15 @@
     });
     $('.formatButton').click(function(e){
         e.preventDefault();
+<<<<<<< HEAD
         if($(this).hasClass('active')){
         } else {
+=======
+        if(!$(this).hasClass('active')){
+>>>>>>> ffd36cb0588e4c4cd3441703e36b81ad62e530df
             $(".active").removeClass("active");
             $(this).addClass('active')
-        }
+        } 
     });
     $(window).keydown(function(event){
     if(event.keyCode == 13) {
