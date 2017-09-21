@@ -50,28 +50,34 @@
                 </div>
             </div>
             <br/>
-            <div class="row">
-                <div class="btn-toolbar col-sm-8">
-                    <button type="submit" value="google" class="btn btn-lg btn-primary search">Google</button>
-                    <button type="submit" value="bing" class="btn btn-lg btn-primary search">Bing</button>
-                    <button type="submit" value="duckduckgo" class="btn btn-lg btn-primary search">DuckDuckGo</button>
-                    <button type="submit" value="yahoo" class="btn btn-lg btn-primary search">Yahoo</button>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-10">
+                        <div class="btn-toolbar">
+                            <button type="submit" value="google" class="btn btn-lg  search btn-outline"><img src="{{ url_for('static', filename='images/google_icon.png') }}" width="30px" alt="Google Icon"> Google</button>
+                            <button type="submit" value="bing" class="btn btn-lg  search btn-outline"><img src="{{ url_for('static', filename='images/bing_icon.ico') }}" width="30px" alt="Bing Icon"> Bing</button>
+                            <button type="submit" value="duckduckgo" class="btn btn-lg  search btn-outline"><img src="{{ url_for('static', filename='images/duckduckgo_icon.png') }}" width="30px" alt="Duckduckgo Icon"> DuckDuckGo</button>
+                            <button type="submit" value="yahoo" class="btn btn-lg  search btn-outline"><img src="{{ url_for('static', filename='images/yahoo_icon.ico') }}" width="30px" alt="Yahoo Icon"> Yahoo</button>
+                        </div>
+                    </div>
+                <div class="col-sm-2">
+                    <div class="form-group" style="display:inline-block;">
+                        <label for="resp">Max:</label>
+                        <select class="form-control" id="resp">
+                            <option>10</option>
+                            <option>20</option>
+                            <option>30</option>
+                            <option>40</option>
+                            <option>50</option>
+                            <option>60</option>
+                            <option>70</option>
+                            <option>80</option>
+                            <option>90</option>
+                            <option>100</option>
+                        </select>
+                    </div> 
                 </div>
-                <div class="form-group col-sm-1" style="display:inline;">
-                    <label for="resp">Max:</label>
-                    <select class="form-control" id="resp">
-                        <option>10</option>
-                        <option>20</option>
-                        <option>30</option>
-                        <option>40</option>
-                        <option>50</option>
-                        <option>60</option>
-                        <option>70</option>
-                        <option>80</option>
-                        <option>90</option>
-                        <option>100s</option>
-                    </select>
-                </div> 
+                </div>
             </div>
             </div>
         </form>
