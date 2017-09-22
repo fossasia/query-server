@@ -1,5 +1,5 @@
 from __future__ import print_function
-import os, json, sys
+import os
 import requests
 from bs4 import BeautifulSoup
 
