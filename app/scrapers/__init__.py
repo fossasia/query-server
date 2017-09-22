@@ -4,11 +4,14 @@ from google import Google
 from duckduckgo import Duckduckgo
 from bing import Bing
 from yahoo import Yahoo
+from ask import Ask
+
 scrapers = {
         'g':Google(),
         'b':Bing(),
         'y':Yahoo(),
         'd':Duckduckgo(),
+	'a':Ask(),
     }
 
 def read_in():
