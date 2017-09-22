@@ -1,5 +1,4 @@
 from __future__ import print_function
-import os
 import requests
 from bs4 import BeautifulSoup
 
