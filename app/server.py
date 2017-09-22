@@ -1,4 +1,3 @@
-from __future__ import absolute_import
 from flask import Flask, render_template, request, url_for, abort, Response, make_response
 from scraper import feedgen
 from pymongo import MongoClient
@@ -23,7 +22,10 @@ def index():
 
 def bad_request(err):
     message = {'Error': err[1], 'Status Code': err[0]}
-    response = dicttoxml(message) if err[2] == 'xml' else json.dumps(message)
+    if (err[2] == 'xml'):
+        response = dicttoxml(message)
+    else:
+        response = json.dumps(message)
     resp = make_response(response, err[0])
     return resp
 
