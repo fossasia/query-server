@@ -18,6 +18,8 @@ errorObj = {
 
 @app.route('/')
 def index():
+    """this is done because in mongodb the database is not created until and unless something is added to it."""
+    db['queries'].insert({"query": "", "engine": "", "qformat": ""})
     return render_template('index.html')
 
 def bad_request(err):
@@ -54,8 +56,20 @@ def search(search_engine):
                 err = [404, 'No response', qformat]
                 return bad_request(err)
 
-            if((db['queries'].find({query: query}).limit(1)) == False):
-                db['queries'].insert({"query" : query,  "engine" : engine, "qformat" : qformat})
+            flag = 0
+            data = db['queries'].find({"query": query}).limit(1)
+
+            for documents in data:
+                flag = 1
+                """this is done because db['queries'].find({"query": query}).limit(1)
+                returns the documents and not boolean hence for will count if for dosen't run
+                then the element is unique"""
+
+            if (flag == 0):  # ie for dosen't run
+                db['queries'].delete_many({"query": ""})
+                # this is done in order to delete document which has empty query
+                db['queries'].insert({"query": query, "engine": engine, "qformat": qformat})
+
 
             for line in result:
                 line['link'] = line['link'].encode('utf-8')
