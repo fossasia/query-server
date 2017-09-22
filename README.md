@@ -29,11 +29,12 @@ The API(s) provided by query-server are as follows:
 
 > *format* : [ `json`, `xml` ]
 
-A sample query : `/api/v1/search/bing?query=fossasia&format=xml`
+A sample query : `/api/v1/search/bing?query=fossasia&format=xml&num=10`
 
 ## Error Codes
     404 Not Found : Incorrect Search Engine, Zero Response
     400 Bad Request : query and/or format is not in the correct format
+    500 Internal Server Error : Server Error from Search Engine
 
 ## Dependencies
 
