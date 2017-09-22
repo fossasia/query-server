@@ -22,7 +22,7 @@ def index():
 
 def bad_request(err):
     message = {'Error': err[1], 'Status Code': err[0]}
-    if (err[2] == 'xml'):
+    if(err[2] == 'xml'):
         response = dicttoxml(message)
     else:
         response = json.dumps(message)
