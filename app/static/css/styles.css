@@ -41,6 +41,18 @@ p{
   border-radius: 0.4em;
 }
 
+.btn-outline {
+  background-color: transparent;
+  color: inherit;
+  transition: all .5s;
+  border: 1px #428bca solid;
+}
+
+.btn-outline:hover {
+  color: #286090;
+  background-color:rgba(0, 0, 0, 0.09);
+}
+
 .search{
     margin:0.3em;
 }

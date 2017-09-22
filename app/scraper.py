@@ -62,26 +62,37 @@ def get_duckduckgo_page(query):
     """
     header = {
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36'}
-    payload = {'q': query}
-    response = requests.get('https://duckduckgo.com/html', headers=header, params=payload)
+    response = requests.get('https://duckduckgo.com/html' + query, headers=header)
     return response
 
 
-def duckduckgo_search(query):
+def duckduckgo_search(query, count):
     """ Search duckduckgo for the query and return set of urls
     Returns: urls (list)
             [[Tile1,url1], [Title2, url2],..]
     """
     urls = []
-    response = get_duckduckgo_page(query)
-    soup = BeautifulSoup(response.text, 'html.parser')
-    for links in soup.findAll('a', {'class': 'result__a'}):
-        desc = links.find_next('a')
-        urls.append({'title': links.getText(),
-                     'link': links.get('href'),
-                     'desc': desc.getText()})
+    query = '/?q=' + query
+    while True:
+        response = get_duckduckgo_page(query)
+        soup = BeautifulSoup(response.text, 'html.parser')
+        navLink = soup.find_all('div', {'class': 'nav-link'})
+        if navLink:
+            navLinkForm = navLink[-1].find('form', {'action': '/html/', 'method': 'post'})
+            navLinkForm = navLinkForm.find_all('input')
+            parameters = [(i['name']+'='+i['value']) for i in navLinkForm[1:]]
+            parameters = '&'.join(parameters)
 
-    return urls
+            for links in soup.findAll('a', {'class': 'result__a'}):
+                desc = links.find_next('a')
+                urls.append({'title': links.getText(),
+                             'link': links.get('href'),
+                             'desc': desc.getText()})
+                if(len(urls) == count):
+                    return urls
+            query = '/?' + parameters
+        else:
+            return urls
 
 
 def get_google_page(query,index):
@@ -195,7 +206,7 @@ def feedgen(query, engine,count):
     if engine == 'g':
         urls = google_search(query,count)
     elif engine == 'd':
-        urls = duckduckgo_search(query)
+        urls = duckduckgo_search(query, count)
     elif engine == 'y':
         urls = yahoo_search(query,count)
     elif engine == 'b':
