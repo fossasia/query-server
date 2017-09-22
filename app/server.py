@@ -10,6 +10,11 @@ err = ""
 
 client = MongoClient(os.environ.get('MONGO_URI', 'mongodb://localhost:27017/'))
 db = client['query-server-v2']
+errorObj = {
+    'type' : 'Internal Server Error',
+    'status_code' : 500,
+    'error' : 'Could not parse the page due to Internal Server Error'
+}
 
 @app.route('/')
 def index():
@@ -67,8 +72,7 @@ def search(search_engine):
                 return Response(xmlfeed, mimetype='application/xml')
 
     except Exception as e:
-        return (e)
-
+        return Response(json.dumps(errorObj).encode('utf-8'),mimetype='application/json')
 @app.after_request
 def set_header(r):
     r.headers["Cache-Control"] = "no-cache"
