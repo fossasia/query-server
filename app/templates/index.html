@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="robots" content="index,follow">
     <meta http-equiv="cache-control" content="public">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="Content-Language" content="en, english"/>
+    <meta name="Content-Language" content="en, english" />
     <link rel="stylesheet" href="{{ url_for('static', filename='bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='bower_components/prismjs/themes/prism.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
@@ -19,40 +20,40 @@
     <title>query-server &middot; FOSSASIA</title>
 </head>
 
-<body style="position: relative; margin: 0; padding-bottom: 6rem; min-height: 100%; font-family:Droid Sans Mono">
-<a href="https://github.com/fossasia/query-server.git">
-    <img style="position:absolute; top:0; right:0; border:0;" src="{{ url_for('static', filename='images/forkme_right_green_007200.png') }}"
-         alt="Fork me on GitHub" title="query-server source code on github">
-</a>
-<div class="jumbotron">
+<body>
     <div class="container">
-        <h1><code>query-server</code></h1>
-        <span id="desc">
-          Query server that stores a query string on a server.
-        </span><br><br><br>
-        <form class="col-sm-12 hidden-xs" id="searchForm">
-            <div class="row">
-                <div class="col-sm-8">
-                    <div class="input-group input-group-lg">
-                        <input id="query" type="text" class="center-block form-control"
-                               placeholder="Search with query-server" style="min-width: 750px;">
+        <a class="github-fork-ribbon" href="https://github.com/fossasia/query-server.git">
+            <img src="{{ url_for('static', filename='images/forkme_right_green_007200.png') }}" alt="Fork me on GitHub" title="query-server source code on github">
+        </a>
+    </div>
+
+    <div class="jumbotron">
+        <div class="container">
+            <h1><code>query-server</code></h1>
+            <p>
+                Query server that stores a query string on a server.
+            </p>
+            <form id="searchForm">
+                <div class="container" style="padding:0; margin: 0 auto;">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <div class="input-group input-group-lg" style="min-width:100%">
+                                <input id="query" type="text" class="center-block form-control" autocomplete="on" placeholder="Search with query-server">
+                            </div>
+                        </div>
+                        <div class="col-sm-4" style="display:inline-flex    ;">
+                            <div class="btn-group" role="group" id="format" data-toggle="buttons">
+                                <label class="btn btn-lg btn-primary active formatButton">
+                                        <input type="radio" value="json" autocomplete="off">JSON
+                                    </label>
+                                <label class="btn btn-lg btn-primary formatButton">
+                                        <input type="radio" value="xml" autocomplete="off">XML
+                                    </label>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-4" style="display: inline;">
-                    <div class="btn-group" id="format" data-toggle="buttons">
-                        <label class="btn btn-lg btn-primary active formatButton">
-                            <input type="radio" value="json" autocomplete="off">JSON
-                        </label>
-                        <label class="btn btn-lg btn-primary formatButton">
-                            <input type="radio" value="xml" autocomplete="off">XML
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <br/>
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-10">
+                    <br/>
+                    <div class="col-md-10 col-xs-12 col-sm-10" style="padding:0; margin: 0 auto;">
                         <div class="btn-toolbar">
                             <button type="submit" value="google" class="btn btn-lg  search btn-outline"><img src="{{ url_for('static', filename='images/google_icon.png') }}" width="30px" alt="Google Icon"> Google</button>
                             <button type="submit" value="bing" class="btn btn-lg  search btn-outline"><img src="{{ url_for('static', filename='images/bing_icon.ico') }}" width="30px" alt="Bing Icon"> Bing</button>
@@ -60,92 +61,128 @@
                             <button type="submit" value="yahoo" class="btn btn-lg  search btn-outline"><img src="{{ url_for('static', filename='images/yahoo_icon.ico') }}" width="30px" alt="Yahoo Icon"> Yahoo</button>
                         </div>
                     </div>
-                <div class="col-sm-2">
-                    <div class="form-group" style="display:inline-block;">
-                        <label for="resp">Max:</label>
-                        <select class="form-control" id="resp">
-                            <option>10</option>
-                            <option>20</option>
-                            <option>30</option>
-                            <option>40</option>
-                            <option>50</option>
-                            <option>60</option>
-                            <option>70</option>
-                            <option>80</option>
-                            <option>90</option>
-                            <option>100</option>
-                        </select>
-                    </div> 
+                    <div class="col-sm-2">
+                        <div class="form-group" style="display:inline-block; margin: 0 auto; min-width:50%;">
+                            <label for="resp">Max:</label>
+                            <select class="form-control" id="resp">
+                                <option>10</option>
+                                <option>20</option>
+                                <option>30</option>
+                                <option>40</option>
+                                <option>50</option>
+                                <option>60</option>
+                                <option>70</option>
+                                <option>80</option>
+                                <option>90</option>
+                                <option>100</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
-                </div>
-            </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
-</div>
-
-<div class="container">
-    <footer style="position: absolute; right: 0; bottom: 0; left: 0; padding: 1rem; text-align: center;">
-        <p>Nice? To get latest news about <code>query-server</code>, follow <a
-                href="https://twitter.com/fossasia"><code>@FOSSASIA</code></a>. Help to spread the news: <a
-                class="btn btn-info" id="tweet"
-                href="https://twitter.com/intent/tweet?hashtags=loklak&text=%20%23query-server%20%23fossasia&tw_p=tweetbutton"
-                role="button">tweet about this &raquo;</a></p>
+    <div class="pagination-centered">
+        <img id="load" src="{{ url_for('static', filename='images/ripple.gif') }}">
+    </div>
+    <pre id="feed" style="display:none;"><code class="language-xml"></code></pre>
+    <br/><br/>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-sm-12 col-xs-12" style="margin: 0 auto;display: table;">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Project Information</div>
+                    <div class="panel-body">
+                        <strong>Git Commit/Version number: </strong><a class="version"></a><br>
+                        <strong>Python version: </strong> 2.x or 3.x<br>
+                        <strong>Packages: </strong>
+                        <code><span class="label label-primary">Node.js</span></code>
+                        <code><span class="label label-primary">Pip</span></code>
+                        <code><span class="label label-primary">Flask</span></code>
+                        <code><span class="label label-primary">BeautifulSoup4</span></code><br>
+                        <strong>Maintainer: </strong><a href="nikhilrayaprolu" target="_blank">Nikhil Rayaprolu</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted">Want to contribute? <a href="https://gitter.im/fossasia/query-server" target="_blank"><img src="https://badges.gitter.im/gitterHQ/gitter.png" alt="gitter badge"></a>                to get started.</p>
+            <p>Nice? To get latest news about <code>query-server</code>, follow <a href="https://twitter.com/fossasia"><code>@FOSSASIA</code></a>.
+                Help to spread the news: <a class="btn btn-info" id="tweet" href="https://twitter.com/intent/tweet?hashtags=loklak&text=%20%23query-server%20%23fossasia&tw_p=tweetbutton"
+                    role="button">tweet about this &raquo;</a></p>
+        </div>
     </footer>
-</div>
-<div class="pagination-centered" >
-  <img id="load" src="{{ url_for('static', filename='images/ripple.gif') }}">
-</div>
-<pre id="feed" style="display:none;"><code class="language-xml"></code></pre>
-<br/><br/>
-<script>
-    $(function() {
-        $('.btn-toolbar > button.btn').click(function(e) {
-            e.preventDefault();
-            if($('#query').val()) {
-                $('#load').show();
-                $('#feed').hide();
-                var sengine = $(this).val();
-                var squery = $('#query').val();
-                var sformat = $(' #format label.active input').val();
-                var count = $('#resp').val();
-                var urlloc = window.location.href.split(/\?|#/)[0] + "api/v1/search/" + sengine + "?query=" + squery + "&format=" + sformat + "&num=" + count;
-                $.ajax({
-                    url: urlloc,
-                    type: 'GET',
-                    success: function(response) {
-                        $('#load').hide();
-                        if(sformat == "json")
-                        {
-                            $(".code").attr("class", "language-json");
-                            response = JSON.stringify(response, null, 4);
+    <script>
+        $(function () {
+            $('.btn-toolbar > button.btn').click(function (e) {
+                e.preventDefault();
+                if ($('#query').val()) {
+                    $('#load').show();
+                    $('#feed').hide();
+                    var sengine = $(this).val();
+                    var squery = $('#query').val();
+                    var sformat = $(' #format label.active input').val();
+                    var count = $('#resp').val();
+                    var urlloc = window.location.href.split(/\?|#/)[0] + "api/v1/search/" + sengine +
+                        "?query=" + squery + "&format=" + sformat + "&num=" + count;
+                    $.ajax({
+                        url: urlloc,
+                        type: 'GET',
+                        success: function (response) {
+                            $('#load').hide();
+                            if (sformat == "json") {
+                                $(".code").attr("class", "language-json");
+                                response = JSON.stringify(response, null, 4);
+                            } else
+                                response = new XMLSerializer().serializeToString(response);
+                            $('#feed').show();
+                            $('#feed').text(response);
+                            Prism.highlightElement($('#feed')[0]);
+                        },
+                        error: function (error) {
+                            console.log(error);
                         }
-                        else
-                            response = new XMLSerializer().serializeToString(response);
-                        $('#feed').show();
-                        $('#feed').text(response);
-                        Prism.highlightElement($('#feed')[0]);
-                    },
-                    error: function(error) {
-                        console.log(error);
-                    }
-                });
-            };
+                    });
+                };
+            });
         });
-    });
-    $('.formatButton').click(function(e){
-        e.preventDefault();
-        if(!$(this).hasClass('active')){
-            $(".active").removeClass("active");
-            $(this).addClass('active')
-        } 
-    });
-    $(window).keydown(function(event){
-    if(event.keyCode == 13) {
-      event.preventDefault();
-      return false;
-    }
-  });
-</script>
+
+        $('.formatButton').click(function (e) {
+            e.preventDefault();
+            if (!$(this).hasClass('active')) {
+                $(".active").removeClass("active");
+                $(this).addClass('active')
+            }
+        });
+
+        $(window).keydown(function (event) {
+            if (event.keyCode == 13) {
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        var apiUrl = "https://api.github.com/repos/fossasia/query-server/git/refs/heads/master";
+        $.ajax({
+            url: apiUrl,
+            async: true,
+            success(result) {
+                if (typeof result.object !== "undefined" && typeof result.object.sha !==
+                    "undefined") {
+                    var version = result["object"]["sha"];
+                    var versionLink = "https://github.com/fossasia/query-server/tree/" + version;
+                    var deployLink = $('.version').attr("href", versionLink).html(version);
+                } else {
+                    $('.version').html('Failed to access version');
+                }
+            },
+            error(error) {
+                $('.version').html('Failed to access version');
+            }
+        });
+    </script>
 </body>
+
 </html>
