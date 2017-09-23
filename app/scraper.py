@@ -102,7 +102,8 @@ def google_search(query,count):
             [[Tile1,url1], [Title2, url2],..]
     """
     urls = []
-    for index in range(0,count,10):
+    index = 0
+    while True:
         response = get_google_page(query,index)
         soup = BeautifulSoup(response.text, 'html.parser')
         for h3 in soup.findAll('h3', {'class': 'r'}):
@@ -113,6 +114,7 @@ def google_search(query,count):
                          'desc': desc.getText()})
             if len(urls) == count:
                 return urls
+        index = len(urls) + 1
 
 
 
