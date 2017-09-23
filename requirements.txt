@@ -7,7 +7,6 @@ Flask>=0.12
 futures>=3.0.5
 html5lib>=0.9999999
 Jinja2>=2.9.5
-librabbitmq>=1.5.1
 lxml>=3.7.2
 mechanize>=0.2.5
 pymongo>=3.4.0
