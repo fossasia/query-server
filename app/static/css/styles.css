@@ -1,16 +1,33 @@
-body {
-  padding-top: 0px;
-  font: DroidSansMono;
+html {
+    height: 100%;
+    box-sizing: border-box;
 }
 
-#feed{
+body {
+    padding-top: 0px;
+    font: DroidSansMono;
+    position: relative;
+    margin: 0;
+    padding-bottom: 6rem;
+    min-height: 100%;
+    font-family: Droid Sans Mono;
+}
+
+.github-fork-ribbon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: 0;
+}
+
+#feed {
     font-size: 1.2em;
-    margin : 0em 2em 0 2em ;
+    margin: 0em 2em 0 2em;
     padding: -3em 0 -3em 0;
     z-index: -100000;
 }
 
-#load{
+#load {
     position: relative;
     display: none;
     left: 50%;
@@ -18,53 +35,95 @@ body {
     margin: auto;
 }
 
-p{
-  font-size: medium;
+p {
+    font-size: medium;
 }
 
-.desc{
-  font-size: 1.2em;
-}
-
-.btn-toolbar{
-  margin-top: 1em;
-}
-
-.btn {
-  border: none;
-  color: white;
-  padding: 0.5em 1.5em;
-  text-align: center;
-  text-decoration: ghostwhite;
-  display: inline-block;
-  font-size: 1.4em;
-  border-radius: 0.4em;
-}
-
-.btn-outline {
-  background-color: transparent;
-  color: inherit;
-  transition: all .5s;
-  border: 1px #428bca solid;
-}
-
-.btn-outline:hover {
-  color: #286090;
-  background-color:rgba(0, 0, 0, 0.09);
-}
-
-.search{
-    margin:0.3em;
-}
-
-#tweet{
-    font-size: large;
-}
-
-#desc{
-    font-weight: bold;
-    font-size: 1.2em;
+.jumbotron p {
+    font-weight: 300;
+    font-size: 1.5em;
+    display: inline-block;
     box-shadow: aliceblue;
 }
 
+.btn-toolbar {
+    margin-top: 1em;
+}
 
+.btn {
+    border: none;
+    color: white;
+    padding: 0.5em 1.5em;
+    text-align: center;
+    text-decoration: ghostwhite;
+    display: inline-block;
+    font-size: 1.4em;
+    border-radius: 0.4em;
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: inherit;
+    transition: all .5s;
+    border: 1px #428bca solid;
+}
+
+.btn-outline:hover {
+    color: #286090;
+    background-color: rgba(0, 0, 0, 0.09);
+}
+
+.search {
+    margin: 0.3em;
+}
+
+#tweet {
+    font-size: large;
+}
+
+.panel-heading {
+    font-weight: 300;
+    font-size: 1.5em;
+}
+
+.panel-body {
+    line-height: 25px;
+    margin: 0 auto;
+}
+
+.panel-body .label {
+    font-size: 1em;
+}
+
+.footer {
+    bottom:0;
+    width: 100%;
+    height: 100px;
+}
+
+
+.footer .text-muted {
+    margin: 20px 0;
+}
+
+
+/* Media Queries */
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    .github-fork-ribbon img {
+        width: 120px;
+    }
+    h1 {
+        font-size: 2.5em;
+    }
+    .jumbotron p {
+        font-size: 1.5em;
+    }
+    #query {
+        width: 90%;
+    }
+    .btn-group {
+        margin-top: 10px;
+        line-height: 20px;
+    }
+}
