@@ -1,7 +1,14 @@
 from __future__ import print_function
-import os, json, sys
+import json
+import sys
 import requests
 from bs4 import BeautifulSoup
+
+try:
+  reload                        # Python 2
+except NameError:
+  from importlib import reload  # Python 3
+
 
 reload(sys)
 sys.setdefaultencoding('utf8')
