@@ -9,13 +9,13 @@ from yahoo import Yahoo
 from ask import Ask
 
 scrapers = {
+
     'g': Google(),
     'b': Bing(),
     'y': Yahoo(),
     'd': Duckduckgo(),
     'a': Ask()
 }
-
 
 def read_in():
     lines = sys.stdin.readlines()
