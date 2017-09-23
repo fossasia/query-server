@@ -148,7 +148,6 @@
                 };
             });
         });
-
         $('.formatButton').click(function (e) {
             e.preventDefault();
             if (!$(this).hasClass('active')) {
@@ -156,36 +155,12 @@
                 $(this).addClass('active')
             }
         });
-<<<<<<< HEAD
-    });
-    $('.formatButton').click(function(e){
-        e.preventDefault();
-<<<<<<< HEAD
-        if($(this).hasClass('active')){
-        } else {
-=======
-        if(!$(this).hasClass('active')){
->>>>>>> ffd36cb0588e4c4cd3441703e36b81ad62e530df
-            $(".active").removeClass("active");
-            $(this).addClass('active')
-        } 
-    });
-    $(window).keydown(function(event){
-    if(event.keyCode == 13) {
-      event.preventDefault();
-      return false;
-    }
-  });
-</script>
-=======
-
         $(window).keydown(function (event) {
             if (event.keyCode == 13) {
                 event.preventDefault();
                 return false;
             }
         });
-
         var apiUrl = "https://api.github.com/repos/fossasia/query-server/git/refs/heads/master";
         $.ajax({
             url: apiUrl,
@@ -205,7 +180,6 @@
             }
         });
     </script>
->>>>>>> 7e956a7bbe8f82199028a748546e1d0eaa489721
 </body>
 
 </html>
