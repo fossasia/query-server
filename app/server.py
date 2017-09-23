@@ -1,9 +1,11 @@
-from flask import Flask, render_template, request, url_for, abort, Response, make_response
-from scraper import feedgen
+from flask import (Flask, render_template, request, abort,
+    Response, make_response)
+from scrapers import feedgen
 from pymongo import MongoClient
 from dicttoxml import dicttoxml
 from xml.dom.minidom import parseString
-import json,os
+import json
+import os
 
 app = Flask(__name__)
 err = ""
@@ -55,7 +57,8 @@ def search(search_engine):
                 return bad_request(err)
 
             if((db['queries'].find({query: query}).limit(1)) == False):
-                db['queries'].insert({"query" : query,  "engine" : engine, "qformat" : qformat})
+                db['queries'].insert({"query" : query,
+                    "engine" : engine, "qformat" : qformat})
 
             for line in result:
                 line['link'] = line['link'].encode('utf-8')
@@ -68,7 +71,9 @@ def search(search_engine):
                 return Response(jsonfeed, mimetype='application/json')
 
             elif(qformat == 'xml'):
-                xmlfeed = parseString((dicttoxml(result, custom_root='channel', attr_type=False)).encode('utf-8')).toprettyxml()
+                xmlfeed = parseString(\
+                    (dicttoxml(result, custom_root='channel',
+                        attr_type=False)).encode('utf-8')).toprettyxml()
                 return Response(xmlfeed, mimetype='application/xml')
 
     except Exception as e:

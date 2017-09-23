@@ -1,15 +1,17 @@
-from __future__ import print_function
-import os, json, sys
+import json
+import sys
 from google import Google
 from duckduckgo import Duckduckgo
 from bing import Bing
 from yahoo import Yahoo
+
 scrapers = {
         'g':Google(),
         'b':Bing(),
         'y':Yahoo(),
         'd':Duckduckgo(),
     }
+
 
 def read_in():
     lines = sys.stdin.readlines()
