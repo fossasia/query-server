@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, url_for, abort, Response, make_response
-from scrapers import feedgen
+from scraper import feedgen
 from pymongo import MongoClient
 from dicttoxml import dicttoxml
 from xml.dom.minidom import parseString
@@ -10,6 +10,11 @@ err = ""
 
 client = MongoClient(os.environ.get('MONGO_URI', 'mongodb://localhost:27017/'))
 db = client['query-server-v2']
+errorObj = {
+    'type' : 'Internal Server Error',
+    'status_code' : 500,
+    'error' : 'Could not parse the page due to Internal Server Error'
+}
 
 @app.route('/')
 def index():
@@ -28,7 +33,7 @@ def bad_request(err):
 def search(search_engine):
     try:
         if request.method == 'GET':
-            num = request.args.get('num')
+            num = request.args.get('num') or 10
             count = int(num)
             qformat = request.args.get('format') or 'json'
             if qformat not in ['json', 'xml']:
@@ -67,8 +72,7 @@ def search(search_engine):
                 return Response(xmlfeed, mimetype='application/xml')
 
     except Exception as e:
-        return (e)
-
+        return Response(json.dumps(errorObj).encode('utf-8'),mimetype='application/json')
 @app.after_request
 def set_header(r):
     r.headers["Cache-Control"] = "no-cache"
