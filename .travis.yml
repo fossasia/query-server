@@ -15,7 +15,5 @@ before_script:
   - flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 script:
   - echo success
-# - py.test app/rss-generator.py
-# - py.test --cov
 after_success:
   - coveralls 
