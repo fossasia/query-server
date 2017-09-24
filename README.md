@@ -23,9 +23,9 @@ The API(s) provided by query-server are as follows:
 
 ` GET /api/v1/search/<search-engine>?query=query&format=format `
 
-> *search-engine* : ['google' , 'bing', 'duckduckgo' , 'yahoo']
+> *search-engine* : ['google' , 'bing', 'duckduckgo' , 'yahoo', 'ask']
 
-> *query* : query can be any string 
+> *query* : query can be any string
 
 > *format* : [ `json`, `xml` ]
 
@@ -51,14 +51,14 @@ Make sure you have [Nodejs](https://nodejs.org/en/) installed.
 Running this tool requires installing the nodejs as well as python dependencies.
 
 ```
-git clone https://github.com/fossasia/query-server.git 
+git clone https://github.com/fossasia/query-server.git
 cd query-server
 npm install -g bower
 bower install
 pip install -r requirements.txt
 ```
 
-To set up MongoDB on your server : 
+To set up MongoDB on your server :
 ```bash
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
 echo "deb http://repo.mongodb.org/apt/ubuntu "$(lsb_release -sc)"/mongodb-org/3.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list
@@ -69,7 +69,7 @@ sudo service mongod start
 
 ## Usage
 
-To run the query server: 
+To run the query server:
 ```bash
 python app/server.py
 ```
@@ -81,4 +81,3 @@ Found an issue? Post it in the [issue tracker](https://github.com/fossasia/query
 ## License
 
 This project is currently licensed under the Apache License version 2.0. A copy of `LICENSE` should be present along with the source code. To obtain the software under a different license, please contact [FOSSASIA](http://blog.fossasia.org/contact/).
-
