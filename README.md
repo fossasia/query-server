@@ -6,7 +6,8 @@
 
 > The query server can be used to search a keyword/phrase on a search engine (Google, Yahoo, Bing, DuckDuckGo) and get the results as `json` or `xml`. The tool also stores the searched query string in a MongoDB database for analytical purposes. (The search engine scrapper is based on the scraper at [fossasia/searss](https://github.com/fossasia/searss).)
 
-[![Deploy to Docker Cloud](https://files.cloud.docker.com/images/deploy-to-dockercloud.svg)](https://cloud.docker.com/stack/deploy/?repo=https://github.com/fossasia/query-server)[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/fossasia/query-server)
+[![Deploy to Docker Cloud](https://files.cloud.docker.com/images/deploy-to-dockercloud.svg)](https://cloud.docker.com/stack/deploy/?repo=https://github.com/fossasia/query-server)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/fossasia/query-server)
 
 ## Table of Contents
 
@@ -23,11 +24,11 @@ The API(s) provided by query-server are as follows:
 
 ` GET /api/v1/search/<search-engine>?query=query&format=format `
 
-> *search-engine* : ['google' , 'bing', 'duckduckgo' , 'yahoo']
+> *search-engine* : [`google`, `ask`, `bing`, `duckduckgo`, `yahoo`]
 
 > *query* : query can be any string 
 
-> *format* : [ `json`, `xml` ]
+> *format* : [`json`, `xml`]
 
 A sample query : `/api/v1/search/bing?query=fossasia&format=xml&num=10`
 
@@ -38,12 +39,15 @@ A sample query : `/api/v1/search/bing?query=fossasia&format=xml&num=10`
 
 ## Dependencies
 
-* Python 2.x or Python 3.x
-* [Node.js](https://nodejs.org/en/)
-* [Pip](https://pip.pypa.io/en/stable/installing/)
-* [Flask](http://flask.pocoo.org/)
-* [BeautifulSoup4](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
-
+* [MongoDB](https://www.mongodb.com)
+* [Python 2.7 and 3.4+](https://python.org)
+    * [BeautifulSoup4](https://www.crummy.com/software/BeautifulSoup/bs4/doc)
+    * [dicttoxml](https://github.com/quandyfactory/dicttoxml)
+    * [Flask](http://flask.pocoo.org)
+    * [pymongo](https://api.mongodb.com/python/current)
+    * [requests](http://docs.python-requests.org)
+* [Node.js](https://nodejs.org/en)
+    * [bower.io](https://bower.io)
 
 ## Installation
 
@@ -76,7 +80,7 @@ python app/server.py
 
 ## Contribute
 
-Found an issue? Post it in the [issue tracker](https://github.com/fossasia/query-server/issues)
+Found an issue? Post it in the [issue tracker](https://github.com/fossasia/query-server/issues)  For pull requests please read [Open Source Developer Guide and Best Practices at FOSSASIA](https://blog.fossasia.org/open-source-developer-guide-and-best-practices-at-fossasia/)
 
 ## License
 
