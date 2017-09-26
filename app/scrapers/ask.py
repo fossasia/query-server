@@ -2,6 +2,7 @@ from __future__ import print_function
 import requests
 from bs4 import BeautifulSoup
 
+
 class Ask:
     """Scrapper class for Ask"""
     @classmethod
@@ -9,7 +10,7 @@ class Ask:
         pass
 
     @classmethod
-    def get_page(cls,query):
+    def get_page(cls, query):
         """
         Fetches search response from ask.com
         returns : result page in html
@@ -21,12 +22,12 @@ class Ask:
         return response
 
     @classmethod
-    def results_search(cls,query):
+    def results_search(cls, query):
         """ Search ask for the query and return set of urls
         Returns: urls (list)
                 [[Tile1,url1], [Title2, url2],..]
         """
-        urls=[]
+        urls = []
         response = get_ask_page(query)
         soup = BeautifulSoup(response.text, 'html.parser')
         for div in soup.findAll('div', {'class': 'PartialSearchResults-item'}):

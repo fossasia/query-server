@@ -1,14 +1,14 @@
 from __future__ import print_function
-import os, json, sys
 import requests
 from bs4 import BeautifulSoup
+
 
 class Bing:
     """Scrapper class for Bing"""
     def __init__(self):
         pass
 
-    def get_page(self,query):
+    def get_page(self, query):
         """
         Fetches search response from bing.com
         returns : result page in html
@@ -19,7 +19,7 @@ class Bing:
         response = requests.get('http://www.bing.com/search', params=payload, headers=header)
         return response
 
-    def results_search(self,query):
+    def results_search(self, query):
         """ Search bing for the query and return set of urls
         Returns: urls (list)
                 [[Tile1,url1], [Title2, url2],..]

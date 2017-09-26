@@ -1,14 +1,14 @@
 from __future__ import print_function
-import os, json, sys
 import requests
 from bs4 import BeautifulSoup
+
 
 class Google:
     """Scrapper class for Google"""
     def __init__(self):
         pass
 
-    def get_page(self,query):
+    def get_page(self, query):
         """ Fetch the google search results page
         Returns : Results Page
         """
@@ -18,7 +18,7 @@ class Google:
         response = requests.get('https://www.google.com/search', headers=header, params=payload)
         return response
 
-    def get_page(self,query, startIndex):
+    def get_page(self, query, startIndex):
         """ Fetch the google search results page
         Returns : Results Page
         """
@@ -28,7 +28,7 @@ class Google:
         response = requests.get('https://www.google.com/search', headers=header, params=payload)
         return response
 
-    def results_search(self,query):
+    def results_search(self, query):
         """ Search google for the query and return set of urls
         Returns: urls (list)
                 [[Tile1,url1], [Title2, url2],..]
@@ -43,4 +43,3 @@ class Google:
                              'link': links.get('href')})
 
         return urls
-
