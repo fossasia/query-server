@@ -1,5 +1,4 @@
-from flask import Flask, render_template, request, abort, Response, \
-        make_response
+from flask import Flask, render_template, request, abort, Response, make_response
 from scraper import feedgen
 from pymongo import MongoClient
 from dicttoxml import dicttoxml
