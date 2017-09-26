@@ -164,29 +164,32 @@ def yahoo_search(query,count):
                 if len(urls) == count:
                     return urls
 
-def get_ask_page(query):
+def get_ask_page(query,index):
     """Fetch the ask search results
     Returns : Results Page
     """
     header = {
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36'}
-    payload = {'q': query}
+    payload = {'q': query,'page':index}
     response = requests.get('http://ask.com/web', headers=header, params=payload)
     return response
 
 
-def ask_search(query):
+def ask_search(query,count):
     """ Search ask for the query and return set of urls
     Returns: urls (list)
             [[Tile1,url1], [Title2, url2],..]
     """
     urls=[]
-    response = get_ask_page(query)
-    soup = BeautifulSoup(response.text, 'html.parser')
-    for div in soup.findAll('div', {'class': 'PartialSearchResults-item'}):
-        title = div.div.a.text
-        url = div.div.a['href']
-        urls.append({'title': title, 'link': url})
+    for index in range(1,(count/10) + 2):
+        response = get_ask_page(query,index)
+        soup = BeautifulSoup(response.text, 'html.parser')
+        for div in soup.findAll('div', {'class': 'PartialSearchResults-item'}):
+            title = div.div.a.text
+            url = div.div.a['href']
+            urls.append({'title': title, 'link': url})
+            if len(urls) == count:
+                return urls
     return urls
 
 
@@ -209,7 +212,7 @@ def feedgen(query, engine,count):
     elif engine == 'b':
         urls = bing_search(query,count)
     else:
-        urls = ask_search(query)
+        urls = ask_search(query,count)
     result = urls
     print(result)
     print(len(result))
