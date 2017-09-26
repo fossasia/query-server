@@ -10,7 +10,7 @@ class Ask:
         pass
 
     @classmethod
-    def get_page(cls, query):
+    def get_ask_page(cls, query):
         """
         Fetches search response from ask.com
         returns : result page in html
