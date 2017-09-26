@@ -3,12 +3,21 @@ import os, json, sys
 import requests
 from bs4 import BeautifulSoup
 
+try:
+  reload                        # Python 2
+except NameError:
+  from importlib import reload  # Python 3
+
 reload(sys)
 
 try:
     sys.setdefaultencoding('utf8')
 except AttributeError:
     pass
+
+HEADERS = {'User-Agent':
+           'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.36 '
+           '(KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36'}
 
 search_engines = {'g': ('GOOGLE SEARCH RESULTS', 'https://www.google.com', 'Google search results for %s'),
                   'd': ('DUCKDUCKGO SEARCH RESULTS', 'https://www.duckduckgo.com', 'Duckduckgo search results for %s'),
@@ -23,10 +32,8 @@ def get_bing_page(query,index):
     Fetches search response from bing.com
     returns : result page in html
     """
-    header = {
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36'}
     payload = {'q': query, 'first' : index}
-    response = requests.get('http://www.bing.com/search', params=payload, headers=header)
+    response = requests.get('http://www.bing.com/search', params=payload, headers=HEADERS)
     return response
 
 
@@ -56,9 +63,7 @@ def get_duckduckgo_page(query):
     Search query on duckduckgo
     Returns : Result page in html
     """
-    header = {
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36'}
-    response = requests.get('https://duckduckgo.com/html' + query, headers=header)
+    response = requests.get('https://duckduckgo.com/html' + query, headers=HEADERS)
     return response
 
 
@@ -95,10 +100,8 @@ def get_google_page(query,index):
     """ Fetch the google search results page
     Returns : Results Page
     """
-    header = {
-        'User-Agent': 'Mozilla/5.4 (Macintosh; Intel Mac OS X 10_8_1) AppleWebKit/537.34 (KHTML, like Gecko) Chrome/27.0.1453.106 Safari/535.36'}
     payload = {'q': query,'start' : index}
-    response = requests.get('https://www.google.com/search', headers=header, params=payload)
+    response = requests.get('https://www.google.com/search', headers=HEADERS, params=payload)
     return response
 
 
@@ -128,10 +131,8 @@ def get_yahoo_page(query,index):
     """ Fetch the yahoo search results
     Returns : Results Page
     """
-    header = {
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36'}
     payload = {'p': query,'b' : index}
-    response = requests.get('https://search.yahoo.com/search', headers=header, params=payload)
+    response = requests.get('https://search.yahoo.com/search', headers=HEADERS, params=payload)
     return response
 
 
@@ -168,10 +169,8 @@ def get_ask_page(query):
     """Fetch the ask search results
     Returns : Results Page
     """
-    header = {
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36'}
     payload = {'q': query}
-    response = requests.get('http://ask.com/web', headers=header, params=payload)
+    response = requests.get('http://ask.com/web', headers=HEADERS, params=payload)
     return response
 
 
