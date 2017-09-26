@@ -1,33 +1,22 @@
 from __future__ import print_function
 import os, json, sys
-import requests
-from bs4 import BeautifulSoup
+from generalized import Scraper
 
-
-class Yahoo:
+class Yahoo(Scraper):
     """Scrapper class for Yahoo"""
     def __init__(self):
-        pass
+        self.url = 'https://search.yahoo.com/search'
+        self.defaultStart = 1
+        self.startKey = 'b'
 
-    def get_page(self,query):
-        """ Fetch the yahoo search results
-        Returns : Results Page
-        """
-        header = {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36'}
-        payload = {'q': query}
-        response = requests.get('https://search.yahoo.com/search', headers=header, params=payload)
-        return response
+    @classmethod
+    def parseResponse(self, soup):
+        """ Parse response and returns the urls
 
-    def results_search(self,query):
-        """ Gives search query to yahoo and returns the urls
-
-        Returns: urls (list)
-                [[Tile1,url1], [Title2, url2],..]
+            Returns: urls (list)
+                    [[Tile1,url1], [Title2, url2],..]
         """
         urls = []
-        response = self.get_page(query)
-        soup = BeautifulSoup(response.content, 'lxml')
         for h in soup.findAll('h3', attrs={'class': 'title'}):
             t = h.findAll('a', attrs={'class': ' ac-algo fz-l ac-21th lh-24'})
             for y in t:
