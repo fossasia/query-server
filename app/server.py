@@ -40,7 +40,7 @@ def search(search_engine):
                 abort(400, 'Not Found - undefined format')
 
             engine = search_engine
-            if engine not in ['google','bing','duckduckgo','yahoo','ask']:
+            if engine not in ['google','bing','duckduckgo','yahoo','ask','baidu']:
                 err = [404, 'Incorrect search engine', qformat]
                 return bad_request(err)
 
@@ -49,7 +49,7 @@ def search(search_engine):
                 err = [400, 'Not Found - missing query', qformat]
                 return bad_request(err)
 
-            result = feedgen(query,engine[0],count)
+            result = feedgen(query,engine,count)
             if not result:
                 err = [404, 'No response', qformat]
                 return bad_request(err)
@@ -60,7 +60,7 @@ def search(search_engine):
             for line in result:
                 line['link'] = line['link'].encode('utf-8')
                 line['title'] = line['title'].encode('utf-8')
-                if( engine == 'b'):
+                if( engine == 'bing'):
                     line['desc'] = line['desc'].encode('utf-8')
 
             if(qformat == 'json'):

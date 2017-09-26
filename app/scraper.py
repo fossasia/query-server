@@ -10,11 +10,12 @@ try:
 except AttributeError:
     pass
 
-search_engines = {'g': ('GOOGLE SEARCH RESULTS', 'https://www.google.com', 'Google search results for %s'),
-                  'd': ('DUCKDUCKGO SEARCH RESULTS', 'https://www.duckduckgo.com', 'Duckduckgo search results for %s'),
-                  'b': ('BING SEARCH RESULTS', 'https://www.bing.com', 'Bing search results for %s'),
-                  'y': ('YAHOO SEARCH RESULTS', 'https://search.yahoo.com/', 'Yahoo search results for %s'),
-                  'a': ('ASK SEARCH RESULTS', 'http://www.ask.com/', 'Ask search results for %s')}
+search_engines = {'google': ('GOOGLE SEARCH RESULTS', 'https://www.google.com', 'Google search results for %s'),
+                  'duckduckgo': ('DUCKDUCKGO SEARCH RESULTS', 'https://www.duckduckgo.com', 'Duckduckgo search results for %s'),
+                  'bing': ('BING SEARCH RESULTS', 'https://www.bing.com', 'Bing search results for %s'),
+                  'yahoo': ('YAHOO SEARCH RESULTS', 'https://search.yahoo.com/', 'Yahoo search results for %s'),
+                  'ask': ('ASK SEARCH RESULTS', 'http://www.ask.com/', 'Ask search results for %s'),
+                  'baidu': ('BAIDU SEARCH RESULTS', 'http://www.baidu.com/', 'Baidu search results for %s')}
 query = ''
 
 
@@ -189,6 +190,33 @@ def ask_search(query):
         urls.append({'title': title, 'link': url})
     return urls
 
+def get_baidu_page(query, index):
+    """Fetch Baidu search results
+    Returns: Results Page
+    """
+    header = {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36'}
+    payload = {'wd': query, 'pn': index}
+    response = requests.get('http://baidu.com/s', headers=header, params=payload)
+    return response
+
+def baidu_search(query, index):
+    """Search Baidu for the query and return set of urls
+    Returls: urls (list)
+    """
+    urls = []
+    count = 0
+    while True:
+        response = get_baidu_page(query, count)
+        soup=BeautifulSoup(response.text, 'html.parser')
+        for div in soup.findAll('div', {'class': 'result'}):
+            title = div.h3.text
+            url = div.h3.a['href']
+            desc = div.find('div', {'class': 'c-abstract'}).text
+            urls.append({'desc': desc, 'link': url, 'title': title})
+            if(len(urls) == index):
+                return urls
+        count += 10
 
 def read_in():
     lines = sys.stdin.readlines()
@@ -200,16 +228,18 @@ def small_test():
 
 
 def feedgen(query, engine,count):
-    if engine == 'g':
+    if engine == 'google':
         urls = google_search(query,count)
-    elif engine == 'd':
+    elif engine == 'duckduckgo':
         urls = duckduckgo_search(query, count)
-    elif engine == 'y':
+    elif engine == 'yahoo':
         urls = yahoo_search(query,count)
-    elif engine == 'b':
+    elif engine == 'bing':
         urls = bing_search(query,count)
-    else:
+    elif engine == 'ask':
         urls = ask_search(query)
+    else:
+        urls = baidu_search(query, count)
     result = urls
     print(result)
     print(len(result))
