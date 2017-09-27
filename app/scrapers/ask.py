@@ -5,10 +5,10 @@ from bs4 import BeautifulSoup
 
 class Ask:
     """Scrapper class for Ask"""
-    def __init__(cls):
+    def __init__(self):
         pass
 
-    def get_page(cls, query):
+    def get_page(self, query):
         """
         Fetches search response from ask.com
         returns : result page in html
@@ -19,7 +19,7 @@ class Ask:
         response = requests.get('http://ask.com/web', headers=header, params=payload)
         return response
 
-    def results_search(cls, query):
+    def results_search(self, query):
         """ Search ask for the query and return set of urls
         Returns: urls (list)
                 [[Tile1,url1], [Title2, url2],..]
