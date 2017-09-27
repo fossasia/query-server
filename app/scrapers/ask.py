@@ -10,7 +10,7 @@ class Ask:
         pass
 
     @classmethod
-    def get_ask_page(cls, query):
+    def get_page(cls, query):
         """
         Fetches search response from ask.com
         returns : result page in html
@@ -28,7 +28,7 @@ class Ask:
                 [[Tile1,url1], [Title2, url2],..]
         """
         urls = []
-        response = get_ask_page(query)
+        response = self.get_page(query)
         soup = BeautifulSoup(response.text, 'html.parser')
         for div in soup.findAll('div', {'class': 'PartialSearchResults-item'}):
             title = div.div.a.text
