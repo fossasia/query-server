@@ -4,12 +4,10 @@ from bs4 import BeautifulSoup
 
 class Ask:
     """Scrapper class for Ask"""
-    @classmethod
-    def __init__(cls):
+    def __init__(self):
         pass
 
-    @classmethod
-    def get_page(cls,query):
+    def get_page(self,query):
         """
         Fetches search response from ask.com
         returns : result page in html
@@ -20,14 +18,13 @@ class Ask:
         response = requests.get('http://ask.com/web', headers=header, params=payload)
         return response
 
-    @classmethod
-    def results_search(cls,query):
+    def results_search(self,query):
         """ Search ask for the query and return set of urls
         Returns: urls (list)
                 [[Tile1,url1], [Title2, url2],..]
         """
         urls=[]
-        response = get_ask_page(query)
+        response = self.get_page(query)
         soup = BeautifulSoup(response.text, 'html.parser')
         for div in soup.findAll('div', {'class': 'PartialSearchResults-item'}):
             title = div.div.a.text
