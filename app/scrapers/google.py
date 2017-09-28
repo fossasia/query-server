@@ -9,11 +9,9 @@ class Google(Scraper):
         self.url = 'https://www.google.com/search'
         self.defaultStart = 0
 
-    @classmethod
     def nextStart(self, currentStart, prevResults):
         return currentStart + len(prevResults)
 
-    @classmethod
     def parseResponse(self, soup):
         """
         Parses the response and returns set of urls

@@ -10,7 +10,6 @@ class Yahoo(Scraper):
         self.defaultStart = 1
         self.startKey = 'b'
 
-    @classmethod
     def parseResponse(self, soup):
         """ Parse response and returns the urls
 

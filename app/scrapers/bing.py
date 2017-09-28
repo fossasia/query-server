@@ -10,7 +10,6 @@ class Bing(Scraper):
         self.defaultStart = 1
         self.startKey = 'first'
 
-    @classmethod
     def parseResponse(self, soup):
         """ Parses the reponse and return set of urls
         Returns: urls (list)
