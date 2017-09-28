@@ -22,7 +22,7 @@ def read_in():
 
 
 def small_test():
-    assert isinstance(scrapers['g'].search('fossasia'), list)
+    assert isinstance(scrapers['g'].search('fossasia', 1), list)
 
 
 def feedgen(query, engine, count=10):
