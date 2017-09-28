@@ -1,9 +1,10 @@
 from __future__ import print_function
-import os, json, sys
 from generalized import Scraper
+
 
 class Bing(Scraper):
     """Scrapper class for Bing"""
+
     def __init__(self):
         self.url = 'http://www.bing.com/search'
         self.defaultStart = 1

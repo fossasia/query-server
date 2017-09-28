@@ -1,8 +1,10 @@
 from __future__ import print_function
 from generalized import Scraper
 
+
 class Ask(Scraper):
     """Scrapper class for Ask"""
+
     def __init__(self):
         self.url = 'http://ask.com/web'
         self.defaultStart = 1
@@ -18,7 +20,7 @@ class Ask(Scraper):
         Returns: urls (list)
                 [[Tile1,url1], [Title2, url2],..]
         """
-        urls=[]
+        urls = []
         for div in soup.findAll('div', {'class': 'PartialSearchResults-item'}):
             title = div.div.a.text
             url = div.div.a['href']

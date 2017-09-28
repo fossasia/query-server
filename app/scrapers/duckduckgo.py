@@ -1,9 +1,10 @@
 from __future__ import print_function
-import os, json, sys
 from generalized import Scraper
+
 
 class Duckduckgo(Scraper):
     """Scrapper class for Duckduckgo"""
+
     def __init__(self):
         self.url = 'https://duckduckgo.com/html'
         self.defaultStart = 0
