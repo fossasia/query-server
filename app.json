@@ -21,9 +21,7 @@
       "url": "heroku/nodejs"
     }
   ],
-  "scripts": [
-    {
-        "postinstall": "bower install"
-    }
-  ]
+  "scripts": {
+    "postinstall": "bower install"
+  }
 }
