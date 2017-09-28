@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 
 class Scraper:
     """Generalized scraper"""
-    url = ''
+    # url = ''
     startKey = 'start'
     defaultStart = 0
     headers = {
