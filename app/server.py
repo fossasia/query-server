@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, url_for, abort, Response, make_response
-from scraper import feedgen
+from scrapers import feedgen
 from pymongo import MongoClient
 from dicttoxml import dicttoxml
 from xml.dom.minidom import parseString
@@ -72,6 +72,7 @@ def search(search_engine):
                 return Response(xmlfeed, mimetype='application/xml')
 
     except Exception as e:
+        print(e)
         return Response(json.dumps(errorObj).encode('utf-8'),mimetype='application/json')
 @app.after_request
 def set_header(r):

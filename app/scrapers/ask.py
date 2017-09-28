@@ -1,34 +1,24 @@
 from __future__ import print_function
-import requests
-from bs4 import BeautifulSoup
+from generalized import Scraper
 
-class Ask:
+class Ask(Scraper):
     """Scrapper class for Ask"""
-    @classmethod
-    def __init__(cls):
-        pass
+    def __init__(self):
+        self.url = 'http://ask.com/web'
+        self.defaultStart = 1
+        self.startKey = 'page'
 
     @classmethod
-    def get_page(cls,query):
-        """
-        Fetches search response from ask.com
-        returns : result page in html
-        """
-        header = {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36'}
-        payload = {'q': query}
-        response = requests.get('http://ask.com/web', headers=header, params=payload)
-        return response
+    def nextStart(self, currentStart, prevResults):
+        return currentStart + 1
 
     @classmethod
-    def results_search(cls,query):
-        """ Search ask for the query and return set of urls
+    def parseResponse(self, soup):
+        """ Parse the response and return set of urls
         Returns: urls (list)
                 [[Tile1,url1], [Title2, url2],..]
         """
         urls=[]
-        response = get_ask_page(query)
-        soup = BeautifulSoup(response.text, 'html.parser')
         for div in soup.findAll('div', {'class': 'PartialSearchResults-item'}):
             title = div.div.a.text
             url = div.div.a['href']
