@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 
 class Scraper:
     """Generalized scraper"""
-    # url = ''
+    url = ''
     startKey = 'start'
     defaultStart = 0
     headers = {
@@ -17,7 +17,7 @@ class Scraper:
     }
 
     def __init__(self):
-        self.url = ''
+        pass
 
     @classmethod
     def get_page(self, query, startIndex=0):
