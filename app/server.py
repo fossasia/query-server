@@ -25,12 +25,8 @@ def index():
 
 def bad_request(err):
     message = {'Error': err[1], 'Status Code': err[0]}
-    if(err[2] == 'xml'):
-        response = dicttoxml(message)
-    else:
-        response = json.dumps(message)
-    resp = make_response(response, err[0])
-    return resp
+    response = dicttoxml(message) if err[2] == 'xml' else json.dumps(message)
+    return make_response(response, err[0])
 
 
 @app.route('/api/v1/search/<search_engine>', methods=['GET'])
@@ -39,11 +35,11 @@ def search(search_engine):
         num = request.args.get('num') or 10
         count = int(num)
         qformat = request.args.get('format') or 'json'
-        if qformat not in ['json', 'xml']:
+        if qformat not in ('json', 'xml'):
             abort(400, 'Not Found - undefined format')
 
         engine = search_engine
-        if engine not in ['google', 'bing', 'duckduckgo', 'yahoo', 'ask']:
+        if engine not in ('google', 'bing', 'duckduckgo', 'yahoo', 'ask'):
             err = [404, 'Incorrect search engine', qformat]
             return bad_request(err)
 
@@ -57,17 +53,17 @@ def search(search_engine):
             err = [404, 'No response', qformat]
             return bad_request(err)
 
-        if((db['queries'].find({query: query}).limit(1)) is False):
+        if db['queries'].find({query: query}).limit(1) is False:
             db['queries'].insert(
                 {"query": query, "engine": engine, "qformat": qformat})
 
         for line in result:
             line['link'] = line['link'].encode('utf-8')
             line['title'] = line['title'].encode('utf-8')
-            if(engine == 'b'):
+            if engine == 'b':
                 line['desc'] = line['desc'].encode('utf-8')
 
-        if(qformat == 'json'):
+        if qformat == 'json':
             jsonfeed = json.dumps(result).encode('utf-8')
             return Response(jsonfeed, mimetype='application/json')
 
@@ -94,7 +90,7 @@ if __name__ == '__main__':
     app.debug = True
     app.run(
         host='0.0.0.0',
-        port=(int)(
+        port=int(
             os.environ.get(
                 'PORT',
                 7001)),
