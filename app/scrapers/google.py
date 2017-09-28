@@ -1,9 +1,10 @@
 from __future__ import print_function
-import os, json, sys
 from generalized import Scraper
+
 
 class Google(Scraper):
     """Scrapper class for Google"""
+
     def __init__(self):
         self.url = 'https://www.google.com/search'
         self.defaultStart = 0
@@ -22,7 +23,6 @@ class Google(Scraper):
         urls = []
         for h3 in soup.findAll('h3', {'class': 'r'}):
             links = h3.find('a')
-            urls.append({ 'title': links.getText(), 'link': links.get('href') })
+            urls.append({'title': links.getText(), 'link': links.get('href')})
 
         return urls
-
