@@ -17,7 +17,7 @@ class Scraper:
     }
 
     def __init__(self):
-        pass
+        self.url = ''
 
     @classmethod
     def get_page(self, query, startIndex=0):
