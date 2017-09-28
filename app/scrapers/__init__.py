@@ -27,6 +27,4 @@ def small_test():
 
 def feedgen(query, engine, count=10):
     urls = scrapers[engine].search(query, count)
-    print(urls)
-    print(len(urls))
     return urls
