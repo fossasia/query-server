@@ -21,7 +21,7 @@ def read_in():
     return json.loads(lines[0])
 
 
-def small_test():
+def test_search_returns_a_list():
     assert isinstance(scrapers.google.results_search('fossasia'), list)
 
 
