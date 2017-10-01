@@ -19,7 +19,6 @@ class Scraper:
     def __init__(self):
         pass
 
-    @classmethod
     def get_page(self, query, startIndex=0):
         """ Fetch the google search results page
         Returns : Results Page
@@ -28,15 +27,12 @@ class Scraper:
         response = requests.get(self.url, headers=self.headers, params=payload)
         return response
 
-    @classmethod
     def parseResponse(self, soup):
         raise NotImplementedError
 
-    @classmethod
     def nextStart(self, currentStart, prevResults):
         return currentStart + len(prevResults)
 
-    @classmethod
     def search(self, query, numResults):
         """
             Search for the query and return set of urls

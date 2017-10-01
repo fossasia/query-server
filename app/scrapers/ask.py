@@ -10,11 +10,9 @@ class Ask(Scraper):
         self.defaultStart = 1
         self.startKey = 'page'
 
-    @classmethod
     def nextStart(self, currentStart, prevResults):
         return currentStart + 1
 
-    @classmethod
     def parseResponse(self, soup):
         """ Parse the response and return set of urls
         Returns: urls (list)
