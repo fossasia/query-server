@@ -1,7 +1,7 @@
 from __future__ import print_function
 import json
 import sys
-from google import Google
+from .google import Google
 from duckduckgo import Duckduckgo
 from bing import Bing
 from yahoo import Yahoo
@@ -22,7 +22,7 @@ def read_in():
 
 
 def small_test():
-    assert isinstance(scrapers.google.results_search('fossasia'), list)
+    assert isinstance(scrapers['g'].search('fossasia', 1), list)
 
 
 def feedgen(query, engine, count=10):
