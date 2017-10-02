@@ -1,5 +1,6 @@
 from __future__ import print_function
 from generalized import Scraper
+import urllib
 
 
 class Yahoo(Scraper):
@@ -23,13 +24,7 @@ class Yahoo(Scraper):
                 r = y.get('href')
                 f = r.split('RU=')
                 e = f[-1].split('/RK=0')
-                u = e[0].replace('%3a', ':').replace('%2f', '/') \
-                        .replace('%28', '(').replace('%29', ')') \
-                        .replace('%3f', '%3d', '=').replace('%26', '&') \
-                        .replace('%29', ')').replace('%26', "'") \
-                        .replace('%21', '!').replace('%23', '$') \
-                        .replace('%40', '[').replace('%5b', ']')
-
+                u = urllib.unquote(e[0])
                 urls.append({
                     'title': y.getText(),
                     'link': u
