@@ -5,6 +5,10 @@
     "bower": "^1.8.0"
   },
   "scripts": {
-    "postinstall": "bower install"
+    "postinstall": "bower install",
+    "precommit": "flake8 . --max-line-length=85"
+  },
+  "devDependencies": {
+    "husky": "^0.14.3"
   }
 }

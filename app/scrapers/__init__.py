@@ -1,5 +1,4 @@
 from __future__ import print_function
-import os
 import json
 import sys
 from google import Google
@@ -18,16 +17,16 @@ scrapers = {
     'q': Quora()
 }
 
+
 def read_in():
     lines = sys.stdin.readlines()
     return json.loads(lines[0])
 
-def small_test():
-    assert type(scrapers.google.results_search('fossasia')) is list
 
-def feedgen(query, engine):
-    urls = scrapers[engine].results_search(query)
-    result = urls
-    print(result)
-    print(len(result))
-    return result
+def small_test():
+    assert isinstance(scrapers.google.results_search('fossasia'), list)
+
+
+def feedgen(query, engine, count=10):
+    urls = scrapers[engine].search(query, count)
+    return urls
