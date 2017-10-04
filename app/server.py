@@ -66,12 +66,11 @@ def search(search_engine):
         if qformat == 'json':
             jsonfeed = json.dumps(result).encode('utf-8')
             return Response(jsonfeed, mimetype='application/json')
-
         xmlfeed = parseString(
             (dicttoxml(
                 result,
                 custom_root='channel',
-                attr_type=False)).encode('utf-8')).toprettyxml()
+                attr_type=False))).toprettyxml()
         return Response(xmlfeed, mimetype='application/xml')
 
     except Exception as e:
@@ -87,7 +86,6 @@ def set_header(r):
 
 
 if __name__ == '__main__':
-    app.debug = True
     app.run(
         host='0.0.0.0',
         port=int(
