@@ -1,5 +1,6 @@
+from __future__ import absolute_import
 from flask import Flask, render_template, request, abort, Response, make_response
-from scrapers import feedgen
+from .scrapers import feedgen
 from pymongo import MongoClient
 from dicttoxml import dicttoxml
 from xml.dom.minidom import parseString
