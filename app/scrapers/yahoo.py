@@ -30,4 +30,6 @@ class Yahoo(Scraper):
                     'link': u
                 })
 
+        print('parsed' + str(urls))
+
         return urls

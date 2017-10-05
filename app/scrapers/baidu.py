@@ -2,16 +2,13 @@ from __future__ import print_function
 from generalized import Scraper
 
 
-class Ask(Scraper):
-    """Scrapper class for Ask"""
+class Baidu(Scraper):
+    """Scrapper class for Baidu"""
 
     def __init__(self):
-        self.url = 'http://ask.com/web'
+        self.url = 'https://www.baidu.com/s'
         self.defaultStart = 1
-        self.startKey = 'page'
-
-    def nextStart(self, currentStart, prevResults):
-        return currentStart + 1
+        self.startKey = 'pn'
 
     def parseResponse(self, soup):
         """ Parse the response and return set of urls
@@ -19,9 +16,9 @@ class Ask(Scraper):
                 [[Tile1,url1], [Title2, url2],..]
         """
         urls = []
-        for div in soup.findAll('div', {'class': 'PartialSearchResults-item'}):
-            title = div.div.a.text
-            url = div.div.a['href']
+        for a in soup.findAll('a', attrs={'target': '_blank'}):
+            title = a.getText()
+            url = a.get('href')
             urls.append({'title': title, 'link': url})
 
         print('parsed' + str(urls))
