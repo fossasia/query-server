@@ -3,6 +3,7 @@ from __future__ import print_function
 from bs4 import BeautifulSoup
 import requests
 
+
 class Scraper:
     """Generalized scraper"""
     url = ''
