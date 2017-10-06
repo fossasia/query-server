@@ -6,6 +6,7 @@ from duckduckgo import Duckduckgo
 from bing import Bing
 from yahoo import Yahoo
 from ask import Ask
+from yandex import Yandex
 from aol import AOL
 
 scrapers = {
@@ -14,9 +15,9 @@ scrapers = {
     'yahoo': Yahoo(),
     'duckduckgo': Duckduckgo(),
     'ask': Ask(),
+    'yandex': Yandex()
     'aol': AOL()
-}
-
+  
 
 def read_in():
     lines = sys.stdin.readlines()

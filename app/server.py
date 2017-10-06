@@ -39,7 +39,7 @@ def search(search_engine):
             abort(400, 'Not Found - undefined format')
 
         engine = search_engine
-        if engine not in ('google', 'bing', 'duckduckgo', 'yahoo', 'ask', 'aol'):
+        if engine not in ('google', 'bing', 'duckduckgo', 'yahoo', 'ask', 'yandex', 'aol'):
             err = [404, 'Incorrect search engine', qformat]
             return bad_request(err)
 
