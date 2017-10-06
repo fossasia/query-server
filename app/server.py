@@ -39,7 +39,6 @@ def search(search_engine):
         qformat = request.args.get('format', 'json')
         if qformat not in ('json', 'xml'):
             abort(400, 'Not Found - undefined format')
-
         query = request.args.get('query')
         if not query:
             return bad_request([400, 'Not Found - missing query', qformat])

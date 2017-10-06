@@ -5,13 +5,15 @@ from .bing import Bing
 from .duckduckgo import Duckduckgo
 from .google import Google
 from .yahoo import Yahoo
+from .yandex import Yandex
 
 scrapers = {
     'ask': Ask(),
     'bing': Bing(),
     'duckduckgo': Duckduckgo(),
     'google': Google(),
-    'yahoo': Yahoo()
+    'yahoo': Yahoo(),
+    'yandex': Yandex()
 }
 
 
