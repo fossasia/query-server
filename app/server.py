@@ -1,10 +1,13 @@
-from flask import Flask, render_template, request, abort, Response, make_response
-from scrapers import feedgen
-from pymongo import MongoClient
-from dicttoxml import dicttoxml
-from xml.dom.minidom import parseString
+from __future__ import absolute_import
 import json
 import os
+from dicttoxml import dicttoxml
+from flask import (Flask, render_template, request, abort, Response,
+                   make_response)
+from pymongo import MongoClient
+from xml.dom.minidom import parseString
+from .scrapers import feedgen
+
 
 app = Flask(__name__)
 err = ""
@@ -32,36 +35,28 @@ def bad_request(err):
 @app.route('/api/v1/search/<search_engine>', methods=['GET'])
 def search(search_engine):
     try:
-        num = request.args.get('num') or 10
-        count = int(num)
-        qformat = request.args.get('format') or 'json'
+        count = int(request.args.get('num') or 10)
+        qformat = request.args.get('format', 'json')
         if qformat not in ('json', 'xml'):
             abort(400, 'Not Found - undefined format')
 
-        engine = search_engine
-        if engine not in ('google', 'bing', 'duckduckgo', 'yahoo', 'ask'):
-            err = [404, 'Incorrect search engine', qformat]
-            return bad_request(err)
-
         query = request.args.get('query')
         if not query:
-            err = [400, 'Not Found - missing query', qformat]
-            return bad_request(err)
-
-        result = feedgen(query, engine[0], count)
+            return bad_request([400, 'Not Found - missing query', qformat])
+        try:
+            result = feedgen(query, search_engine, count)
+        except KeyError:
+            return bad_request([404, 'Incorrect search engine', qformat])
         if not result:
-            err = [404, 'No response', qformat]
-            return bad_request(err)
+            return bad_request([404, 'No response', qformat])
 
         if db['queries'].find({query: query}).limit(1) is False:
             db['queries'].insert(
-                {"query": query, "engine": engine, "qformat": qformat})
+                {"query": query, "engine": search_engine, "qformat": qformat})
 
         for line in result:
-            line['link'] = line['link'].encode('utf-8')
-            line['title'] = line['title'].encode('utf-8')
-            if engine == 'b':
-                line['desc'] = line['desc'].encode('utf-8')
+            for key, value in line.items():
+                line[key] = value.encode('utf-8')
 
         if qformat == 'json':
             jsonfeed = json.dumps(result).encode('utf-8')

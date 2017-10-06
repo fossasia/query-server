@@ -1,5 +1,6 @@
+from __future__ import absolute_import
 from __future__ import print_function
-from generalized import Scraper
+from .generalized import Scraper
 
 
 class Ask(Scraper):
@@ -14,13 +15,10 @@ class Ask(Scraper):
         return currentStart + 1
 
     def parseResponse(self, soup):
-        """ Parse the response and return set of urls
+        """ Parse the response and return a list of url dicts
         Returns: urls (list)
-                [[Tile1,url1], [Title2, url2],..]
+                [Tile1, url1], [Title2, url2],..]
         """
-        urls = []
-        for div in soup.findAll('div', {'class': 'PartialSearchResults-item'}):
-            title = div.div.a.text
-            url = div.div.a['href']
-            urls.append({'title': title, 'link': url})
+        urls = [{'title': div.div.a.text, 'link': div.div.a['href']} for div
+                in soup.find_all('div', class_='PartialSearchResults-item')]
         return urls

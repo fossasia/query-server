@@ -1,6 +1,7 @@
+from __future__ import absolute_import
 from __future__ import print_function
-from generalized import Scraper
 import urllib
+from .generalized import Scraper
 
 
 class Yahoo(Scraper):
@@ -18,8 +19,8 @@ class Yahoo(Scraper):
                     [[Tile1,url1], [Title2, url2],..]
         """
         urls = []
-        for h in soup.findAll('h3', attrs={'class': 'title'}):
-            t = h.findAll('a', attrs={'class': ' ac-algo fz-l ac-21th lh-24'})
+        for h in soup.find_all('h3', class_='title'):
+            t = h.find_all('a', class_=' ac-algo fz-l ac-21th lh-24')
             for y in t:
                 r = y.get('href')
                 f = r.split('RU=')
