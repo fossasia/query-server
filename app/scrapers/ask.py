@@ -22,5 +22,7 @@ class Ask(Scraper):
         for div in soup.findAll('div', {'class': 'PartialSearchResults-item'}):
             title = div.div.a.text
             url = div.div.a['href']
-            urls.append({'title': title, 'link': url})
+            p = div.find('p', {'class': 'PartialSearchResults-item-abstract'})
+            desc = p.text.replace('\n', '')
+            urls.append({'title': title, 'link': url, 'desc': desc})
         return urls
