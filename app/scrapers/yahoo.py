@@ -23,11 +23,13 @@ class Yahoo(Scraper):
             for y in t:
                 r = y.get('href')
                 f = r.split('RU=')
-                e = f[-1].split('/RK=0')
+                e = f[-1].split('/RK=1')
                 u = urllib.unquote(e[0])
                 urls.append({
                     'title': y.getText(),
                     'link': u
                 })
+
+        print('parsed' + str(urls))
 
         return urls
