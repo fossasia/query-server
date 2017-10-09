@@ -10,4 +10,4 @@ def test_small_test():
 
 
 def test_true():
-    assert True, "We have a problem!"
+    assert True, "We have a problem!"  # noqa
