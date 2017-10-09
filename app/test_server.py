@@ -9,5 +9,5 @@ def test_small_test():
 """
 
 
-def true_test():
+def test_true():
     assert True, "We have a problem!"
