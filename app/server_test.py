@@ -2,7 +2,7 @@
 
 
 # Let's get pytest turned on before we start testing in earnest
-#def test_small_test():
+# def test_small_test():
 #    small_test()
 
 def true_test():
