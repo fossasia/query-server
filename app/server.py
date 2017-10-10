@@ -60,7 +60,7 @@ def search(search_engine):
         for line in result:
             line['link'] = line['link'].encode('utf-8')
             line['title'] = line['title'].encode('utf-8')
-            if engine == 'b':
+            if engine in ['b', 'a']:
                 line['desc'] = line['desc'].encode('utf-8')
 
         if qformat == 'json':
