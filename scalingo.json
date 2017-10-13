@@ -1,0 +1,10 @@
+{
+  "name": "Query-Server",
+  "description": "The query server can be used to search a keyword/phrase on a search engine (Google, Yahoo, Bing, Ask and DuckDuckGo) and get the results as json or xml.",
+  "logo": "https://scalingo.com/logo.svg",
+  "repository": "https://github.com/fossasia/query-server",
+  "website": "https://query-server.herokuapp.com/",
+  "env": {
+  },
+  "addons": ["scalingo-redis"]
+} 
