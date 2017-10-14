@@ -19,6 +19,11 @@ class Ask(Scraper):
         Returns: urls (list)
                 [Tile1, url1], [Title2, url2],..]
         """
-        urls = [{'title': div.div.a.text, 'link': div.div.a['href']} for div
-                in soup.find_all('div', class_='PartialSearchResults-item')]
+        urls = []
+        for div in soup.findAll('div', {'class': 'PartialSearchResults-item'}):
+            title = div.div.a.text
+            url = div.div.a['href']
+            p = div.find('p', {'class': 'PartialSearchResults-item-abstract'})
+            desc = p.text.replace('\n', '')
+            urls.append({'title': title, 'link': url, 'desc': desc})
         return urls

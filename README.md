@@ -4,10 +4,9 @@
 [![Dependency Status](https://david-dm.org/fossasia/query-server.svg)](https://david-dm.org/ossasia/query-server)
 [![Join the chat at https://gitter.im/fossasia/query-server](https://badges.gitter.im/fossasia/query-server.svg)](https://gitter.im/fossasia/query-server?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-> The query server can be used to search a keyword/phrase on a search engine (Google, Yahoo, Bing, DuckDuckGo) and get the results as `json` or `xml`. The tool also stores the searched query string in a MongoDB database for analytical purposes. (The search engine scrapper is based on the scraper at [fossasia/searss](https://github.com/fossasia/searss).)
+> The query server can be used to search a keyword/phrase on a search engine (Google, Yahoo, Bing, Ask and DuckDuckGo) and get the results as `json` or `xml`. The tool also stores the searched query string in a MongoDB database for analytical purposes. (The search engine scrapper is based on the scraper at [fossasia/searss](https://github.com/fossasia/searss).)
 
-[![Deploy to Docker Cloud](https://files.cloud.docker.com/images/deploy-to-dockercloud.svg)](https://cloud.docker.com/stack/deploy/?repo=https://github.com/fossasia/query-server)
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/fossasia/query-server)
+[![Deploy to Docker Cloud](https://files.cloud.docker.com/images/deploy-to-dockercloud.svg)](https://cloud.docker.com/stack/deploy/?repo=https://github.com/fossasia/query-server) [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/fossasia/query-server) [![Deploy on Scalingo](https://cdn.scalingo.com/deploy/button.svg)](https://my.scalingo.com/deploy?source=https://github.com/fossasia/query-server#master) [![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/fossasia/query-server&branch=master)
 
 ## Table of Contents
 

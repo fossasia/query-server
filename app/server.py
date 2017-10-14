@@ -56,7 +56,6 @@ def search(search_engine):
         for line in result:
             for key, value in line.items():
                 line[key] = value.encode('utf-8')
-
         if qformat == 'json':
             jsonfeed = json.dumps(result).encode('utf-8')
             return Response(jsonfeed, mimetype='application/json')
