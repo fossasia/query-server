@@ -8,6 +8,7 @@ install:
 before_script:
   - flake8 . --count --max-complexity=11 --max-line-length=85 --show-source --statistics
 script:
-  - echo success
+  - python -V
+  - pip -V
 after_success:
   - coveralls 
