@@ -7,6 +7,7 @@ class Scraper:
     """Generalized scraper"""
     url = ''
     startKey = 'start'
+    queryKey = 'q'
     defaultStart = 0
     headers = {
         'User-Agent': (
@@ -23,7 +24,7 @@ class Scraper:
         """ Fetch the google search results page
         Returns : Results Page
         """
-        payload = {'q': query, self.startKey: startIndex}
+        payload = {self.queryKey: query, self.startKey: startIndex}
         response = requests.get(self.url, headers=self.headers, params=payload)
         return response
 

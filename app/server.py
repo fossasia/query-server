@@ -39,7 +39,7 @@ def search(search_engine):
             abort(400, 'Not Found - undefined format')
 
         engine = search_engine
-        if engine not in ('google', 'bing', 'duckduckgo', 'yahoo', 'ask', 'quora'):
+        if engine not in ('google', 'bing', 'duckduckgo', 'yahoo', 'ask', 'yandex', 'quora'):
             err = [404, 'Incorrect search engine', qformat]
             return bad_request(err)
 
@@ -60,7 +60,7 @@ def search(search_engine):
         for line in result:
             line['link'] = line['link'].encode('utf-8')
             line['title'] = line['title'].encode('utf-8')
-            if engine == 'b':
+            if engine in ['b', 'a']:
                 line['desc'] = line['desc'].encode('utf-8')
 
         if qformat == 'json':
