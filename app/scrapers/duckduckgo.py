@@ -1,5 +1,6 @@
+from __future__ import absolute_import
 from __future__ import print_function
-from generalized import Scraper
+from .generalized import Scraper
 
 
 class Duckduckgo(Scraper):
@@ -11,13 +12,11 @@ class Duckduckgo(Scraper):
         self.startKey = 's'
 
     def parseResponse(self, soup):
-        """ Parse the response and return set of urls
+        """ Parse the response and return list of url dicts
         Returns: urls (list)
                 [[Tile1,url1], [Title2, url2],..]
         """
-        urls = []
-        for links in soup.findAll('a', {'class': 'result__a'}):
-            urls.append({'title': links.getText(),
-                         'link': links.get('href')})
-        print('parsed' + str(urls))
+        urls = [{'title': link.getText(), 'link': link.get('href')}
+                for link in soup.find_all('a', class_='result__a')]
+        print('parsed: ' + str(urls))
         return urls

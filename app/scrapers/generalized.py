@@ -1,6 +1,6 @@
 from __future__ import print_function
-import requests
 from bs4 import BeautifulSoup
+import requests
 
 
 class Scraper:
@@ -36,7 +36,7 @@ class Scraper:
 
     def search(self, query, numResults):
         """
-            Search for the query and return set of urls
+            Search for the query and return list of url dicts
             Returns: list
         """
         urls = []
@@ -46,7 +46,6 @@ class Scraper:
             response = self.get_page(query, currentStart)
             soup = BeautifulSoup(response.text, 'html.parser')
             newResults = self.parseResponse(soup)
-
             urls.extend(newResults)
             currentStart = self.nextStart(currentStart, newResults)
-        return urls[: numResults]
+        return urls[:numResults]
