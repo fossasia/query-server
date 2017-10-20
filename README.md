@@ -50,32 +50,15 @@ A sample query : `/api/v1/search/bing?query=fossasia&format=xml&num=10`
 
 ## Installation
 
-Make sure you have [Nodejs](https://nodejs.org/en/) installed.
-Running this tool requires installing the nodejs as well as python dependencies.
+1. [Local Installation](/docs/installation/local.md)
 
-```
-git clone https://github.com/fossasia/query-server.git 
-cd query-server
-npm install -g bower
-bower install
-pip install -r requirements.txt
-```
+2. [Deployment on Heroku](/docs/installation/heroku.md)
 
-To set up MongoDB on your server : 
-```bash
-sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
-echo "deb http://repo.mongodb.org/apt/ubuntu "$(lsb_release -sc)"/mongodb-org/3.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list
-sudo apt-get update
-sudo apt-get install -y mongodb-org
-sudo service mongod start
-```
+3. [Deployment with Docker](/docs/installation/docker.md)
 
-## Usage
+One-click Docker and Heroku deployment is also available:
 
-To run the query server: 
-```bash
-python app/server.py
-```
+[![Deploy to Docker Cloud](https://files.cloud.docker.com/images/deploy-to-dockercloud.svg)](https://cloud.docker.com/stack/deploy/?repo=https://github.com/fossasia/query-server) [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/fossasia/query-server)
 
 ## Contribute
 
