@@ -1,0 +1,16 @@
+.git
+.dockerignore
+
+#####################
+# .gitignore copied
+#####################
+
+.cache/*
+__pycache__/*
+node_modules/*
+.coverage
+.idea/*
+*.pyc
+*.py.bak
+*.swp
+app/static/bower_components/
