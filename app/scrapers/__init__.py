@@ -1,6 +1,4 @@
 from __future__ import print_function
-import json
-import sys
 from google import Google
 from duckduckgo import Duckduckgo
 from bing import Bing
@@ -10,25 +8,19 @@ from yandex import Yandex
 from baidu import Baidu
 
 scrapers = {
-    'g': Google(),
-    'b': Bing(),
-    'y': Yahoo(),
-    'd': Duckduckgo(),
-    'a': Ask(),
-    'yd': Yandex(),
-    'u': Baidu()
+    'ask': Ask(),
+    'bing': Bing(),
+    'baidu': Baidu(),
+    'duckduckgo': Duckduckgo(),
+    'google': Google(),
+    'yahoo': Yahoo(),
+    'yandex': Yandex()
 }
 
 
-def read_in():
-    lines = sys.stdin.readlines()
-    return json.loads(lines[0])
-
-
 def small_test():
-    assert isinstance(scrapers.google.results_search('fossasia'), list)
+    assert isinstance(scrapers['google'].results_search('fossasia'), list)
 
 
 def feedgen(query, engine, count=10):
-    urls = scrapers[engine].search(query, count)
-    return urls
+    return scrapers[engine.lower()].search(query, count)
