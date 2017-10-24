@@ -23,4 +23,6 @@ class Google(Scraper):
             links = h3.find('a')
             urls.append({'title': links.getText(), 'link': links.get('href')})
 
+        print('parsed' + str(urls))
+
         return urls

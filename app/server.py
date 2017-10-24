@@ -48,7 +48,7 @@ def search(search_engine):
             err = [400, 'Not Found - missing query', qformat]
             return bad_request(err)
 
-        result = feedgen(query, engine[0], count)
+        result = feedgen(query, engine, count)
         if not result:
             err = [404, 'No response', qformat]
             return bad_request(err)
