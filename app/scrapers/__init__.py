@@ -11,7 +11,7 @@ scrapers = {
     'bing': Bing(),
     'duckduckgo': Duckduckgo(),
     'google': Google(),
-    'yahoo': Yahoo(),    
+    'yahoo': Yahoo(),
     'yandex': Yandex()
 }
 
