@@ -31,6 +31,8 @@ def bad_request(err):
 
 @app.route('/api/v1/search/<search_engine>', methods=['GET'])
 def search(search_engine):
+    available_engines = ('google', 'bing', 'duckduckgo', 'yahoo', 'ask',
+                         'yandex', 'pdogpile')
     try:
         num = request.args.get('num') or 10
         count = int(num)
@@ -39,7 +41,7 @@ def search(search_engine):
             abort(400, 'Not Found - undefined format')
 
         engine = search_engine
-        if engine not in ('google', 'bing', 'duckduckgo', 'yahoo', 'ask', 'yandex'):
+        if engine not in available_engines:
             err = [404, 'Incorrect search engine', qformat]
             return bad_request(err)
 
@@ -60,7 +62,7 @@ def search(search_engine):
         for line in result:
             line['link'] = line['link'].encode('utf-8')
             line['title'] = line['title'].encode('utf-8')
-            if engine in ['b', 'a']:
+            if engine in ['b', 'a', 'p']:
                 line['desc'] = line['desc'].encode('utf-8')
 
         if qformat == 'json':
