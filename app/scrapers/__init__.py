@@ -7,6 +7,7 @@ from bing import Bing
 from yahoo import Yahoo
 from ask import Ask
 from yandex import Yandex
+from dogpile import Dogpile
 
 scrapers = {
     'g': Google(),
@@ -14,7 +15,8 @@ scrapers = {
     'y': Yahoo(),
     'd': Duckduckgo(),
     'a': Ask(),
-    'yd': Yandex()
+    'yd': Yandex(),
+    'p': Dogpile()
 }
 
 
