@@ -1,6 +1,4 @@
 from __future__ import print_function
-import json
-import sys
 from google import Google
 from duckduckgo import Duckduckgo
 from bing import Bing
