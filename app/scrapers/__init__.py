@@ -17,7 +17,9 @@ scrapers = {
 
 
 def small_test():
-    assert isinstance(scrapers['g'].results_search('fossasia'), list)
+    results = scrapers['g'].search('fossasia', 10)
+    assert isinstance(results, list)
+    assert len(results) == 10
 
 
 def feedgen(query, engine, count=10):
