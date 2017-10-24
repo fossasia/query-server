@@ -5,10 +5,12 @@ from bing import Bing
 from yahoo import Yahoo
 from ask import Ask
 from yandex import Yandex
+from baidu import Baidu
 
 scrapers = {
     'ask': Ask(),
     'bing': Bing(),
+    'baidu': Baidu(),
     'duckduckgo': Duckduckgo(),
     'google': Google(),
     'yahoo': Yahoo(),
