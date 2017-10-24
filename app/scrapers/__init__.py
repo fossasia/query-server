@@ -18,13 +18,8 @@ scrapers = {
 }
 
 
-def read_in():
-    lines = sys.stdin.readlines()
-    return json.loads(lines[0])
-
-
 def small_test():
-    assert isinstance(scrapers.google.results_search('fossasia'), list)
+    assert isinstance(scrapers['g'].results_search('fossasia'), list)
 
 
 def feedgen(query, engine, count=10):
