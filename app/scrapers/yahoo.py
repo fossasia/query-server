@@ -1,6 +1,9 @@
+from __future__ import absolute_import
 from __future__ import print_function
-from generalized import Scraper
+
 import urllib
+
+from .generalized import Scraper
 
 
 class Yahoo(Scraper):
@@ -25,11 +28,8 @@ class Yahoo(Scraper):
                 f = r.split('RU=')
                 e = f[-1].split('/RK=1')
                 u = urllib.unquote(e[0])
-                urls.append({
-                    'title': y.getText(),
-                    'link': u
-                })
+                urls.append({'title': y.getText(), 'link': u})
 
-        print('parsed' + str(urls))
+        print('Yahoo parsed: ' + str(urls))
 
         return urls

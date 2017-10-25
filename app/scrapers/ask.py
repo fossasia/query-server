@@ -1,5 +1,7 @@
+from __future__ import absolute_import
 from __future__ import print_function
-from generalized import Scraper
+
+from .generalized import Scraper
 
 
 class Ask(Scraper):
@@ -25,4 +27,5 @@ class Ask(Scraper):
             p = div.find('p', {'class': 'PartialSearchResults-item-abstract'})
             desc = p.text.replace('\n', '')
             urls.append({'title': title, 'link': url, 'desc': desc})
+        print('Ask parsed: ' + str(urls))
         return urls

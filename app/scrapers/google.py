@@ -1,5 +1,7 @@
+from __future__ import absolute_import
 from __future__ import print_function
-from generalized import Scraper
+
+from .generalized import Scraper
 
 
 class Google(Scraper):
@@ -23,6 +25,6 @@ class Google(Scraper):
             links = h3.find('a')
             urls.append({'title': links.getText(), 'link': links.get('href')})
 
-        print('parsed' + str(urls))
+        print('Google parsed: ' + str(urls))
 
         return urls

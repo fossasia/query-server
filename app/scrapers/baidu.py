@@ -1,5 +1,7 @@
+from __future__ import absolute_import
 from __future__ import print_function
-from generalized import Scraper
+
+from .generalized import Scraper
 
 
 class Baidu(Scraper):
@@ -22,6 +24,6 @@ class Baidu(Scraper):
             url = h3.a.get('href')
             urls.append({'title': title, 'link': url})
 
-        print('parsed' + str(urls))
+        print('Baidu parsed: ' + str(urls))
 
         return urls
