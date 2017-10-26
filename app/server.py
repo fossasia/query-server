@@ -5,6 +5,7 @@ from dicttoxml import dicttoxml
 from xml.dom.minidom import parseString
 import json
 import os
+import csv
 
 app = Flask(__name__)
 err = ""
@@ -35,7 +36,7 @@ def search(search_engine):
         num = request.args.get('num') or 10
         count = int(num)
         qformat = request.args.get('format') or 'json'
-        if qformat not in ('json', 'xml'):
+        if qformat not in ('json', 'csv', 'xml'):
             abort(400, 'Not Found - undefined format')
 
         engine = search_engine
@@ -63,16 +64,29 @@ def search(search_engine):
             line['title'] = line['title'].encode('utf-8')
             if engine in ['b', 'a']:
                 line['desc'] = line['desc'].encode('utf-8')
+        
+        def to_utf8(lst):
+            return [unicode(elem).encode('utf-8') for elem in lst]
 
         if qformat == 'json':
             jsonfeed = json.dumps(result).encode('utf-8')
             return Response(jsonfeed, mimetype='application/json')
-        xmlfeed = parseString(
-            (dicttoxml(
+        elif qformat == 'xml':
+            xmlfeed = parseString((dicttoxml(
                 result,
                 custom_root='channel',
                 attr_type=False))).toprettyxml()
-        return Response(xmlfeed, mimetype='application/xml')
+            return Response(xmlfeed, mimetype='application/xml')
+        else:
+            list=[]
+            headers = [d.keys() for d in result]
+            list.append(headers[1])
+            for data in result:
+                list1= []
+                for key in data:
+                    list1.append(data[key])
+                list.append(list1)
+            return Response(list, mimetype='text/plain')
 
     except Exception as e:
         print(e)
