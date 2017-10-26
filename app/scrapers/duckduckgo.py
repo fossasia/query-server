@@ -19,5 +19,7 @@ class Duckduckgo(Scraper):
         for links in soup.findAll('a', {'class': 'result__a'}):
             urls.append({'title': links.getText(),
                          'link': links.get('href')})
+
         print('parsed' + str(urls))
+
         return urls
