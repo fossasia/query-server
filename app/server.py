@@ -9,7 +9,6 @@ from pymongo import MongoClient
 from scrapers import feedgen
 
 app = Flask(__name__)
-err = ""
 
 client = MongoClient(os.environ.get('MONGO_URI', 'mongodb://localhost:27017/'))
 db = client['query-server-v2']
