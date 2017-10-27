@@ -21,5 +21,5 @@ class Exalead(Scraper):
                 'title': a.getText(),
                 'link': a.get('href')
                 })
-        print('parsed' + str(urls))
+        print('Exalead parsed: ' + str(urls))
         return urls
