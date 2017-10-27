@@ -3,7 +3,7 @@ from generalized import Scraper
 
 
 class Exalead(Scraper):
-    """Scrapper class for Exalead"""
+    """Scraper class for Exalead"""
 
     def __init__(self):
         self.url = 'https://www.exalead.com/search/web/results/'
