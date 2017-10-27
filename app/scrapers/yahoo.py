@@ -1,6 +1,9 @@
+from __future__ import absolute_import
 from __future__ import print_function
-from generalized import Scraper
+
 import urllib
+
+from .generalized import Scraper
 
 
 class Yahoo(Scraper):
@@ -30,6 +33,6 @@ class Yahoo(Scraper):
                     'link': u
                 })
 
-        print('parsed' + str(urls))
+        print('Yahoo parsed: ' + str(urls))
 
         return urls
