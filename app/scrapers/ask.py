@@ -1,5 +1,7 @@
+from __future__ import absolute_import
 from __future__ import print_function
-from generalized import Scraper
+
+from .generalized import Scraper
 
 
 class Ask(Scraper):
