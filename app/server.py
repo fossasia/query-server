@@ -1,13 +1,14 @@
-from flask import Flask, render_template, request, abort, Response, make_response
-from scrapers import feedgen
-from pymongo import MongoClient
-from dicttoxml import dicttoxml
-from xml.dom.minidom import parseString
 import json
 import os
+from xml.dom.minidom import parseString
+
+from dicttoxml import dicttoxml
+from flask import (Flask, Response, abort, make_response, render_template,
+                   request)
+from pymongo import MongoClient
+from scrapers import feedgen
 
 app = Flask(__name__)
-err = ""
 
 client = MongoClient(os.environ.get('MONGO_URI', 'mongodb://localhost:27017/'))
 db = client['query-server-v2']
