@@ -8,6 +8,7 @@ class Google(Scraper):
     def __init__(self):
         self.url = 'https://www.google.com/search'
         self.defaultStart = 0
+        self.startKey = 'start'
 
     def nextStart(self, currentStart, prevResults):
         return currentStart + len(prevResults)
