@@ -8,6 +8,7 @@ from yahoo import Yahoo
 from ask import Ask
 from yandex import Yandex
 from baidu import Baidu
+from exalead import Exalead
 
 scrapers = {
     'g': Google(),
@@ -16,7 +17,8 @@ scrapers = {
     'd': Duckduckgo(),
     'a': Ask(),
     'yd': Yandex(),
-    'u': Baidu()
+    'u': Baidu(),
+    'e': Exalead()
 }
 
 
