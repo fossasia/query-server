@@ -10,6 +10,7 @@ from yandex import Yandex
 from baidu import Baidu
 from exalead import Exalead
 from quora import Quora
+from mojeek import Mojeek
 
 scrapers = {
     'g': Google(),
@@ -20,7 +21,8 @@ scrapers = {
     'yd': Yandex(),
     'u': Baidu(),
     'e': Exalead(),
-    'q': Quora()
+    'q': Quora(),
+    'm': Mojeek()
 }
 
 
