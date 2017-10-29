@@ -10,6 +10,9 @@ from yandex import Yandex
 from baidu import Baidu
 from exalead import Exalead
 from quora import Quora
+from youtube import Youtube
+from mojeek import Mojeek
+
 
 scrapers = {
     'g': Google(),
@@ -20,7 +23,9 @@ scrapers = {
     'yd': Yandex(),
     'u': Baidu(),
     'e': Exalead(),
-    'q': Quora()
+    'q': Quora(),
+    't': Youtube(),
+    'm': Mojeek()
 }
 
 
@@ -34,7 +39,7 @@ def small_test():
 
 
 def feedgen(query, engine, count=10):
-    if engine == 'q':
+    if engine in ['q', 't']:
         urls = scrapers[engine].search_without_count(query)
     else:
         urls = scrapers[engine].search(query, count)
