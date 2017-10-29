@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, abort, Response, make_response
+from flask import (Flask, render_template, request, abort, Response,
+                   make_response)
 from scrapers import feedgen
 from pymongo import MongoClient
 from dicttoxml import dicttoxml
@@ -31,40 +32,35 @@ def bad_request(err):
 
 @app.route('/api/v1/search/<search_engine>', methods=['GET'])
 def search(search_engine):
+    search_engine = search_engine.strip().lower()
     try:
         num = request.args.get('num') or 10
         count = int(num)
-        qformat = request.args.get('format') or 'json'
+        qformat = request.args.get('format', 'json')
         if qformat not in ('json', 'xml'):
             abort(400, 'Not Found - undefined format')
-
-        engine = search_engine
-        if engine not in ('google', 'bing', 'duckduckgo', 'yahoo', 'ask',
-                          'yandex', 'ubaidu', 'exalead', 'quora'):
-            err = [404, 'Incorrect search engine', qformat]
-            return bad_request(err)
 
         query = request.args.get('query')
         if not query:
             err = [400, 'Not Found - missing query', qformat]
             return bad_request(err)
 
-        if engine[0] == 'q':
-            result = feedgen(query, engine[0])
-        else:
-            result = feedgen(query, engine[0], count)
+        try:
+            result = feedgen(query, search_engine, count)
+        except KeyError:  # Unsupported search_engine
+            return bad_request([404, 'Incorrect search engine', qformat])
         if not result:
             err = [404, 'No response', qformat]
             return bad_request(err)
 
         if db['queries'].find({query: query}).limit(1) is False:
             db['queries'].insert(
-                {"query": query, "engine": engine, "qformat": qformat})
+                {"query": query, "engine": search_engine, "qformat": qformat})
 
         for line in result:
             line['link'] = line['link'].encode('utf-8')
             line['title'] = line['title'].encode('utf-8')
-            if engine in ['b', 'a']:
+            if search_engine in ['ask', 'bing']:
                 line['desc'] = line['desc'].encode('utf-8')
 
         if qformat == 'json':
@@ -92,8 +88,5 @@ def set_header(r):
 if __name__ == '__main__':
     app.run(
         host='0.0.0.0',
-        port=int(
-            os.environ.get(
-                'PORT',
-                7001)),
+        port=int(os.environ.get('PORT', 7001)),
         debug=True)

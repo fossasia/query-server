@@ -1,41 +1,33 @@
 from __future__ import print_function
-import json
-import sys
-from google import Google
-from duckduckgo import Duckduckgo
-from bing import Bing
-from yahoo import Yahoo
 from ask import Ask
-from yandex import Yandex
 from baidu import Baidu
+from bing import Bing
+from duckduckgo import Duckduckgo
 from exalead import Exalead
+from google import Google
 from quora import Quora
+from yahoo import Yahoo
+from yandex import Yandex
 
 scrapers = {
-    'g': Google(),
-    'b': Bing(),
-    'y': Yahoo(),
-    'd': Duckduckgo(),
-    'a': Ask(),
-    'yd': Yandex(),
-    'u': Baidu(),
-    'e': Exalead(),
-    'q': Quora()
+    'ask': Ask(),
+    'bing': Bing(),
+    'baidu': Baidu(),
+    'duckduckgo': Duckduckgo(),
+    'exalead': Exalead(),
+    'google': Google(),
+    'quora': Quora(),
+    'yahoo': Yahoo(),
+    'yandex': Yandex()
 }
 
 
-def read_in():
-    lines = sys.stdin.readlines()
-    return json.loads(lines[0])
-
-
 def small_test():
-    assert isinstance(scrapers.google.results_search('fossasia'), list)
+    assert isinstance(scrapers['google'].results_search('fossasia'), list)
 
 
 def feedgen(query, engine, count=10):
-    if engine == 'q':
-        urls = scrapers[engine].search_without_count(query)
+    if engine == 'quora':
+        return scrapers[engine.strip().lower()].search_without_count(query, count)
     else:
-        urls = scrapers[engine].search(query, count)
-    return urls
+        return scrapers[engine.strip().lower()].search(query, count)
