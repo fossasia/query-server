@@ -8,6 +8,7 @@ class Google(Scraper):
     def __init__(self):
         self.url = 'https://www.google.com/search'
         self.defaultStart = 0
+        self.startKey = 'start'
 
     def nextStart(self, currentStart, prevResults):
         return currentStart + len(prevResults)
@@ -22,5 +23,7 @@ class Google(Scraper):
         for h3 in soup.findAll('h3', {'class': 'r'}):
             links = h3.find('a')
             urls.append({'title': links.getText(), 'link': links.get('href')})
+
+        print('parsed' + str(urls))
 
         return urls
