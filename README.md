@@ -39,7 +39,7 @@ A sample query : `/api/v1/search/bing?query=fossasia&format=xml&num=10`
 ## Dependencies
 
 * [MongoDB](https://www.mongodb.com)
-* [Python 2.7 and 3.4+](https://python.org)
+* [Python 2.7](https://python.org)
     * [BeautifulSoup4](https://www.crummy.com/software/BeautifulSoup/bs4/doc)
     * [dicttoxml](https://github.com/quandyfactory/dicttoxml)
     * [Flask](http://flask.pocoo.org)
