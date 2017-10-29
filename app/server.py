@@ -49,7 +49,6 @@ def search(search_engine):
             result = feedgen(query, search_engine, count)
         except KeyError:  # Unsupported search_engine
             return bad_request([404, 'Incorrect search engine', qformat])
-
         if not result:
             err = [404, 'No response', qformat]
             return bad_request(err)
