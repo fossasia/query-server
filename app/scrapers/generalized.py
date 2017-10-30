@@ -46,7 +46,8 @@ class Scraper:
             response = self.get_page(query, currentStart)
             soup = BeautifulSoup(response.text, 'html.parser')
             newResults = self.parseResponse(soup)
-
+            if newResults is None:
+                break
             urls.extend(newResults)
             currentStart = self.nextStart(currentStart, newResults)
         return urls[: numResults]
