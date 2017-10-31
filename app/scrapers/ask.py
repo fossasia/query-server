@@ -19,6 +19,8 @@ class Ask(Scraper):
                 [[Tile1,url1], [Title2, url2],..]
         """
         urls = []
+        if soup.find('div', {'class': 'PartialSearchResults-noresults'}):
+            return None
         for div in soup.findAll('div', {'class': 'PartialSearchResults-item'}):
             title = div.div.a.text
             url = div.div.a['href']

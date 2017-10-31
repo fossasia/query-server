@@ -8,6 +8,8 @@ from yahoo import Yahoo
 from ask import Ask
 from yandex import Yandex
 from baidu import Baidu
+from exalead import Exalead
+from quora import Quora
 
 scrapers = {
     'g': Google(),
@@ -16,7 +18,9 @@ scrapers = {
     'd': Duckduckgo(),
     'a': Ask(),
     'yd': Yandex(),
-    'u': Baidu()
+    'u': Baidu(),
+    'e': Exalead(),
+    'q': Quora()
 }
 
 
@@ -30,5 +34,8 @@ def small_test():
 
 
 def feedgen(query, engine, count=10):
-    urls = scrapers[engine].search(query, count)
+    if engine == 'q':
+        urls = scrapers[engine].search_without_count(query)
+    else:
+        urls = scrapers[engine].search(query, count)
     return urls
