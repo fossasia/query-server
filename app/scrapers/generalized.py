@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 class Scraper:
     """Generalized scraper"""
     url = ''
-    startKey = 'start'
+    startKey = ''
     queryKey = 'q'
     defaultStart = 0
     headers = {
@@ -46,7 +46,20 @@ class Scraper:
             response = self.get_page(query, currentStart)
             soup = BeautifulSoup(response.text, 'html.parser')
             newResults = self.parseResponse(soup)
-
+            if newResults is None:
+                break
             urls.extend(newResults)
             currentStart = self.nextStart(currentStart, newResults)
         return urls[: numResults]
+
+    def search_without_count(self, query):
+        """
+            Search for the query and return set of urls
+            Returns: list
+        """
+        urls = []
+        payload = {self.queryKey: query}
+        response = requests.get(self.url, headers=self.headers, params=payload)
+        soup = BeautifulSoup(response.text, 'html.parser')
+        urls = self.parseResponse(soup)
+        return urls

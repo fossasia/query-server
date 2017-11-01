@@ -7,7 +7,7 @@ class Baidu(Scraper):
 
     def __init__(self):
         self.url = 'https://www.baidu.com/s'
-        self.defaultStart = 1
+        self.defaultStart = 0
         self.queryKey = 'wd'
         self.startKey = 'pn'
 
@@ -17,9 +17,9 @@ class Baidu(Scraper):
                 [[Tile1,url1], [Title2, url2],..]
         """
         urls = []
-        for h3 in soup.findAll('h3', attrs={'class': 't c-title-en'}):
-            title = h3.a.getText()
-            url = h3.a.get('href')
+        for div in soup.findAll('div', {'class': 'result'}):
+            title = div.h3.a.getText()
+            url = div.h3.a['href']
             urls.append({'title': title, 'link': url})
 
         print('parsed' + str(urls))
