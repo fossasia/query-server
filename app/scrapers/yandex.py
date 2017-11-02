@@ -18,6 +18,6 @@ class Yandex(Scraper):
         for a in soup.findAll('a', {'class': 'link link_theme_normal'}):
             urls.append({'title': a.getText(), 'link': a.get('href')})
 
-        print('parsed' + str(urls))
+        print('Yandex parsed: ' + str(urls))
 
         return urls
