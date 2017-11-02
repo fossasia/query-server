@@ -20,6 +20,6 @@ class Duckduckgo(Scraper):
             urls.append({'title': links.getText(),
                          'link': links.get('href')})
 
-        print('parsed' + str(urls))
+        print('DuckDuckGo parsed' + str(urls))
 
         return urls
