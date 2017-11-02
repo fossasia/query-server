@@ -22,6 +22,6 @@ class Baidu(Scraper):
             url = div.h3.a['href']
             urls.append({'title': title, 'link': url})
 
-        print('Baidu parsed:' + str(urls))
+        print('Baidu parsed: ' + str(urls))
 
         return urls

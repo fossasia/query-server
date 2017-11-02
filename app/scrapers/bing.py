@@ -25,6 +25,6 @@ class Bing(Scraper):
                          'desc': desc}
             urls.append(url_entry)
 
-        print('Bing parsed:' + str(urls))
+        print('Bing parsed: ' + str(urls))
 
         return urls

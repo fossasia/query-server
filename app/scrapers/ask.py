@@ -27,7 +27,5 @@ class Ask(Scraper):
             p = div.find('p', {'class': 'PartialSearchResults-item-abstract'})
             desc = p.text.replace('\n', '')
             urls.append({'title': title, 'link': url, 'desc': desc})
-
-        print('Ask parsed:' + str(urls)) 
-
+        print('Ask parsed: ' + str(urls)) 
         return urls
