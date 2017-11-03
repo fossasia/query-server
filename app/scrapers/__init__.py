@@ -11,6 +11,7 @@ from baidu import Baidu
 from exalead import Exalead
 from quora import Quora
 from youtube import Youtube
+from gigablast import Gigablast
 
 scrapers = {
     'g': Google(),
@@ -23,6 +24,7 @@ scrapers = {
     'e': Exalead(),
     'q': Quora(),
     't': Youtube()
+    'g': Gigablast()
 }
 
 
