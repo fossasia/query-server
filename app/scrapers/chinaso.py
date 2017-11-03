@@ -8,8 +8,7 @@ class ChinaSo(Scraper):
     def __init__(self):
         self.url = 'https://www.chinaso.com/search'
         self.defaultStart = 1
-        self.startKey = 'c'
-        
+        self.startKey = 'c'        
     def parseResponse(self, soup):
         """ Parse the response and return set of urls
         Returns: urls (list)
@@ -18,7 +17,7 @@ class ChinaSo(Scraper):
         urls = []
         for a in soup.findAll('a', {'class': 'ob'}):
             link = 'https://www.chinaso.com' + str(a.get('href'))
-            urls.append({'title': title, 'link': url})
+            urls.append({'title': title, 'link': link})
 
         print('ChinaSo parsed: ' + str(urls))
 
