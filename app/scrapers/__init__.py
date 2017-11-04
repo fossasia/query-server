@@ -9,6 +9,7 @@ from ask import Ask
 from yandex import Yandex
 from baidu import Baidu
 from exalead import Exalead
+from medium import Medium
 from quora import Quora
 from youtube import Youtube
 
@@ -21,6 +22,7 @@ scrapers = {
     'yd': Yandex(),
     'u': Baidu(),
     'e': Exalead(),
+    'm': Medium(),
     'q': Quora(),
     't': Youtube()
 }
