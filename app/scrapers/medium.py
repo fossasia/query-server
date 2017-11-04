@@ -5,8 +5,7 @@ from bs4 import BeautifulSoup
 
 
 class Medium(Scraper):
-    """Scrapper class for Medium"""
-    
+    """Scrapper class for Medium"""   
     def __init__(self):
         self.url = 'https://www.medium.com/search/posts?q='
         self.keyword = 'q'
@@ -29,6 +28,4 @@ class Medium(Scraper):
             urls.append({'title': title.text.strip(), 'link': link.strip()})
         print('Medium parsed: ' + str(urls))
         
-        return urls
-
-       
+        return urls       
