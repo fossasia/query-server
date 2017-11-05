@@ -11,7 +11,6 @@ from baidu import Baidu
 from exalead import Exalead
 from quora import Quora
 from youtube import Youtube
-from parsijoo import Parsijoo
 
 scrapers = {
     'g': Google(),
@@ -25,6 +24,7 @@ scrapers = {
     'q': Quora(),
     't': Youtube(),
     'p': Parsijoo()
+    't': Youtube()
 }
 
 
