@@ -22,6 +22,8 @@ scrapers = {
     'u': Baidu(),
     'e': Exalead(),
     'q': Quora(),
+    't': Youtube(),
+    'p': Parsijoo()
     't': Youtube()
 }
 
