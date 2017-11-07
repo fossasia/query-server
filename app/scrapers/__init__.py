@@ -11,6 +11,7 @@ from baidu import Baidu
 from exalead import Exalead
 from quora import Quora
 from youtube import Youtube
+from parsijoo import Parsijoo
 from mojeek import Mojeek
 
 scrapers = {
@@ -24,6 +25,7 @@ scrapers = {
     'e': Exalead(),
     'q': Quora(),
     't': Youtube(),
+    'p': Parsijoo(),
     'm': Mojeek()
 }
 

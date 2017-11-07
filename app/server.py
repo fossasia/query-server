@@ -41,7 +41,7 @@ def search(search_engine):
         engine = search_engine
         if engine not in ('google', 'bing', 'duckduckgo', 'yahoo', 'ask',
                           'yandex', 'ubaidu', 'exalead', 'quora', 'tyoutube',
-                          'mojeek'):
+                          'parsijoo', 'mojeek'):
             err = [404, 'Incorrect search engine', qformat]
             return bad_request(err)
 
