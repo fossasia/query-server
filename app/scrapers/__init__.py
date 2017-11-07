@@ -14,17 +14,17 @@ from youtube import Youtube
 from parsijoo import Parsijoo
 
 scrapers = {
-    'g': Google(),
-    'b': Bing(),
-    'y': Yahoo(),
-    'd': Duckduckgo(),
-    'a': Ask(),
-    'yd': Yandex(),
-    'u': Baidu(),
-    'e': Exalead(),
-    'q': Quora(),
-    't': Youtube(),
-    'p': Parsijoo()
+    'ask': Ask(),
+    'baiduu': Baidu(),
+    'bing': Bing(),
+    'duckduckgo': Duckduckgo(),
+    'exalead': Exalead(),
+    'google': Google(),
+    'parsijoo': Parsijoo(),
+    'quora': Quora(),
+    'yahoo': Yahoo(),
+    'yandex': Yandex(),
+    'youtube': Youtube()
 }
 
 
@@ -34,11 +34,11 @@ def read_in():
 
 
 def small_test():
-    assert isinstance(scrapers.google.results_search('fossasia'), list)
+    assert isinstance(scrapers['google'].search('fossasia'), list)
 
 
 def feedgen(query, engine, count=10):
-    if engine in ['q', 't']:
+    if engine in ('quora', 'youtube'):
         urls = scrapers[engine].search_without_count(query)
     else:
         urls = scrapers[engine].search(query, count)

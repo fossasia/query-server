@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request, abort, Response, make_response
-from scrapers import feedgen
+from flask import (Flask, render_template, request, abort, Response,
+                   make_response)
+from scrapers import feedgen, scrapers
 from pymongo import MongoClient
 from dicttoxml import dicttoxml
 from xml.dom.minidom import parseString
@@ -39,9 +40,7 @@ def search(search_engine):
             abort(400, 'Not Found - undefined format')
 
         engine = search_engine
-        if engine not in ('google', 'bing', 'duckduckgo', 'yahoo', 'ask',
-                          'yandex', 'ubaidu', 'exalead', 'quora', 'tyoutube',
-                          'parsijoo'):
+        if engine not in scrapers:
             err = [404, 'Incorrect search engine', qformat]
             return bad_request(err)
 
@@ -50,7 +49,7 @@ def search(search_engine):
             err = [400, 'Not Found - missing query', qformat]
             return bad_request(err)
 
-        result = feedgen(query, engine[0], count)
+        result = feedgen(query, engine, count)
         if not result:
             err = [404, 'No response', qformat]
             return bad_request(err)
@@ -62,7 +61,7 @@ def search(search_engine):
         for line in result:
             line['link'] = line['link'].encode('utf-8')
             line['title'] = line['title'].encode('utf-8')
-            if engine in ['b', 'a']:
+            if 'desc' in line:
                 line['desc'] = line['desc'].encode('utf-8')
 
         if qformat == 'json':
@@ -90,8 +89,5 @@ def set_header(r):
 if __name__ == '__main__':
     app.run(
         host='0.0.0.0',
-        port=int(
-            os.environ.get(
-                'PORT',
-                7001)),
+        port=int(os.environ.get('PORT', 7001)),
         debug=True)
