@@ -47,8 +47,11 @@
                                         <input type="radio" value="json" autocomplete="off">JSON
                                     </label>
                                 <label class="btn btn-lg btn-primary formatButton">
-                                        <input type="radio" value="xml" autocomplete="off">XML
+                                        <input type="radio" value="csv" autocomplete="off">CSV
                                     </label>
+                                <label class="btn btn-lg btn-primary formatButton">
+                                        <input type="radio" value="xml" autocomplete="off">XML
+                                    </label>                                
                             </div>
                         </div>
                     </div>
@@ -147,8 +150,12 @@
                             if (sformat == "json") {
                                 $(".code").attr("class", "language-json");
                                 response = JSON.stringify(response, null, 4);
-                            } else
+                            } else if (sformat == "xml"){
                                 response = new XMLSerializer().serializeToString(response);
+                            }else{
+                                console.log("CSV Respose here");
+                                return response;
+                            }
                             $('#feed').show();
                             $('#feed').text(response);
                             Prism.highlightElement($('#feed')[0]);
