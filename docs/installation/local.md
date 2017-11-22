@@ -21,6 +21,10 @@ Running this tool requires installing the nodejs as well as python dependencies.
 ```
 npm install -g bower
 bower install
+pip install virtualenv
+virtualenv venv
+source activate venv # Linux
+venv\Scripts\activate # Windows
 pip install -r requirements.txt
 ```
 

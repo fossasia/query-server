@@ -1,9 +1,10 @@
 .cache/*
 __pycache__/*
+venv/*
 node_modules/*
+app/static/bower_components/*
 .coverage
 .idea/*
 *.pyc
 *.py.bak
 *.swp
-app/static/bower_components/
