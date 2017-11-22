@@ -93,6 +93,7 @@
     <div class="pagination-centered">
         <img id="load" src="{{ url_for('static', filename='images/ripple.gif') }}">
     </div>
+    <pre id="time-analysis" style="display:none;"><code class="language-xml"></code></pre>
     <pre id="feed" style="display:none;"><code class="language-xml"></code></pre>
     <br/><br/>
     <div class="container">
@@ -133,12 +134,14 @@
                 if ($('#query').val()) {
                     $('#load').show();
                     $('#feed').hide();
+                    $('#time-analysis').hide();
                     var sengine = $(this).val();
                     var squery = $('#query').val();
                     var sformat = $(' #format label.active input').val();
                     var count = $('#resp').val();
                     var urlloc = window.location.href.split(/\?|#/)[0] + "api/v1/search/" + sengine +
                         "?query=" + squery + "&format=" + sformat + "&num=" + count;
+                    var startDate = new Date();
                     $.ajax({
                         url: urlloc,
                         type: 'GET',
@@ -149,6 +152,11 @@
                                 response = JSON.stringify(response, null, 4);
                             } else
                                 response = new XMLSerializer().serializeToString(response);
+                            var endDate   = new Date();
+                            var seconds = (endDate.getTime() - startDate.getTime()) / 1000;
+                            var time_analysis_string  = "Following Results fetched in " + seconds + " seconds";
+                            $('#time-analysis').show();
+                            $('#time-analysis').text(time_analysis_string);
                             $('#feed').show();
                             $('#feed').text(response);
                             Prism.highlightElement($('#feed')[0]);
