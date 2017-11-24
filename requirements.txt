@@ -1,4 +1,5 @@
 beautifulsoup4>=4.5.1
+codecov
 coverage>=4.3.4
 coveralls>=1.1
 dicttoxml>=1.7.4
