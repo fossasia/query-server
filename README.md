@@ -25,7 +25,7 @@ The API(s) provided by query-server are as follows:
 
 > *search-engine* : [`google`, `ask`, `bing`, `duckduckgo`, `yahoo`, `yandex`, `baidu`, `exalead`, `quora`, `youtube`, `parsijoo`, `mojeek`, `stackoverflow`]
 
-> *query* : query can be any string
+> *query* : query can be any string 
 
 > *format* : [`json`, `xml`]
 

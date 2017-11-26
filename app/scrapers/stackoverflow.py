@@ -11,8 +11,6 @@ class StackOverFlow(Scraper):
         self.defaultStart = 1
         self.startKey = 'page'
 
-    def nextStart(self, currentStart, prevResults):
-        return currentStart + len(prevResults)
 
     def parseResponse(self, soup):
         """ Parse the response and return set of urls
