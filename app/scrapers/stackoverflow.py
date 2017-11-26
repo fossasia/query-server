@@ -1,6 +1,7 @@
 from __future__ import print_function
 from generalized import Scraper
 
+
 class StackOverFlow(Scraper):
     """Scrapper class for StackOverFlow"""
 
@@ -23,8 +24,8 @@ class StackOverFlow(Scraper):
             a = div.find('a')
             link = self.result_url + str(a.get('href'))
             urls.append({
-                    'title' : a.getText().strip(),
-                    'link' : link
+                    'title': a.getText().strip(),
+                    'link': link
                 })
         print('StackOverFlow parsed: ' + str(urls))
 
