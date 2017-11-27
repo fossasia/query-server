@@ -13,7 +13,7 @@ from quora import Quora
 from youtube import Youtube
 from parsijoo import Parsijoo
 from mojeek import Mojeek
-from stackoverflow import StackOverFlow
+from stackoverflow import StackOverflow
 
 scrapers = {
     'g': Google(),
@@ -28,7 +28,7 @@ scrapers = {
     't': Youtube(),
     'p': Parsijoo(),
     'm': Mojeek(),
-    's': StackOverFlow()
+    's': StackOverflow()
 }
 
 
@@ -42,7 +42,7 @@ def small_test():
 
 
 def feedgen(query, engine, count=10):
-    if engine in ['q', 't']:
+    if engine in ['q', 't', 's']:
         urls = scrapers[engine].search_without_count(query)
     else:
         urls = scrapers[engine].search(query, count)

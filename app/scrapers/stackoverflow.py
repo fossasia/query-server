@@ -2,14 +2,12 @@ from __future__ import print_function
 from generalized import Scraper
 
 
-class StackOverFlow(Scraper):
-    """Scrapper class for StackOverFlow"""
+class StackOverflow(Scraper):
+    """Scrapper class for StackOverflow"""
 
     def __init__(self):
         self.url = 'https://stackoverflow.com/search'
         self.result_url = 'https://stackoverflow.com'
-        self.defaultStart = 1
-        self.startKey = 'page'
 
     def parseResponse(self, soup):
         """ Parse the response and return set of urls
@@ -24,6 +22,6 @@ class StackOverFlow(Scraper):
                     'title': a.getText().strip(),
                     'link': link
                 })
-        print('StackOverFlow parsed: ' + str(urls))
+        print('StackOverflow parsed: ' + str(urls))
 
         return urls
