@@ -42,7 +42,7 @@ def small_test():
 
 
 def feedgen(query, engine, count=10):
-    if engine in ['q', 't', 's']:
+    if engine in ['q', 't']:
         urls = scrapers[engine].search_without_count(query)
     else:
         urls = scrapers[engine].search(query, count)

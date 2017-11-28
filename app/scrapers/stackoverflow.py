@@ -7,7 +7,8 @@ class StackOverflow(Scraper):
 
     def __init__(self):
         self.url = 'https://stackoverflow.com/search'
-        self.result_url = 'https://stackoverflow.com'
+        self.startKey = 'page'
+        self.defaultStart = 1
 
     def parseResponse(self, soup):
         """ Parse the response and return set of urls
@@ -17,7 +18,7 @@ class StackOverflow(Scraper):
         urls = []
         for div in soup.findAll('div', {'class': 'result-link'}):
             a = div.find('a')
-            link = self.result_url + str(a.get('href'))
+            link = 'https://stackoverflow.com' + str(a.get('href'))
             urls.append({
                     'title': a.getText().strip(),
                     'link': link
