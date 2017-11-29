@@ -15,8 +15,8 @@ class ChinaSo(Scraper):
                 [[Tile1,url1], [Title2, url2],..]
         """
         urls = []
-        for a in soup.findAll('a', {'class': 'ob'}):
-            link = 'https://www.chinaso.com' + str(a.get('href'))
-            urls.append({'title': title, 'link': link})
+        for a in soup.findAll('a', {'target': '_blank'}):
+            urls.append({'title': links.getText(),
+			 'link': links.get('href')})
         print('ChinaSo parsed: ' + str(urls))
         return urls
