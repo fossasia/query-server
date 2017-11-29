@@ -96,13 +96,7 @@ def set_header(r):
 
 if __name__ == '__main__':
 
-    if args.dev:
-        app.run(
-            host='0.0.0.0',
-            port=int(os.environ.get('PORT', 7001)),
-            debug=True)
-
-    else:
-        app.run(
-            host='0.0.0.0',
-            port=int(os.environ.get('PORT', 7001)))
+    app.run(
+        host='0.0.0.0',
+        port=int(os.environ.get('PORT', 7001)),
+        debug=args.dev)
