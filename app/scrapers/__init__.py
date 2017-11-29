@@ -24,7 +24,7 @@ scrapers = {
     'e': Exalead(),
     'q': Quora(),
     't': Youtube()
-    'g': Gigablast()
+    'gb': Gigablast()
 }
 
 
