@@ -23,7 +23,7 @@ scrapers = {
     'u': Baidu(),
     'e': Exalead(),
     'q': Quora(),
-    't': Youtube()
+    't': Youtube(),
     'gb': Gigablast()
 }
 
