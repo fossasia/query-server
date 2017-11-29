@@ -19,8 +19,11 @@ errorObj = {
 }
 
 parser = ArgumentParser()
-parser.add_argument("--dev", help = "Start the server in development mode with debug=True", action = "store_true")
+parser.add_argument("--dev",
+                    help="Start the server in development mode with debug=True",
+                    action="store_true")
 args = parser.parse_args()
+
 
 @app.route('/')
 def index():
