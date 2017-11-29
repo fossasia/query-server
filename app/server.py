@@ -5,6 +5,7 @@ from dicttoxml import dicttoxml
 from xml.dom.minidom import parseString
 import json
 import os
+from argparse import ArgumentParser
 
 app = Flask(__name__)
 err = ""
@@ -17,6 +18,9 @@ errorObj = {
     'error': 'Could not parse the page due to Internal Server Error'
 }
 
+parser = ArgumentParser()
+parser.add_argument("--dev", help = "Start the server in development mode with debug=True", action = "store_true")
+args = parser.parse_args()
 
 @app.route('/')
 def index():
@@ -88,10 +92,18 @@ def set_header(r):
 
 
 if __name__ == '__main__':
-    app.run(
-        host='0.0.0.0',
-        port=int(
-            os.environ.get(
-                'PORT',
-                7001)),
-        debug=True)
+    if args.dev:
+        app.run(
+            host='0.0.0.0',
+            port=int(
+                os.environ.get(
+                    'PORT',
+                    7001)),
+            debug=True)
+    else:
+        app.run(
+            host='0.0.0.0',
+            port=int(
+                os.environ.get(
+                    'PORT',
+                    7001)))
