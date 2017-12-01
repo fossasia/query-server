@@ -38,6 +38,7 @@ def make_engine_api_call(engine_name):
 @pytest.mark.xfail(PYTHON3 or not TRAVIS_CI, reason=REASON)
 def test_engine_api_calls(engine_names=None):
     engines = ['ask', 'ubaidu', 'bing', 'duckduckgo', 'tyoutube',
-               'exalead', 'mojeek', 'google', 'quora', 'yahoo', 'yandex', 'parsijoo']
+               'exalead', 'mojeek', 'google', 'quora', 'yahoo', 'yandex', 'parsijoo',
+               'stackoverflow']
     for engine_name in (engine_names or engines):
         make_engine_api_call(engine_name)
