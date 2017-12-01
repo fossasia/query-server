@@ -40,6 +40,13 @@ sudo service mongod start
 
 To run the project on a local machine.
 
+For development mode (with debugger active), use the following command
+```sh
+python app/server.py --dev
+```
+
+To run the project on a production machine.
+
 ```sh
 python app/server.py
 ```
