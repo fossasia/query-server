@@ -13,6 +13,7 @@ from quora import Quora
 from youtube import Youtube
 from parsijoo import Parsijoo
 from mojeek import Mojeek
+from socialmention import SocialMention
 
 scrapers = {
     'g': Google(),
@@ -26,7 +27,8 @@ scrapers = {
     'q': Quora(),
     't': Youtube(),
     'p': Parsijoo(),
-    'm': Mojeek()
+    'm': Mojeek(),
+    's': SocialMention()
 }
 
 
