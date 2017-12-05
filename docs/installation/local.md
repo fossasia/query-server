@@ -28,17 +28,24 @@ venv\Scripts\activate # Windows
 pip install -r requirements.txt
 ```
 
-To set up MongoDB on your server : 
+To set up MongoDB on your server :
 
 ```bash
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
 echo "deb http://repo.mongodb.org/apt/ubuntu "$(lsb_release -sc)"/mongodb-org/3.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list
 sudo apt-get update
-sudo apt-get install -y mongodb-org
+sudo apt-get install -y mongodb
 sudo service mongod start
 ```
 
 To run the project on a local machine.
+
+For development mode (with debugger active), use the following command
+```sh
+python app/server.py --dev
+```
+
+To run the project on a production machine.
 
 ```sh
 python app/server.py
