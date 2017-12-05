@@ -20,7 +20,7 @@ scrapers = {
     'y': Yahoo(),
     'd': Duckduckgo(),
     'a': Ask(),
-    'yd': Yandex(),
+    'n': Yandex(),
     'u': Baidu(),
     'e': Exalead(),
     'q': Quora(),
