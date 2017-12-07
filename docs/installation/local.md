@@ -35,7 +35,7 @@ npm install -g bower
 bower install
 pip install pipenv
 pipenv --two # To setup python 2 virtual environment
-pipenv install -r requirement.txt
+pipenv install -r requirements.txt
 pipenv shell # To activate virtual environment
 ```
 
