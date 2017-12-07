@@ -14,6 +14,7 @@ from youtube import Youtube
 from parsijoo import Parsijoo
 from mojeek import Mojeek
 from qihooso import QihooSo
+from dailymotion import Dailymotion
 
 scrapers = {
     'g': Google(),
@@ -28,7 +29,8 @@ scrapers = {
     't': Youtube(),
     'p': Parsijoo(),
     'm': Mojeek(),
-    'h': QihooSo()
+    'h': QihooSo(),
+    'v': Dailymotion()
 }
 
 
