@@ -3,6 +3,7 @@ from __future__ import print_function
 from ask import Ask
 from baidu import Baidu
 from bing import Bing
+from dailymotion import Dailymotion
 from duckduckgo import Duckduckgo
 from exalead import Exalead
 from google import Google
@@ -24,6 +25,7 @@ scrapers = {
     'q': Quora(),
     't': Youtube(),
     'u': Baidu(),
+    'v': Dailymotion(),
     'y': Yahoo(),
     'yd': Yandex()
 }

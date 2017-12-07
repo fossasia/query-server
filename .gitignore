@@ -8,3 +8,5 @@ app/static/bower_components/*
 *.pyc
 *.py.bak
 *.swp
+Pipfile
+Pipfile.lock
