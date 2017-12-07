@@ -3,7 +3,7 @@ from generalized import Scraper
 
 
 class QihooSo(Scraper):
-    """Scrapper class for Ask"""
+    """Scrapper class for QihooSo"""
     def __init__(self):
         self.url = 'https://www.so.com/s'
         self.defaultStart = 0
