@@ -1,48 +1,48 @@
 from __future__ import print_function
-import json
-import sys
-from google import Google
-from duckduckgo import Duckduckgo
-from bing import Bing
-from yahoo import Yahoo
+
 from ask import Ask
-from yandex import Yandex
 from baidu import Baidu
-from exalead import Exalead
-from quora import Quora
-from youtube import Youtube
-from parsijoo import Parsijoo
-from mojeek import Mojeek
+from bing import Bing
 from dailymotion import Dailymotion
+from duckduckgo import Duckduckgo
+from exalead import Exalead
+from google import Google
+from mojeek import Mojeek
+from parsijoo import Parsijoo
+from quora import Quora
+from yahoo import Yahoo
+from yandex import Yandex
+from youtube import Youtube
 
 scrapers = {
-    'g': Google(),
-    'b': Bing(),
-    'y': Yahoo(),
-    'd': Duckduckgo(),
-    'a': Ask(),
-    'yd': Yandex(),
-    'u': Baidu(),
-    'e': Exalead(),
-    'q': Quora(),
-    't': Youtube(),
-    'p': Parsijoo(),
-    'm': Mojeek(),
-    'v': Dailymotion()
+    'ask': Ask(),
+    'baidu': Baidu(),
+    'bing': Bing(),
+    'dailymotion': Dailymotion(),
+    'duckduckgo': Duckduckgo(),
+    'exalead': Exalead(),
+    'google': Google(),
+    'mojeek': Mojeek(),
+    'parsijoo': Parsijoo(),
+    'quora': Quora(),
+    'yahoo': Yahoo(),
+    'yandex': Yandex(),
+    'youtube': Youtube()
 }
 
 
-def read_in():
-    lines = sys.stdin.readlines()
-    return json.loads(lines[0])
-
-
 def small_test():
-    assert isinstance(scrapers.google.results_search('fossasia'), list)
+    assert isinstance(scrapers['google'].search('fossasia'), list)
 
 
 def feedgen(query, engine, count=10):
-    if engine in ['q', 't']:
+    engine = engine.lower()
+    # provide temporary backwards compatibility for old names
+    old_names = {'ubaidu': 'baidu',
+                 'vdailymotion': 'dailymotion',
+                 'tyoutube': 'youtube'}
+    engine = old_names.get(engine, engine)
+    if engine in ('quora', 'youtube'):
         urls = scrapers[engine].search_without_count(query)
     else:
         urls = scrapers[engine].search(query, count)
