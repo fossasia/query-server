@@ -30,20 +30,27 @@ scrapers = {
     'youtube': Youtube()
 }
 
+# provide temporary backwards compatibility for old names
+old_names = {'ubaidu': 'baidu',
+             'vdailymotion': 'dailymotion',
+             'tyoutube': 'youtube'}
+
 
 def small_test():
-    assert isinstance(scrapers['google'].search('fossasia'), list)
+    assert isinstance(scrapers['google'].search('fossasia', 1), list)
 
 
-def feedgen(query, engine, count=10):
-    engine = engine.lower()
-    # provide temporary backwards compatibility for old names
-    old_names = {'ubaidu': 'baidu',
-                 'vdailymotion': 'dailymotion',
-                 'tyoutube': 'youtube'}
-    engine = old_names.get(engine, engine)
-    if engine in ('quora', 'youtube'):
-        urls = scrapers[engine].search_without_count(query)
+def get_scraper(engine_name):
+    print(engine_name)
+    engine_name = engine_name.lower()
+    print(engine_name)
+    return scrapers[old_names.get(engine_name, engine_name)]
+
+
+def feedgen(query, engine_name, count=10):
+    scraper = get_scraper(engine_name)
+    if engine_name in ('quora', 'youtube'):
+        urls = scraper.search_without_count(query)
     else:
-        urls = scrapers[engine].search(query, count)
+        urls = scraper.search(query, count)
     return urls
