@@ -13,6 +13,7 @@ from quora import Quora
 from youtube import Youtube
 from parsijoo import Parsijoo
 from mojeek import Mojeek
+from chinaso import ChinaSo
 from dailymotion import Dailymotion
 
 scrapers = {
@@ -28,6 +29,7 @@ scrapers = {
     't': Youtube(),
     'p': Parsijoo(),
     'm': Mojeek(),
+    'c': ChinaSo(),
     'v': Dailymotion()
 }
 
