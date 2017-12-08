@@ -1,18 +1,18 @@
 from __future__ import print_function
 
-from ask import Ask
-from baidu import Baidu
-from bing import Bing
-from dailymotion import Dailymotion
-from duckduckgo import Duckduckgo
-from exalead import Exalead
-from google import Google
-from mojeek import Mojeek
-from parsijoo import Parsijoo
-from quora import Quora
-from yahoo import Yahoo
-from yandex import Yandex
-from youtube import Youtube
+from .ask import Ask
+from .baidu import Baidu
+from .bing import Bing
+from .dailymotion import Dailymotion
+from .duckduckgo import Duckduckgo
+from .exalead import Exalead
+from .google import Google
+from .mojeek import Mojeek
+from .parsijoo import Parsijoo
+from .quora import Quora
+from .yahoo import Yahoo
+from .yandex import Yandex
+from .youtube import Youtube
 
 scrapers = {
     'ask': Ask(),
