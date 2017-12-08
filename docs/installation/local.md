@@ -23,9 +23,20 @@ npm install -g bower
 bower install
 pip install virtualenv
 virtualenv venv
-source activate venv # Linux
+. venv/bin/activate # Linux
 venv\Scripts\activate # Windows
 pip install -r requirements.txt
+```
+
+or to use [`pipenv`](https://docs.pipenv.org) instead of `pip` and `virtualenv` separately.
+
+```
+npm install -g bower
+bower install
+pip install pipenv
+pipenv --two # To setup python 2 virtual environment
+pipenv install -r requirements.txt
+pipenv shell # To activate virtual environment
 ```
 
 To set up MongoDB on your server :
