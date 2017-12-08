@@ -6,6 +6,7 @@ from bing import Bing
 from dailymotion import Dailymotion
 from duckduckgo import Duckduckgo
 from exalead import Exalead
+from gigablast import Gigablast
 from google import Google
 from mojeek import Mojeek
 from parsijoo import Parsijoo
@@ -21,6 +22,7 @@ scrapers = {
     'dailymotion': Dailymotion(),
     'duckduckgo': Duckduckgo(),
     'exalead': Exalead(),
+    'gigablast': Gigablast(),
     'google': Google(),
     'mojeek': Mojeek(),
     'parsijoo': Parsijoo(),
@@ -28,6 +30,7 @@ scrapers = {
     'yahoo': Yahoo(),
     'yandex': Yandex(),
     'youtube': Youtube()
+
 }
 
 
