@@ -1,6 +1,4 @@
 """
-# Let's get pytest turned on before we start testing in earnest
-
 from .scrapers import small_test
 
 
@@ -13,7 +11,6 @@ import sys
 
 import pytest
 import requests
-
 
 PYTHON3 = sys.version_info.major >= 3
 REASON = 'Python 3 blocked until #297 goes live'
@@ -37,7 +34,12 @@ def make_engine_api_call(engine_name):
 
 @pytest.mark.xfail(PYTHON3 or not TRAVIS_CI, reason=REASON)
 def test_engine_api_calls(engine_names=None):
-    engines = ['ask', 'ubaidu', 'bing', 'duckduckgo', 'tyoutube',
-               'exalead', 'mojeek', 'google', 'quora', 'yahoo', 'yandex', 'parsijoo']
+    engines = """ask baidu bing dailymotion duckduckgo exalead google
+                 mojeek parsijoo quora yahoo yandex youtube""".split()
     for engine_name in (engine_names or engines):
         make_engine_api_call(engine_name)
+
+
+@pytest.mark.xfail(PYTHON3 or not TRAVIS_CI, reason=REASON)
+def test_old_names():
+    test_engine_api_calls(['ubaidu', 'vdailymotion', 'tyoutube'])

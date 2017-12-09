@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request, abort, Response, make_response
-from scrapers import feedgen
+from flask import (Flask, Response, abort, make_response, render_template,
+                   request)
+from scrapers import get_scraper, feedgen
 from pymongo import MongoClient
 from dicttoxml import dicttoxml
 from xml.dom.minidom import parseString
@@ -19,9 +20,8 @@ errorObj = {
 }
 
 parser = ArgumentParser()
-parser.add_argument("--dev",
-                    help="Start the server in development mode with debug=True",
-                    action="store_true")
+help_msg = "Start the server in development mode with debug=True"
+parser.add_argument("--dev", help=help_msg, action="store_true")
 args = parser.parse_args()
 
 
@@ -39,37 +39,37 @@ def bad_request(err):
 @app.route('/api/v1/search/<search_engine>', methods=['GET'])
 def search(search_engine):
     try:
-        num = request.args.get('num') or 10
+        get_scraper(search_engine)
+    except KeyError as e:
+        print(e)
+        err = [404, 'Incorrect search engine: ' + search_engine, search_engine]
+        return bad_request(err)
+
+    try:
+        num = request.args.get('num', 10)
         count = int(num)
-        qformat = request.args.get('format') or 'json'
+        qformat = request.args.get('format', 'json')
         if qformat not in ('json', 'xml'):
             abort(400, 'Not Found - undefined format')
-
-        engine = search_engine
-        if engine not in ('google', 'bing', 'duckduckgo', 'yahoo', 'ask',
-                          'yandex', 'ubaidu', 'exalead', 'quora', 'tyoutube',
-                          'parsijoo', 'mojeek', 'vdailymotion'):
-            err = [404, 'Incorrect search engine', qformat]
-            return bad_request(err)
 
         query = request.args.get('query')
         if not query:
             err = [400, 'Not Found - missing query', qformat]
             return bad_request(err)
 
-        result = feedgen(query, engine, count)
+        result = feedgen(query, search_engine, count)
         if not result:
             err = [404, 'No response', qformat]
             return bad_request(err)
 
         if db['queries'].find({query: query}).limit(1) is False:
             db['queries'].insert(
-                {"query": query, "engine": engine, "qformat": qformat})
+                {"query": query, "engine": search_engine, "qformat": qformat})
 
         for line in result:
             line['link'] = line['link'].encode('utf-8')
             line['title'] = line['title'].encode('utf-8')
-            if engine in ['b', 'a']:
+            if 'desc' in line:
                 line['desc'] = line['desc'].encode('utf-8')
 
         if qformat == 'json':
@@ -81,7 +81,6 @@ def search(search_engine):
                 custom_root='channel',
                 attr_type=False))).toprettyxml()
         return Response(xmlfeed, mimetype='application/xml')
-
     except Exception as e:
         print(e)
         return Response(json.dumps(errorObj).encode(
@@ -95,8 +94,5 @@ def set_header(r):
 
 
 if __name__ == '__main__':
-
-    app.run(
-        host='0.0.0.0',
-        port=int(os.environ.get('PORT', 7001)),
-        debug=args.dev)
+    port = int(os.environ.get('PORT', 7001))
+    app.run(host='0.0.0.0', port=port, debug=args.dev)
