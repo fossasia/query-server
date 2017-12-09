@@ -20,8 +20,8 @@ errorObj = {
 }
 
 parser = ArgumentParser()
-help = "Start the server in development mode with debug=True"
-parser.add_argument("--dev", help=help, action="store_true")
+help_msg = "Start the server in development mode with debug=True"
+parser.add_argument("--dev", help=help_msg, action="store_true")
 args = parser.parse_args()
 
 
