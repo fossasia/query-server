@@ -46,7 +46,7 @@ def make_engine_api_call(engine_name):
     assert all('title' in link for link in links), engine_name
 
 
-# @pytest.mark.xfail(PYTHON3 or not TRAVIS_CI, reason=REASON)
+@pytest.mark.xfail(PYTHON3 or not TRAVIS_CI, reason=REASON)
 def test_engine_api_calls(engine_names=None):
     engines = """ask baidu bing dailymotion duckduckgo exalead google
                  mojeek parsijoo quora yahoo yandex youtube""".split()
