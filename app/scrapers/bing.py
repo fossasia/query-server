@@ -1,5 +1,5 @@
 from __future__ import print_function
-from generalized import Scraper
+from .generalized import Scraper
 
 
 class Bing(Scraper):

@@ -1,6 +1,10 @@
 from __future__ import print_function
-from generalized import Scraper
-import urllib
+from .generalized import Scraper
+
+try:
+    from urllib.parse import unquote  # Python 3
+except ImportError:
+    from urllib import unquote        # Python 2
 
 
 class Yahoo(Scraper):
@@ -15,7 +19,7 @@ class Yahoo(Scraper):
         """ Parse response and returns the urls
 
             Returns: urls (list)
-                    [[Tile1,url1], [Title2, url2],..]
+                    [[Tile1, url1], [Title2, url2], ...]
         """
         urls = []
         for h in soup.findAll('h3', attrs={'class': 'title'}):
@@ -24,7 +28,7 @@ class Yahoo(Scraper):
                 r = y.get('href')
                 f = r.split('RU=')
                 e = f[-1].split('/RK=1')
-                u = urllib.unquote(e[0])
+                u = unquote(e[0])
                 urls.append({
                     'title': y.getText(),
                     'link': u
