@@ -1,8 +1,7 @@
 import json
 import os
 from argparse import ArgumentParser
-from xml.dom.minidom import parseString
-
+from defusedxml.minidom import parseString
 from dicttoxml import dicttoxml
 from flask import (Flask, Response, abort, jsonify, make_response,
                    render_template, request)
@@ -74,7 +73,11 @@ def search(search_engine):
                     line['desc'] = line['desc'].encode('utf-8')
         except NameError:
             pass  # Python 3 strings are already Unicode
-
+        for line in result:
+            line['link'] = line['link'].encode('utf-8')
+            line['title'] = line['title'].encode('utf-8')
+            if 'desc' in line:
+                line['desc'] = line['desc'].encode('utf-8')
         if qformat == 'json':
             return jsonify(result)
         xmlfeed = dicttoxml(result, custom_root='channel', attr_type=False)
