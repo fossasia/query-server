@@ -1,5 +1,5 @@
 from __future__ import print_function
-from .generalized import Scraper
+from .scraper import Scraper
 
 
 class Youtube(Scraper):

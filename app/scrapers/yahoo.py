@@ -1,6 +1,5 @@
 from __future__ import print_function
-from .generalized import Scraper
-
+from .scraper import Scraper
 try:
     from urllib.parse import unquote  # Python 3
 except ImportError:
@@ -36,5 +35,12 @@ class Yahoo(Scraper):
                 })
 
         print('Yahoo parsed: ' + str(urls))
+        print(type(urls), urls)
+        for i, item in enumerate(urls):
+            print(i, item)
+            for key, value in item.items():
+                print(i, type(key), type(value), key, value)
+        print(type(urls), urls)
+        print('-' * 20)
 
         return urls

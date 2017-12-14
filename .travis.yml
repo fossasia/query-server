@@ -6,7 +6,7 @@ install:
   - pip install codecov flake8 pytest
   - pip install -r requirements.txt
 before_script:
-  - flake8 . --count --max-complexity=15 --max-line-length=85 --show-source --statistics
+  - flake8 . --count --max-complexity=18 --show-source --statistics
 script:
   - python app/server.py > /dev/null &
   - pytest --capture=sys

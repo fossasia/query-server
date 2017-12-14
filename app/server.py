@@ -1,13 +1,15 @@
+#!/usr/bin/env python3
 import json
 import os
 from argparse import ArgumentParser
+
 from defusedxml.minidom import parseString
 from dicttoxml import dicttoxml
-from flask import (Flask, Response, abort, jsonify, make_response,
+from flask import (Flask, Response, jsonify, make_response,
                    render_template, request)
 from pymongo import MongoClient
 
-from scrapers import feed_gen, scrapers
+from scrapers.scraper import get_scrapers
 
 app = Flask(__name__)
 err = ""
@@ -43,30 +45,48 @@ def bad_request(error):
 
 @app.route('/api/v1/search/<search_engine>', methods=['GET'])
 def search(search_engine):
+    print(search_engine)
+    # convert search_engine into engine which should be a Scraper class
     try:
-        count = int(request.args.get('num', 10))
-        qformat = request.args.get('format', 'json').lower()
-        if qformat not in ('json', 'xml', 'csv'):
-            abort(400, 'Not Found - undefined format')
+        engine = get_scrapers()[search_engine.lower()]
+    except KeyError:
+        err = [404, 'Incorrect search engine', search_engine]
+        return bad_request(err)
 
-        engine = search_engine
-        if engine not in scrapers:
-            error = [404, 'Incorrect search engine', engine]
-            return bad_request(error)
+    # get the query parameter
+    query = request.args.get('query')
+    if not query:
+        err = [400, 'Not Found - missing query', query]
+        return bad_request(err)
 
-        query = request.args.get('query')
-        if not query:
-            error = [400, 'Not Found - missing query', qformat]
-            return bad_request(error)
+    # get the output format parameter
+    qformat = request.args.get('format', 'json').lower()
+    if qformat not in ('json', 'xml'):
+        err = [400, 'Not Found - undefined format', qformat]
+        return bad_request(err)
+    print(qformat)
+    # get the num parameter
+    num = request.args.get('num', 10)
+    try:
+        num = int(num)
+    except (TypeError, ValueError):
+        err = [400, 'Not Found - invalid num parameter', num]
+        return bad_request(err)
+    print(num)
 
-        result = feed_gen(query, engine, count)
-        if not result:
-            error = [404, 'No response', qformat]
-            return bad_request(error)
+    # we should now have valid search_engine, query, output format, and num...
+    result = engine().search(query, num)
+    if not result:
+        err = [404, 'No response', qformat]
+        return bad_request(err)
 
+    try:
         if db['queries'].find({query: query}).limit(1) is False:
-            db['queries'].insert(
-                {"query": query, "engine": engine, "qformat": qformat})
+            db['queries'].insert({
+                "query": query,
+                "engine": engine,
+                "qformat": qformat
+            })
 
         try:
             unicode  # unicode is undefined in Python 3 so NameError is raised
@@ -77,6 +97,7 @@ def search(search_engine):
                     line['desc'] = line['desc'].encode('utf-8')
         except NameError:
             pass  # Python 3 strings are already Unicode
+
         if qformat == 'json':
             return jsonify(result)
         elif qformat == 'csv':
