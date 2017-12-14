@@ -63,6 +63,8 @@ def search(search_engine):
         if db['queries'].find({query: query}).limit(1) is False:
             db['queries'].insert(
                 {"query": query, "engine": engine, "qformat": qformat})
+            db['queries'].save(
+                {"query": query, "engine": engine, "qformat": qformat})
 
         try:
             unicode  # unicode is undefined in Python 3 so NameError is raised
