@@ -49,6 +49,9 @@
                                 <label class="btn btn-lg btn-primary formatButton">
                                         <input type="radio" value="xml" autocomplete="off">XML
                                     </label>
+                                <label class="btn btn-lg btn-primary formatButton">
+                                        <input type="radio" value="csv" autocomplete="off">CSV
+                                    </label>
                             </div>
                         </div>
                     </div>
@@ -148,6 +151,9 @@
                             if (sformat == "json") {
                                 $(".code").attr("class", "language-json");
                                 response = JSON.stringify(response, null, 4);
+                            } else if (sformat == "csv") {
+                                $('#feed').show();
+                                $('#feed').text(response);
                             } else
                                 response = new XMLSerializer().serializeToString(response);
                             $('#feed').show();

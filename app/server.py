@@ -42,7 +42,7 @@ def search(search_engine):
     try:
         count = int(request.args.get('num', 10))
         qformat = request.args.get('format', 'json').lower()
-        if qformat not in ('json', 'xml'):
+        if qformat not in ('json', 'xml', 'csv'):
             abort(400, 'Not Found - undefined format')
 
         engine = search_engine
@@ -75,6 +75,16 @@ def search(search_engine):
             pass  # Python 3 strings are already Unicode
         if qformat == 'json':
             return jsonify(result)
+
+        elif qformat == 'csv':
+            csvfeed = '"'
+            csvfeed += '","'.join(result[0].keys())
+            for line in result:
+                csvfeed += '"\n"'
+                csvfeed += '","'.join(line.values())
+            csvfeed += '"'
+            return Response(csvfeed)
+
         xmlfeed = dicttoxml(result, custom_root='channel', attr_type=False)
         xmlfeed = parseString(xmlfeed).toprettyxml()
         return Response(xmlfeed, mimetype='application/xml')
