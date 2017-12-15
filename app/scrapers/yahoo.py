@@ -27,7 +27,7 @@ class Yahoo(Scraper):
             for y in t:
                 r = y.get('href')
                 f = r.split('RU=')
-                e = f[-1].split('/RK=1')
+                e = f[-1].split('/RK=2')
                 u = unquote(e[0])
                 urls.append({
                     'title': y.getText(),
