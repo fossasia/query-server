@@ -28,29 +28,29 @@ class Scraper:
         response = requests.get(self.url, headers=self.headers, params=payload)
         return response
 
-    def parseResponse(self, soup):
+    def parse_response(self, soup):
         raise NotImplementedError
 
-    def nextStart(self, currentStart, prevResults):
-        return currentStart + len(prevResults)
+    def next_start(self, current_start, prev_results):
+        return current_start + len(prev_results)
 
-    def search(self, query, numResults):
+    def search(self, query, num_results):
         """
             Search for the query and return set of urls
             Returns: list
         """
         urls = []
-        currentStart = self.defaultStart
+        current_start = self.defaultStart
 
-        while(len(urls) < numResults):
-            response = self.get_page(query, currentStart)
+        while(len(urls) < num_results):
+            response = self.get_page(query, current_start)
             soup = BeautifulSoup(response.text, 'html.parser')
-            newResults = self.parseResponse(soup)
-            if newResults is None:
+            new_results = self.parse_response(soup)
+            if new_results is None:
                 break
-            urls.extend(newResults)
-            currentStart = self.nextStart(currentStart, newResults)
-        return urls[: numResults]
+            urls.extend(new_results)
+            current_start = self.next_start(current_start, new_results)
+        return urls[: num_results]
 
     def search_without_count(self, query):
         """
@@ -61,5 +61,5 @@ class Scraper:
         payload = {self.queryKey: query}
         response = requests.get(self.url, headers=self.headers, params=payload)
         soup = BeautifulSoup(response.text, 'html.parser')
-        urls = self.parseResponse(soup)
+        urls = self.parse_response(soup)
         return urls

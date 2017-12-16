@@ -6,11 +6,12 @@ class Bing(Scraper):
     """Scrapper class for Bing"""
 
     def __init__(self):
+        Scraper.__init__(self)
         self.url = 'http://www.bing.com/search'
         self.defaultStart = 1
         self.startKey = 'first'
 
-    def parseResponse(self, soup):
+    def parse_response(self, soup):
         """ Parses the reponse and return set of urls
         Returns: urls (list)
                 [[Tile1,url1], [Title2, url2],..]

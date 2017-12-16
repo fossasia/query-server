@@ -3,9 +3,9 @@ from __future__ import print_function
 from .ask import Ask
 from .baidu import Baidu
 from .bing import Bing
-from .dailymotion import Dailymotion
-from .duckduckgo import Duckduckgo
-from .exalead import Exalead
+from .dailymotion import DailyMotion
+from .duckduckgo import DuckDuckGo
+from .exalead import ExaLead
 from .google import Google
 from .mojeek import Mojeek
 from .parsijoo import Parsijoo
@@ -18,9 +18,9 @@ scrapers = {
     'ask': Ask(),
     'baidu': Baidu(),
     'bing': Bing(),
-    'dailymotion': Dailymotion(),
-    'duckduckgo': Duckduckgo(),
-    'exalead': Exalead(),
+    'dailymotion': DailyMotion(),
+    'duckduckgo': DuckDuckGo(),
+    'exalead': ExaLead(),
     'google': Google(),
     'mojeek': Mojeek(),
     'parsijoo': Parsijoo(),
@@ -35,7 +35,7 @@ def small_test():
     assert isinstance(scrapers['google'].search('fossasia'), list)
 
 
-def feedgen(query, engine, count=10):
+def feed_gen(query, engine, count=10):
     engine = engine.lower()
     # provide temporary backwards compatibility for old names
     old_names = {'ubaidu': 'baidu',
