@@ -9,6 +9,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="Content-Language" content="en, english" />
+
+    <meta property="og:url"           content="https://query-server.herokuapp.com/" />
+    <meta property="og:type"          content="Querying website" />
+    <meta property="og:title"         content="Query Server" />
+    <meta property="og:description"   content="A Query Server to query on multiple search engines in one Go!" />
+    <meta property="og:image"         content="../static/images/foss_asia.png" />
+
     <link rel="stylesheet" href="{{ url_for('static', filename='bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='bower_components/prismjs/themes/prism.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
@@ -121,12 +128,18 @@
     <footer class="footer">
         <div class="container">
             <p class="text-muted">Want to contribute? <a href="https://gitter.im/fossasia/query-server" target="_blank"><img src="https://badges.gitter.im/gitterHQ/gitter.png" alt="gitter badge"></a>                to get started.</p>
-            <p>Nice? To get latest news about <code>query-server</code>, follow <a href="https://twitter.com/fossasia"><code>@FOSSASIA</code></a>.
-                Help to spread the news:
-                    <a class="btn btn-info" id="tweet" href="https://twitter.com/intent/tweet?hashtags=loklak&text=%20Hey,%20Guys!%20Check%20out%20%23query-server%20to%20use%20multiple%20search%20engines%20in%20one%20go.%0Aquery-server%20%23fossasia&tw_p=tweetbutton"
-                    role="button">Tweet about this &raquo;</a>
+            <p><a class="twitter-follow-button" href="https://twitter.com/fossasia" data-show-count='true' data-size='large'>Follow @FOSSASIA</a> to get latest updates on <code>query-server</code>.</p>
+            <p>Help to spread the news:</p>
+                <div class="row">
+                  <div class="col-md-3 col-sm-12">
+                      <a class="btn btn-info" id="tweet" href="https://twitter.com/intent/tweet?hashtags=loklak&text=%20Hey,%20Guys!%20Check%20out%20%23query-server%20to%20use%20multiple%20search%20engines%20in%20one%20go.%0Aquery-server%20%23fossasia&tw_p=tweetbutton"
+                        role="button" target="_blank">Tweet about this &raquo;</a>
+                    </div>
+                    <div class="col-md-3 col-sm-12">
+                      <a class="btn btn-info" id="fb" href="https://www.facebook.com/sharer/sharer.php?u=https://query-server.herokuapp.com/" target="_blank">Share on Facebook &raquo;</a>
+                    </div>
+                </div>
 
-                    <a class="btn btn-info" id="fb" href="https://www.facebook.com/sharer/sharer.php?u=https://query-server.herokuapp.com/" target="_blank">Share on Facebook &raquo;</a>
             </p>
         </div>
     </footer>

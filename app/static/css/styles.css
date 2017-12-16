@@ -79,10 +79,31 @@ p {
 
 #tweet {
     font-size: large;
+    color:#0084b4;
+    background-color:#fff;
+    border: 2px solid #0084b4;
+}
+
+
+#tweet:hover{
+    font-size: large;
+    background-color:#0084b4;
+    color:#fff;
 }
 
 #fb {
     font-size: large;
+    background-color:#fff;
+
+    color:#3b5998;
+    border: 2px solid #3b5998;
+}
+
+
+#fb:hover{
+    font-size: large;
+    background-color:#3b5998;
+    color:#fff;
 }
 
 .panel-heading {
