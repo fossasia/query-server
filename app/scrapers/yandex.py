@@ -6,10 +6,11 @@ class Yandex(Scraper):
     """Scrapper class for Yandex"""
 
     def __init__(self):
+        Scraper.__init__(self)
         self.url = 'https://www.yandex.com/search'
         self.defaultStart = 0
 
-    def parseResponse(self, soup):
+    def parse_response(self, soup):
         """ Parse the response and return set of urls
         Returns: urls (list)
                 [[Tile1,url1], [Title2, url2],..]

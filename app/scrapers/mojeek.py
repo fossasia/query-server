@@ -6,11 +6,12 @@ class Mojeek(Scraper):
     """Scraper class for Mojeek"""
 
     def __init__(self):
+        Scraper.__init__(self)
         self.url = 'https://www.mojeek.co.uk/search'
         self.defaultStart = 1
         self.startKey = 's'
 
-    def parseResponse(self, soup):
+    def parse_response(self, soup):
         """ Parse the response and return set of urls
         Returns: urls (list)
                 [[Tile1,url1], [Title2, url2],..]

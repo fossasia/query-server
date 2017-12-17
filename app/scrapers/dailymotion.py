@@ -3,16 +3,17 @@ from .generalized import Scraper
 import json
 
 
-class Dailymotion(Scraper):
-    """Scraper class for Dailymotion"""
+class DailyMotion(Scraper):
+    """Scraper class for DailyMotion"""
 
     def __init__(self):
+        Scraper.__init__(self)
         self.url = 'https://api.dailymotion.com/videos/'
         self.queryKey = 'search'
         self.startKey = 'page'
         self.defaultStart = 1
 
-    def parseResponse(self, soup):
+    def parse_response(self, soup):
         """ Parse the response and return set of urls
         Returns: urls (list)
                 [[Tile1,url1], [Title2, url2],..]

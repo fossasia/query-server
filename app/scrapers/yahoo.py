@@ -11,11 +11,12 @@ class Yahoo(Scraper):
     """Scrapper class for Yahoo"""
 
     def __init__(self):
+        Scraper.__init__(self)
         self.url = 'https://search.yahoo.com/search'
         self.defaultStart = 1
         self.startKey = 'b'
 
-    def parseResponse(self, soup):
+    def parse_response(self, soup):
         """ Parse response and returns the urls
 
             Returns: urls (list)

@@ -5,14 +5,15 @@ from .generalized import Scraper
 class Ask(Scraper):
     """Scrapper class for Ask"""
     def __init__(self):
+        Scraper.__init__(self)
         self.url = 'http://ask.com/web'
         self.defaultStart = 1
         self.startKey = 'page'
 
-    def nextStart(self, currentStart, prevResults):
-        return currentStart + 1
+    def next_start(self, current_start, prev_results):
+        return current_start + 1
 
-    def parseResponse(self, soup):
+    def parse_response(self, soup):
         """ Parse the response and return set of urls
         Returns: urls (list)
                 [[Tile1,url1], [Title2, url2],..]
