@@ -1,16 +1,17 @@
 from __future__ import print_function
-from generalized import Scraper
+from .generalized import Scraper
 
 
-class Duckduckgo(Scraper):
-    """Scrapper class for Duckduckgo"""
+class DuckDuckGo(Scraper):
+    """Scrapper class for DuckDuckGo"""
 
     def __init__(self):
+        Scraper.__init__(self)
         self.url = 'https://duckduckgo.com/html'
         self.defaultStart = 0
         self.startKey = 's'
 
-    def parseResponse(self, soup):
+    def parse_response(self, soup):
         """ Parse the response and return set of urls
         Returns: urls (list)
                 [[Tile1,url1], [Title2, url2],..]

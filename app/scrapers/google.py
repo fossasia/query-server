@@ -1,19 +1,20 @@
 from __future__ import print_function
-from generalized import Scraper
+from .generalized import Scraper
 
 
 class Google(Scraper):
     """Scrapper class for Google"""
 
     def __init__(self):
+        Scraper.__init__(self)
         self.url = 'https://www.google.com/search'
         self.defaultStart = 0
         self.startKey = 'start'
 
-    def nextStart(self, currentStart, prevResults):
-        return currentStart + len(prevResults)
+    def next_start(self, current_start, prev_results):
+        return current_start + len(prev_results)
 
-    def parseResponse(self, soup):
+    def parse_response(self, soup):
         """
         Parses the response and returns set of urls
         Returns: urls (list)

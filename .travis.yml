@@ -1,29 +1,15 @@
-matrix:
-    include:
-        - language: python
-          python: "2.7"
-          install:
-            - pip install flake8 pytest
-            - pip install -r requirements.txt
-          before_script:
-            - flake8 . --count --max-complexity=12 --max-line-length=85 --show-source --statistics
-          script:
-            - python app/server.py > /dev/null &
-            - pytest --capture=sys
-            - kill $(lsof -t -i:7001)
-          after_success:
-            - codecov
-
-        - language: python
-          python: "3.6"
-          install:
-            - pip install flake8 pytest
-            - pip install -r requirements.txt
-          before_script:
-            - flake8 . --count --max-complexity=12 --max-line-length=85 --show-source --statistics
-          script:
-            - pytest --capture=sys
-          after_success:
-            - codecov
-
-
+language: python
+python:
+  - "2.7"
+  - "3.6"
+install:
+  - pip install codecov flake8 pytest
+  - pip install -r requirements.txt
+before_script:
+  - flake8 . --count --max-complexity=15 --max-line-length=85 --show-source --statistics
+script:
+  - python app/server.py > /dev/null &
+  - pytest --capture=sys
+  - kill $(lsof -t -i:7001)
+after_success:
+  - codecov

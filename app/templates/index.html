@@ -9,6 +9,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="Content-Language" content="en, english" />
+
+    <meta property="og:url"           content="https://query-server.herokuapp.com/" />
+    <meta property="og:type"          content="Querying website" />
+    <meta property="og:title"         content="Query Server" />
+    <meta property="og:description"   content="A Query Server to query on multiple search engines in one Go!" />
+    <meta property="og:image"         content="../static/images/foss_asia.png" />
+
     <link rel="stylesheet" href="{{ url_for('static', filename='bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='bower_components/prismjs/themes/prism.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
@@ -49,24 +56,25 @@
                                 <label class="btn btn-lg btn-primary formatButton">
                                         <input type="radio" value="xml" autocomplete="off">XML
                                     </label>
+                                <label class="btn btn-lg btn-primary formatButton">
+                                        <input type="radio" value="csv" autocomplete="off">CSV
+                                    </label>
                             </div>
                         </div>
                     </div>
                     <br/>
                     <div class="col-md-10 col-xs-12 col-sm-10" style="padding:0; margin: 0 auto;">
                         <div class="btn-toolbar">
-                            <button type="submit" value="google" class="btn btn-lg  search btn-outline"><img src="{{ url_for('static', filename='images/google_icon.png') }}" width="30px" alt="Google Icon"> Google</button>
-                            <button type="submit" value="bing" class="btn btn-lg  search btn-outline"><img src="{{ url_for('static', filename='images/bing_icon.ico') }}" width="30px" alt="Bing Icon"> Bing</button>
-                            <button type="submit" value="duckduckgo" class="btn btn-lg  search btn-outline"><img src="{{ url_for('static', filename='images/duckduckgo_icon.png') }}" width="30px" alt="Duckduckgo Icon"> DuckDuckGo</button>
-                            <button type="submit" value="yahoo" class="btn btn-lg  search btn-outline"><img src="{{ url_for('static', filename='images/yahoo_icon.ico') }}" width="30px" alt="Yahoo Icon"> Yahoo</button>
-                            <button type="submit" value="ask" class="btn btn-lg  search btn-outline"><img src="{{ url_for('static', filename='images/ask_icon.ico') }}" width="30px" alt="Ask Icon"> Ask</button>
-                            <button type="submit" value="yandex" class="btn btn-lg  search btn-outline"><img src="{{ url_for('static', filename='images/yandex_icon.png') }}" width="30px" alt="Yandex Icon"> Yandex</button>
-                            <button type="submit" value="ubaidu" class="btn btn-lg  search btn-outline"><img src="{{ url_for('static', filename='images/baidu_icon.ico') }}" width="30px" alt="Baidu Icon"> Baidu</button>
-                            <button type="submit" value="exalead" class="btn btn-lg  search btn-outline"><img src="{{ url_for('static', filename='images/exalead_icon.png') }}" width="30px" alt="Exalead Icon"> Exalead</button>
-                            <button type="submit" value="quora" class="btn btn-lg  search btn-outline"><img src="{{ url_for('static', filename='images/quora_icon.png') }}" width="30px" alt="Quora Icon"> Quora</button>
-                            <button type="submit" value="parsijoo" class="btn btn-lg  search btn-outline"><img src="{{ url_for('static', filename='images/parsijoo_icon.png') }}" width="30px" alt="Parsijoo Icon"> Parsijoo</button>
-                            <button type="submit" value="mojeek" class="btn btn-lg  search btn-outline"><img src="{{ url_for('static', filename='images/mojeek_icon.png') }}" width="30px" alt="Mojeek Icon"> Mojeek</button>
-                            <button type="submit" value="tyoutube" class="btn btn-lg  search btn-outline"><img src="{{ url_for('static', filename='images/youtube_icon.png') }}" width="30px" alt="YouTube Icon"> YouTube</button>
+                            {% for engine in engines_list %}
+                                <button type="submit" value={{ engine }} class="btn btn-lg  search btn-outline">
+                                {% if engine in ['ask', 'baidu', 'bing', 'yahoo'] %}
+                                    <img src="{{ url_for('static', filename='images/' + engine + '_icon.ico') }}" width="30px" alt="{{ engine }} Icon">
+                                {% else %}
+                                    <img src="{{ url_for('static', filename='images/' + engine + '_icon.png') }}" width="30px" alt="{{ engine }} Icon">
+                                {% endif %}
+                                {{ engine }}
+                                </button>
+                            {% endfor %}
                         </div>
                     </div>
                     <div class="col-sm-2">
@@ -118,12 +126,18 @@
     <footer class="footer">
         <div class="container">
             <p class="text-muted">Want to contribute? <a href="https://gitter.im/fossasia/query-server" target="_blank"><img src="https://badges.gitter.im/gitterHQ/gitter.png" alt="gitter badge"></a>                to get started.</p>
-            <p>Nice? To get latest news about <code>query-server</code>, follow <a href="https://twitter.com/fossasia"><code>@FOSSASIA</code></a>.
-                Help to spread the news: 
-                    <a class="btn btn-info" id="tweet" href="https://twitter.com/intent/tweet?hashtags=loklak&text=%20%23query-server%20%23fossasia&tw_p=tweetbutton"
-                    role="button">Tweet about this &raquo;</a>
+            <p><a class="twitter-follow-button" href="https://twitter.com/fossasia" data-show-count='true' data-size='large'>Follow @FOSSASIA</a> to get latest updates on <code>query-server</code>.</p>
+            <p>Help to spread the news:</p>
+                <div class="row">
+                  <div class="col-md-3 col-sm-12">
+                      <a class="btn btn-info" id="tweet" href="https://twitter.com/intent/tweet?hashtags=loklak&text=%20Hey,%20Guys!%20Check%20out%20%23query-server%20to%20use%20multiple%20search%20engines%20in%20one%20go.%0Aquery-server%20%23fossasia&tw_p=tweetbutton"
+                        role="button" target="_blank">Tweet about this &raquo;</a>
+                    </div>
+                    <div class="col-md-3 col-sm-12">
+                      <a class="btn btn-info" id="fb" href="https://www.facebook.com/sharer/sharer.php?u=https://query-server.herokuapp.com/" target="_blank">Share on Facebook &raquo;</a>
+                    </div>
+                </div>
 
-                    <a class="btn btn-info" id="fb" href="https://www.facebook.com/sharer/sharer.php?u=https://query-server.herokuapp.com/" target="_blank">Share on Facebook &raquo;</a>
             </p>
         </div>
     </footer>
@@ -150,6 +164,9 @@
                             if (sformat == "json") {
                                 $(".code").attr("class", "language-json");
                                 response = JSON.stringify(response, null, 4);
+                            } else if (sformat == "csv") {
+                                $('#feed').show();
+                                $('#feed').text(response);
                             } else
                                 response = new XMLSerializer().serializeToString(response);
                             var endDate   = new Date();

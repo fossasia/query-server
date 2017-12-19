@@ -1,15 +1,16 @@
 from __future__ import print_function
-from generalized import Scraper
+from .generalized import Scraper
 
 
 class Youtube(Scraper):
     """Scraper class for Youtube"""
 
     def __init__(self):
+        Scraper.__init__(self)
         self.url = 'https://www.youtube.com/results'
         self.queryKey = 'search_query'
 
-    def parseResponse(self, soup):
+    def parse_response(self, soup):
         """ Parse the response and return list of urls
         Returns: urls (list)
                 [[Tile1,url1], [Title2, url2],..]

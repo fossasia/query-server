@@ -1,10 +1,13 @@
-from flask import Flask, render_template, request, abort, Response, make_response
-from scrapers import feedgen
-from pymongo import MongoClient
-from dicttoxml import dicttoxml
-from xml.dom.minidom import parseString
 import json
 import os
+from argparse import ArgumentParser
+from defusedxml.minidom import parseString
+from dicttoxml import dicttoxml
+from flask import (Flask, Response, abort, jsonify, make_response,
+                   render_template, request)
+from pymongo import MongoClient
+
+from scrapers import feed_gen, scrapers
 
 app = Flask(__name__)
 err = ""
@@ -17,68 +20,80 @@ errorObj = {
     'error': 'Could not parse the page due to Internal Server Error'
 }
 
+parser = ArgumentParser()
+help_msg = "Start the server in development mode with debug=True"
+parser.add_argument("--dev", help=help_msg, action="store_true")
+args = parser.parse_args()
+
+search_engines = ["google", "yahoo", "bing", "ask", "duckduckgo", "yandex",
+                  "youtube", "exalead", "mojeek", "dailymotion", "parsijoo",
+                  "quora", "baidu"]
+
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', engines_list=search_engines)
 
 
-def bad_request(err):
-    message = {'Error': err[1], 'Status Code': err[0]}
-    response = dicttoxml(message) if err[2] == 'xml' else json.dumps(message)
-    return make_response(response, err[0])
+def bad_request(error):
+    message = {'Error': error[1], 'Status Code': error[0]}
+    response = dicttoxml(message) if error[2] == 'xml' else json.dumps(message)
+    return make_response(response, error[0])
 
 
 @app.route('/api/v1/search/<search_engine>', methods=['GET'])
 def search(search_engine):
     try:
-        num = request.args.get('num') or 10
-        count = int(num)
-        qformat = request.args.get('format') or 'json'
-        if qformat not in ('json', 'xml'):
+        count = int(request.args.get('num', 10))
+        qformat = request.args.get('format', 'json').lower()
+        if qformat not in ('json', 'xml', 'csv'):
             abort(400, 'Not Found - undefined format')
 
         engine = search_engine
-        if engine not in ('google', 'bing', 'duckduckgo', 'yahoo', 'ask',
-                          'yandex', 'ubaidu', 'exalead', 'quora', 'tyoutube',
-                          'parsijoo', 'mojeek'):
-            err = [404, 'Incorrect search engine', qformat]
-            return bad_request(err)
+        if engine not in scrapers:
+            error = [404, 'Incorrect search engine', engine]
+            return bad_request(error)
 
         query = request.args.get('query')
         if not query:
-            err = [400, 'Not Found - missing query', qformat]
-            return bad_request(err)
+            error = [400, 'Not Found - missing query', qformat]
+            return bad_request(error)
 
-        result = feedgen(query, engine[0], count)
+        result = feed_gen(query, engine, count)
         if not result:
-            err = [404, 'No response', qformat]
-            return bad_request(err)
+            error = [404, 'No response', qformat]
+            return bad_request(error)
 
         if db['queries'].find({query: query}).limit(1) is False:
             db['queries'].insert(
                 {"query": query, "engine": engine, "qformat": qformat})
 
-        for line in result:
-            line['link'] = line['link'].encode('utf-8')
-            line['title'] = line['title'].encode('utf-8')
-            if engine in ['b', 'a']:
-                line['desc'] = line['desc'].encode('utf-8')
-
+        try:
+            unicode  # unicode is undefined in Python 3 so NameError is raised
+            for line in result:
+                line['link'] = line['link'].encode('utf-8')
+                line['title'] = line['title'].encode('utf-8')
+                if 'desc' in line:
+                    line['desc'] = line['desc'].encode('utf-8')
+        except NameError:
+            pass  # Python 3 strings are already Unicode
         if qformat == 'json':
-            jsonfeed = json.dumps(result).encode('utf-8')
-            return Response(jsonfeed, mimetype='application/json')
-        xmlfeed = parseString(
-            (dicttoxml(
-                result,
-                custom_root='channel',
-                attr_type=False))).toprettyxml()
-        return Response(xmlfeed, mimetype='application/xml')
+            return jsonify(result)
+        elif qformat == 'csv':
+            csvfeed = '"'
+            csvfeed += '","'.join(result[0].keys())
+            for line in result:
+                csvfeed += '"\n"'
+                csvfeed += '","'.join(line.values())
+            csvfeed += '"'
+            return Response(csvfeed)
 
+        xmlfeed = dicttoxml(result, custom_root='channel', attr_type=False)
+        xmlfeed = parseString(xmlfeed).toprettyxml()
+        return Response(xmlfeed, mimetype='application/xml')
     except Exception as e:
         print(e)
-        return Response(json.dumps(errorObj).encode(
-            'utf-8'), mimetype='application/json')
+        return jsonify(errorObj)
 
 
 @app.after_request
@@ -88,10 +103,5 @@ def set_header(r):
 
 
 if __name__ == '__main__':
-    app.run(
-        host='0.0.0.0',
-        port=int(
-            os.environ.get(
-                'PORT',
-                7001)),
-        debug=True)
+    port = int(os.environ.get('PORT', 7001))
+    app.run(host='0.0.0.0', port=port, debug=args.dev)
