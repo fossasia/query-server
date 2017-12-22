@@ -14,7 +14,6 @@
 - [Error Codes](#error-codes)
 - [Dependencies](#dependencies)
 - [Installation](#installation)
-- [Usage](#usage)
 - [Contribute](#contribute)
 
 ## API
