@@ -32,7 +32,7 @@ scrapers = {
 
 
 def small_test():
-    assert isinstance(scrapers['google'].search('fossasia'), list)
+    assert isinstance(scrapers['google'].search('fossasia',  1), list)
 
 
 def feed_gen(query, engine, count=10):
