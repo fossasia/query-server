@@ -66,7 +66,7 @@
                     <div class="col-md-10 col-xs-12 col-sm-10" style="padding:0; margin: 0 auto;">
                         <div class="btn-toolbar">
                             {% for engine in engines_list %}
-                                <button type="submit" value={{ engine }} class="btn btn-lg  search btn-outline">
+                                <button id="{{engine}}" type="submit" value={{ engine }} class="btn btn-lg  search btn-outline">
                                 {% if engine in ['ask', 'baidu', 'bing', 'yahoo'] %}
                                     <img src="{{ url_for('static', filename='images/' + engine + '_icon.ico') }}" width="30px" alt="{{ engine }} Icon">
                                 {% else %}
@@ -142,6 +142,8 @@
     </footer>
     <script>
         $(function () {
+            $('#yandex').prop('disabled', true);
+            $('#yandex').attr('title', 'Yandex search has been temporarily disabled.');
             $('.btn-toolbar > button.btn').click(function (e) {
                 e.preventDefault();
                 if ($('#query').val()) {
