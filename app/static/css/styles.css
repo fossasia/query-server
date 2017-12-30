@@ -27,6 +27,13 @@ body {
     z-index: -100000;
 }
 
+#time-analysis {
+    font-size: 1.2em;
+    margin: 0em 2em 2em 2em;
+    padding: -3em 0 -3em 0;
+    z-index: -100000;
+}
+
 #load {
     position: relative;
     display: none;
