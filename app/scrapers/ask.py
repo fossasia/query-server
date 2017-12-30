@@ -1,5 +1,5 @@
 from __future__ import print_function
-from .generalized import Scraper
+from .scraper import Scraper
 
 
 class Ask(Scraper):
@@ -25,7 +25,7 @@ class Ask(Scraper):
             title = div.div.a.text
             url = div.div.a['href']
             try:
-                p = div.find('p', {'class': 'PartialSearchResults-item-abstract'})
+                p = div.find('p', class_='PartialSearchResults-item-abstract')
                 desc = p.text.replace('\n', '')
                 urls.append({'title': title, 'link': url, 'desc': desc})
             except Exception:
