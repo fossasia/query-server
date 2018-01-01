@@ -26,7 +26,7 @@ The API(s) provided by query-server are as follows:
 
 > *query* : query can be any string 
 
-> *format* : [`json`, `xml`]
+> *format* : [`json`, `xml`, 'csv']
 
 A sample query : `/api/v1/search/bing?query=fossasia&format=xml&num=10`
 
