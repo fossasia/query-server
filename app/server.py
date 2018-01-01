@@ -5,15 +5,13 @@ from defusedxml.minidom import parseString
 from dicttoxml import dicttoxml
 from flask import (Flask, Response, abort, jsonify, make_response,
                    render_template, request)
-from pymongo import MongoClient
 
+from query_cache import lookup, store
 from scrapers import feed_gen, scrapers
 
 app = Flask(__name__)
 err = ""
 
-client = MongoClient(os.environ.get('MONGO_URI', 'mongodb://localhost:27017/'))
-db = client['query-server-v2']
 errorObj = {
     'type': 'Internal Server Error',
     'status_code': 500,
@@ -59,14 +57,19 @@ def search(search_engine):
             error = [400, 'Not Found - missing query', qformat]
             return bad_request(error)
 
-        result = feed_gen(query, engine, count)
-        if not result:
-            error = [404, 'No response', qformat]
-            return bad_request(error)
-
-        if db['queries'].find({query: query}).limit(1) is False:
-            db['queries'].insert(
-                {"query": query, "engine": engine, "qformat": qformat})
+        # first see if we can get the results for the cache
+        engine_and_query = engine + ':' + query
+        result = lookup(engine_and_query)
+        if result:
+            print("cache hit: {}".format(engine_and_query))
+        else:
+            result = feed_gen(query, engine, count)
+            if result:
+                # store the result in the cache to speed up future searches
+                store(engine_and_query, result)
+            else:
+                error = [404, 'No response', engine_and_query]
+                return bad_request(error)
 
         try:
             unicode  # unicode is undefined in Python 3 so NameError is raised

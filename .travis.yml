@@ -2,6 +2,8 @@ language: python
 python:
   - "2.7"
   - "3.6"
+services:
+  - mongodb
 install:
   - pip install codecov flake8 pytest
   - pip install -r requirements.txt
