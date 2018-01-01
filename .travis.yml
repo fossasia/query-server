@@ -14,4 +14,4 @@ script:
   - pytest --capture=sys
   - kill $(lsof -t -i:7001)
 after_success:
-  - codecov
+  - bash <(curl -s https://codecov.io/bash)
