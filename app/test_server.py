@@ -1,6 +1,6 @@
 import os
 
-import codecov
+import codecov  # noqa F401 'codecov' imported but unused
 import pytest
 import requests
 
