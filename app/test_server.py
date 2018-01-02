@@ -1,5 +1,6 @@
 import os
 
+import codecov
 import pytest
 import requests
 
