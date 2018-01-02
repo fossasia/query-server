@@ -12,7 +12,6 @@ before_script:
 script:
   - python app/server.py > /dev/null &
   - pytest --capture=sys --cov=codecov
-  - bash <(curl -s https://codecov.io/bash)
   - kill $(lsof -t -i:7001)
 after_success:
   - codecov
