@@ -23,6 +23,7 @@
     <meta name="author" content="enigmaeth, @enigmaeth">
     <script src="{{ url_for('static', filename='bower_components/jquery/dist/jquery.js') }}"></script>
     <script src="{{ url_for('static', filename='bower_components/prismjs/prism.js') }}"></script>
+    <script src="{{ url_for('static', filename='bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='images/favicon.ico') }}">
     <title>query-server &middot; FOSSASIA</title>
 </head>
@@ -63,21 +64,34 @@
                         </div>
                     </div>
                     <br/>
-                    <div class="col-md-10 col-xs-12 col-sm-10" style="padding:0; margin: 0 auto;">
-                        <div class="btn-toolbar">
-                            {% for engine in engines_list %}
-                                <button type="submit" value={{ engine }} class="btn btn-lg  search btn-outline">
-                                {% if engine in ['ask', 'baidu', 'bing', 'yahoo'] %}
-                                    <img src="{{ url_for('static', filename='images/' + engine + '_icon.ico') }}" width="30px" alt="{{ engine }} Icon">
-                                {% else %}
-                                    <img src="{{ url_for('static', filename='images/' + engine + '_icon.png') }}" width="30px" alt="{{ engine }} Icon">
-                                {% endif %}
-                                {{ engine }}
-                                </button>
-                            {% endfor %}
-                        </div>
+                    <div class="col-sm-4 col-xs-6" style="padding:0; margin: 0 auto;">
+                        <div class="dropdown">
+                            <label>Engine:</label><br/>
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                <span id="drop_down_text">
+                                    <img src='static/images/google_icon.png' width='25px'>&nbsp;google
+                                </span>
+                                &nbsp;
+                                <span class="caret"></span>
+                            </button>
+                            <input type="hidden" id="engine" value="google">
+                            <ul class="dropdown-menu">
+                                {% for engine in engines_list %}
+                                    <li onClick="update_button('{{ engine }}')" id="{{engine}}">
+                                        <a style="cursor:pointer">
+                                            {% if engine in ['ask', 'baidu', 'bing', 'yahoo'] %}
+                                                <img src="{{ url_for('static', filename='images/' + engine + '_icon.ico') }}" width="15px">
+                                            {% else %}
+                                                <img src="{{ url_for('static', filename='images/' + engine + '_icon.png') }}" width="15px">
+                                            {% endif %}
+                                            {{ engine }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div> 
                     </div>
-                    <div class="col-xs-2">
+                    <div class="col-sm-4 col-xs-4">
                         <div class="form-group" style="display:inline-block; margin: 0 auto; min-width:50%;">
                             <label for="resp">Max:</label>
                             <select class="form-control" id="resp">
@@ -93,6 +107,9 @@
                                 <option>100</option>
                             </select>
                         </div>
+                    </div>
+                    <div class="col-sm-4 col-xs-s6" style="margin-top:20px;">
+                        <input type="submit" value="Submit" id="submitter" class="btn btn-primary"/>
                     </div>
                 </div>
             </form>
@@ -141,13 +158,26 @@
         </div>
     </footer>
     <script>
+        function update_button(engine) {
+            var html = ""
+            if(engine == "bing" || engine == "baidu" ||
+               engine == "ask" || engine == "yahoo")
+                html = "<img src='static/images/"+engine+"_icon.ico' width='25px'>";
+            else
+                html = "<img src='static/images/"+engine+"_icon.png' width='25px'>";
+            html += "&nbsp;"+engine;
+            $("#drop_down_text").html(html);
+            $("#engine").val(engine);
+        }
         $(function () {
-            $('.btn-toolbar > button.btn').click(function (e) {
+            $('#yandex').prop('disabled', true);
+            $('#yandex').attr('title', 'Yandex search has been temporarily disabled.');
+            $('#submitter').click(function (e) {
                 e.preventDefault();
                 if ($('#query').val()) {
                     $('#load').show();
                     $('#feed').hide();
-                    var sengine = $(this).val();
+                    var sengine = $("#engine").val();
                     var squery = $('#query').val();
                     var sformat = $(' #format label.active input').val();
                     var count = $('#resp').val();

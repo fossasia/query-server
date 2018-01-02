@@ -3,6 +3,7 @@ import os
 import pytest
 import requests
 
+from .scrapers import small_test
 
 REASON = 'Do you have query-server running on http://127.0.0.1:7001 ?'
 TRAVIS_CI = os.getenv('TRAVIS', False)  # Running in Travis CI?
@@ -10,6 +11,10 @@ TRAVIS_CI = os.getenv('TRAVIS', False)  # Running in Travis CI?
 
 def test_true():
     assert True, "We have a problem!"
+
+
+def test_small_test():
+    small_test()
 
 
 @pytest.mark.xfail(not TRAVIS_CI, reason=REASON)
