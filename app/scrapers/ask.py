@@ -19,13 +19,13 @@ class Ask(Scraper):
                 [[Tile1,url1], [Title2, url2],..]
         """
         urls = []
-        if soup.find('div', {'class': 'PartialSearchResults-noresults'}):
+        if soup.find('div', class_='PartialSearchResults-noresults'):
             return None
-        for div in soup.findAll('div', {'class': 'PartialSearchResults-item'}):
+        for div in soup.findAll('div', class_='PartialSearchResults-item'):
             title = div.div.a.text
             url = div.div.a['href']
             try:
-                p = div.find('p', {'class': 'PartialSearchResults-item-abstract'})
+                p = div.find('p', class_='PartialSearchResults-item-abstract')
                 desc = p.text.replace('\n', '')
                 urls.append({'title': title, 'link': url, 'desc': desc})
             except Exception:
