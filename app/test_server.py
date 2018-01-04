@@ -31,6 +31,6 @@ def make_engine_api_call(engine_name):
 @pytest.mark.xfail(not TRAVIS_CI, reason=REASON)
 def test_engine_api_calls(engine_names=None):
     engines = """ask baidu bing dailymotion duckduckgo exalead google
-                 mojeek parsijoo quora yahoo yandex youtube""".split()
+                 mojeek parsijoo quora twitter yahoo yandex youtube""".split()
     for engine_name in (engine_names or engines):
         make_engine_api_call(engine_name)
