@@ -10,3 +10,5 @@ app/static/bower_components/*
 *.swp
 Pipfile
 Pipfile.lock
+.vscode/*
+

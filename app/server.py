@@ -44,6 +44,7 @@ def search(search_engine):
     try:
         count = int(request.args.get('num', 10))
         qformat = request.args.get('format', 'json').lower()
+        qtype = request.args.get('type', '')
         if qformat not in ('json', 'xml', 'csv'):
             abort(400, 'Not Found - undefined format')
 
@@ -63,7 +64,7 @@ def search(search_engine):
         if result:
             print("cache hit: {}".format(engine_and_query))
         else:
-            result = feed_gen(query, engine, count)
+            result = feed_gen(query, engine, count, qtype)
             if result:
                 # store the result in the cache to speed up future searches
                 store(engine_and_query, result)
