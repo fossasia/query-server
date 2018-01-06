@@ -15,35 +15,42 @@ from .yandex import Yandex
 from .youtube import Youtube
 
 scrapers = {
-    'ask': Ask(),
-    'baidu': Baidu(),
-    'bing': Bing(),
-    'dailymotion': DailyMotion(),
-    'duckduckgo': DuckDuckGo(),
-    'exalead': ExaLead(),
-    'google': Google(),
-    'mojeek': Mojeek(),
-    'parsijoo': Parsijoo(),
-    'quora': Quora(),
-    'yahoo': Yahoo(),
-    'yandex': Yandex(),
-    'youtube': Youtube()
+    'google': Google('image')
+    # 'ask': Ask(),
+    # 'baidu': Baidu(),
+    # 'bing': Bing(),
+    # 'dailymotion': DailyMotion(),
+    # 'duckduckgo': DuckDuckGo(),
+    # 'exalead': ExaLead(),
+    # 'google': Google(),
+    # 'mojeek': Mojeek(),
+    # 'parsijoo': Parsijoo(),
+    # 'quora': Quora(),
+    # 'yahoo': Yahoo(),
+    # 'yandex': Yandex(),
+    # 'youtube': Youtube()
 }
+
 
 
 def small_test():
     assert isinstance(scrapers['google'].search('fossasia',  1), list)
 
 
-def feed_gen(query, engine, count=10):
+def feed_gen(query, engine, extra, count=10):
+    print("Extra variable:", extra)
     engine = engine.lower()
+    print("Engine: ", engine)
+    print("Searcgh Engine", scrapers[engine])
     # provide temporary backwards compatibility for old names
     old_names = {'ubaidu': 'baidu',
                  'vdailymotion': 'dailymotion',
                  'tyoutube': 'youtube'}
     engine = old_names.get(engine, engine)
+    Scarper_class = scrapers(extra)
+
     if engine in ('quora', 'youtube'):
-        urls = scrapers[engine].search_without_count(query)
+        urls = Scarper_class[engine].search_without_count(query)
     else:
-        urls = scrapers[engine].search(query, count)
+        urls = Scarper_class[engine].search(query, count, extra)
     return urls

@@ -5,11 +5,13 @@ from .generalized import Scraper
 class Google(Scraper):
     """Scrapper class for Google"""
 
-    def __init__(self):
+    def __init__(self, extra=None):
         Scraper.__init__(self)
         self.url = 'https://www.google.com/search'
         self.defaultStart = 0
         self.startKey = 'start'
+        self.extra = extra
+        print("Type", extra)
 
     def next_start(self, current_start, prev_results):
         return current_start + len(prev_results)

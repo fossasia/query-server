@@ -17,15 +17,20 @@ class Scraper:
         )
     }
 
-    def __init__(self):
+    def __init__(self, extra=None):
+        self.extra = extra
         pass
 
-    def get_page(self, query, startIndex=0):
+    def get_page(self, query, startIndex=0, extra=None):
         """ Fetch the google search results page
         Returns : Results Page
         """
-        payload = {self.queryKey: query, self.startKey: startIndex}
+        if extra is None:
+            payload = {self.queryKey: query, self.startKey: startIndex}
+        else:
+            payload = {self.queryKey: query, self.startKey: startIndex, "source": "lnms", "tbm": "isch"}
         response = requests.get(self.url, headers=self.headers, params=payload)
+        print("Response URL: ", response.url)
         return response
 
     def parse_response(self, soup):
@@ -34,7 +39,7 @@ class Scraper:
     def next_start(self, current_start, prev_results):
         return current_start + len(prev_results)
 
-    def search(self, query, num_results):
+    def search(self, query, num_results, extra=None):
         """
             Search for the query and return set of urls
             Returns: list
@@ -43,7 +48,7 @@ class Scraper:
         current_start = self.defaultStart
 
         while(len(urls) < num_results):
-            response = self.get_page(query, current_start)
+            response = self.get_page(query, current_start, extra)
             soup = BeautifulSoup(response.text, 'html.parser')
             new_results = self.parse_response(soup)
             if new_results is None:
