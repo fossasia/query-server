@@ -25,7 +25,8 @@ class Scraper:
         """ Fetch the google search results page
         Returns : Results Page
         """
-        payload = {self.queryKey: query, self.startKey: startIndex, self.qtype: qtype}
+        payload = {self.queryKey: query, self.startKey: startIndex,
+                   self.qtype: qtype}
         response = requests.get(self.url, headers=self.headers, params=payload)
         print(response.url)
         return response
