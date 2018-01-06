@@ -25,7 +25,7 @@ args = parser.parse_args()
 
 search_engines = ["google", "yahoo", "bing", "ask", "duckduckgo", "yandex",
                   "youtube", "exalead", "mojeek", "dailymotion", "parsijoo",
-                  "quora", "baidu", "twitter"]
+                  "quora", "twitter", "baidu"]
 
 
 @app.route('/')
