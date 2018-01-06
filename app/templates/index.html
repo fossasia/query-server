@@ -64,52 +64,70 @@
                         </div>
                     </div>
                     <br/>
-                    <div class="col-sm-4 col-xs-6" style="padding:0; margin: 0 auto;">
-                        <div class="dropdown">
-                            <label>Engine:</label><br/>
-                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                                <span id="drop_down_text">
-                                    <img src='static/images/google_icon.png' width='25px'>&nbsp;google
-                                </span>
-                                &nbsp;
-                                <span class="caret"></span>
-                            </button>
-                            <input type="hidden" id="engine" value="google">
-                            <ul class="dropdown-menu">
-                                {% for engine in engines_list %}
-                                    <li onClick="update_button('{{ engine }}')" id="{{engine}}">
-                                        <a style="cursor:pointer">
-                                            {% if engine in ['ask', 'baidu', 'bing', 'yahoo'] %}
-                                                <img src="{{ url_for('static', filename='images/' + engine + '_icon.ico') }}" width="15px">
-                                            {% else %}
-                                                <img src="{{ url_for('static', filename='images/' + engine + '_icon.png') }}" width="15px">
-                                            {% endif %}
-                                            {{ engine }}
-                                        </a>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        </div> 
-                    </div>
-                    <div class="col-sm-4 col-xs-4">
-                        <div class="form-group" style="display:inline-block; margin: 0 auto; min-width:50%;">
-                            <label for="resp">Max:</label>
-                            <select class="form-control" id="resp">
-                                <option>10</option>
-                                <option>20</option>
-                                <option>30</option>
-                                <option>40</option>
-                                <option>50</option>
-                                <option>60</option>
-                                <option>70</option>
-                                <option>80</option>
-                                <option>90</option>
-                                <option>100</option>
-                            </select>
+
+                    <div class="row">
+                        <div class="col-sm-3 col-xs-6" style="padding:0; margin: 0 auto;">
+                            <div class="dropdown">
+                                <label>Engine:</label><br/>
+                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                    <span id="drop_down_text">
+                                        <img src='static/images/google_icon.png' width='25px'>&nbsp;google
+                                    </span>
+                                    &nbsp;
+                                    <span class="caret"></span>
+                                </button>
+                                <input type="hidden" id="engine" value="google">
+                                <ul class="dropdown-menu">
+                                    {% for engine in engines_list %}
+                                        <li onClick="update_button('{{ engine }}')" id="{{engine}}">
+                                            <a style="cursor:pointer">
+                                                {% if engine in ['ask', 'baidu', 'bing', 'yahoo'] %}
+                                                    <img src="{{ url_for('static', filename='images/' + engine + '_icon.ico') }}" width="15px">
+                                                {% else %}
+                                                    <img src="{{ url_for('static', filename='images/' + engine + '_icon.png') }}" width="15px">
+                                                {% endif %}
+                                                {{ engine }}
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-sm-4 col-xs-s6" style="margin-top:20px;">
-                        <input type="submit" value="Submit" id="submitter" class="btn btn-primary"/>
+                        <div class="col-sm-5 col-xs-6">
+                                <label>Type:</label><br/>
+                                <div id="type" class="btn-group btn-group-vertical" style="display:inline-flex;padding:0; margin: 0 auto;" data-toggle="buttons">
+                                    <label class=" active typeButton" style="padding:10px;">General<br/>
+                                            <input type="radio" name = "stype" value="" autocomplete="off" checked>
+                                        </label>
+                                    <label class=" typeButton" style="padding:10px;">Images<br/>
+                                            <input type="radio" name = "stype" value="isch" autocomplete="off">
+                                        </label>
+                                    <label class=" typeButton" style="padding:10px;">
+                                        Video<br/>
+                                            <input type="radio" name = "stype" value="vid" autocomplete="off">
+                                        </label>
+                                </div>
+                        </div>
+                        <div class="col-sm-2 col-xs-6">
+                            <div class="form-group" style="display:inline-block; margin: 0 ; min-width:50%;">
+                                <label for="resp">Max:</label>
+                                <select class="form-control" id="resp">
+                                    <option>10</option>
+                                    <option>20</option>
+                                    <option>30</option>
+                                    <option>40</option>
+                                    <option>50</option>
+                                    <option>60</option>
+                                    <option>70</option>
+                                    <option>80</option>
+                                    <option>90</option>
+                                    <option>100</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 col-xs-6" style="margin-top:20px;">
+                            <input type="submit" value="Submit" id="submitter" class="btn btn-primary"/>
+                        </div>
                     </div>
                 </div>
             </form>
@@ -179,10 +197,10 @@
                     $('#feed').hide();
                     var sengine = $("#engine").val();
                     var squery = $('#query').val();
+                    var stype = $("input[name=stype]:checked").val()
                     var sformat = $(' #format label.active input').val();
                     var count = $('#resp').val();
-                    var urlloc = window.location.href.split(/\?|#/)[0] + "api/v1/search/" + sengine +
-                        "?query=" + squery + "&format=" + sformat + "&num=" + count;
+                    var urlloc = window.location.href.split(/\?|#/)[0] + "api/v1/search/" + sengine + "?query=" + squery + "&type=" + stype + "&format=" + sformat + "&num=" + count;
                     $.ajax({
                         url: urlloc,
                         type: 'GET',
@@ -211,10 +229,21 @@
         $('.formatButton').click(function (e) {
             e.preventDefault();
             if (!$(this).hasClass('active')) {
-                $(".active").removeClass("active");
+                $(".formatButton .active").removeClass("active");
                 $(this).addClass('active')
             }
         });
+
+/*
+        $('.typeButton').click(function (e) {
+            e.preventDefault();
+            if (!$(this).hasClass('active')) {
+                $(".typeButton .active").removeClass("active");
+                $(this).addClass('active')
+            }
+        });
+*/
+
 
         $(window).keydown(function (event) {
             if (event.keyCode == 13) {
