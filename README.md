@@ -55,9 +55,6 @@ A sample query : `/api/v1/search/bing?query=fossasia&format=xml&num=10`
 
 3. [Deployment with Docker](/docs/installation/docker.md)
 
-One-click Docker and Heroku deployment is also available:
-
-[![Deploy to Docker Cloud](https://files.cloud.docker.com/images/deploy-to-dockercloud.svg)](https://cloud.docker.com/stack/deploy/?repo=https://github.com/fossasia/query-server) [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/fossasia/query-server)
 
 ## Contribute
 
