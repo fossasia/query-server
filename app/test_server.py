@@ -3,7 +3,7 @@ import os
 import pytest
 import requests
 
-from .scrapers import small_test
+from .scrapers import scrapers, small_test
 
 REASON = 'Do you have query-server running on http://127.0.0.1:7001 ?'
 TRAVIS_CI = os.getenv('TRAVIS', False)  # Running in Travis CI?
@@ -30,7 +30,5 @@ def make_engine_api_call(engine_name):
 
 @pytest.mark.xfail(not TRAVIS_CI, reason=REASON)
 def test_engine_api_calls(engine_names=None):
-    engines = """ask baidu bing dailymotion duckduckgo exalead google
-                 mojeek parsijoo quora twitter yahoo yandex youtube""".split()
-    for engine_name in (engine_names or engines):
+    for engine_name in (engine_names or scrapers):
         make_engine_api_call(engine_name)
