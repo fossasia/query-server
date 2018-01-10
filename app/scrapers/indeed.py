@@ -2,12 +2,12 @@ from __future__ import print_function
 from .generalized import Scraper
 
 
-class Yandex(Scraper):
-    """Scrapper class for Yandex"""
+class Indeed(Scraper):
+    """Scrapper class for Indeed"""
 
     def __init__(self):
         Scraper.__init__(self)
-        self.url = 'https://www.yandex.com/search'
+        self.url = 'https://www.indeed.com/jobs'
         self.defaultStart = 0
 
     def parse_response(self, soup):
@@ -16,9 +16,9 @@ class Yandex(Scraper):
                 [[Tile1,url1], [Title2, url2],..]
         """
         urls = []
-        for a in soup.findAll('a', {'class': 'link link_theme_normal'}):
-            urls.append({'title': a.getText(), 'link': a.get('href')})
+        for a in soup.findAll('a', {'class': 'turnstileLink'}):
+            urls.append({'title': a.get('title'), 'link': 'https://www.indeed.com'+a.get('href')})
 
-        print('Yandex parsed: ' + str(urls))
+        print('Indeed parsed: ' + str(urls))
 
         return urls
