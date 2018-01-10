@@ -23,14 +23,10 @@ help_msg = "Start the server in development mode with debug=True"
 parser.add_argument("--dev", help=help_msg, action="store_true")
 args = parser.parse_args()
 
-search_engines = ["google", "yahoo", "bing", "ask", "duckduckgo", "yandex",
-                  "youtube", "exalead", "mojeek", "dailymotion", "parsijoo",
-                  "quora", "baidu"]
-
 
 @app.route('/')
 def index():
-    return render_template('index.html', engines_list=search_engines)
+    return render_template('index.html', engines_list=scrapers.keys())
 
 
 def bad_request(error):
