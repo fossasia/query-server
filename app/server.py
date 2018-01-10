@@ -23,7 +23,6 @@ help_msg = "Start the server in development mode with debug=True"
 parser.add_argument("--dev", help=help_msg, action="store_true")
 args = parser.parse_args()
 
-
 @app.route('/')
 def index():
     return render_template('index.html', engines_list=scrapers.keys())

@@ -10,6 +10,7 @@ from .google import Google
 from .mojeek import Mojeek
 from .parsijoo import Parsijoo
 from .quora import Quora
+from .twitter import Twitter
 from .yahoo import Yahoo
 from .yandex import Yandex
 from .youtube import Youtube
@@ -25,6 +26,7 @@ scrapers = {
     'mojeek': Mojeek(),
     'parsijoo': Parsijoo(),
     'quora': Quora(),
+    'twitter': Twitter(),
     'yahoo': Yahoo(),
     'yandex': Yandex(),
     'youtube': Youtube()
