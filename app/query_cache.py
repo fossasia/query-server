@@ -18,11 +18,15 @@ import datetime as dt
 import os
 
 from pymongo import DESCENDING, MongoClient
+from pymongo.errors import OperationFailure
 
 client = MongoClient(os.environ.get('MONGO_URI', 'mongodb://localhost:27017/'))
 db = client['query-server-v2']
 db = db['queries']  # Automatically delete records that are older than one day
-db.create_index([('createdAt', DESCENDING)], expireAfterSeconds=60 * 60 * 24)
+try:
+    (db.create_index[('createdAt', DESCENDING)], expireAfterSeconds=60 * 60 * 24)
+except OperationFailure:
+    pass  # Database index already exists
 
 
 def lookup(url):
