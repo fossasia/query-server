@@ -24,7 +24,8 @@ client = MongoClient(os.environ.get('MONGO_URI', 'mongodb://localhost:27017/'))
 db = client['query-server-v2']
 db = db['queries']  # Automatically delete records that are older than one day
 try:
-    (db.create_index[('createdAt', DESCENDING)], expireAfterSeconds=60 * 60 * 24)
+    db.create_index([('createdAt', DESCENDING)],
+                    expireAfterSeconds=60 * 60 * 24)
 except OperationFailure:
     pass  # Database index already exists
 
