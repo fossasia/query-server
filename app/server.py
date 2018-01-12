@@ -6,8 +6,17 @@ from dicttoxml import dicttoxml
 from flask import (Flask, Response, abort, jsonify, make_response,
                    render_template, request)
 
-from query_cache import lookup, store
 from scrapers import feed_gen, scrapers
+
+DISABLE_CACHE = True  # Temporarily disable the MongoDB cache
+if DISABLE_CACHE:
+    def lookup(url):
+        return False
+
+    def store(url, links):
+        pass
+else:
+    from query_cache import lookup, store
 
 app = Flask(__name__)
 err = ""
