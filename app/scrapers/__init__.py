@@ -7,6 +7,7 @@ from .dailymotion import DailyMotion
 from .duckduckgo import DuckDuckGo
 from .exalead import ExaLead
 from .google import Google
+from .indeed import Indeed
 from .mojeek import Mojeek
 from .parsijoo import Parsijoo
 from .quora import Quora
@@ -22,6 +23,7 @@ scrapers = {
     'duckduckgo': DuckDuckGo(),
     'exalead': ExaLead(),
     'google': Google(),
+    'indeed': Indeed(),
     'mojeek': Mojeek(),
     'parsijoo': Parsijoo(),
     'quora': Quora(),
