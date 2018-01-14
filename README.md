@@ -5,7 +5,7 @@
 [![Join the chat at https://gitter.im/fossasia/query-server](https://badges.gitter.im/fossasia/query-server.svg)](https://gitter.im/fossasia/query-server?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![codecov](https://codecov.io/gh/fossasia/query-server/branch/master/graph/badge.svg)](https://codecov.io/gh/fossasia/query-server)
 
-> The query server can be used to search a keyword/phrase on a search engine (Google, Yahoo, Bing, Ask, DuckDuckGo, Yandex, Baidu, Exalead, Quora, Parsijoo, Dailymotion, Mojeek and Youtube) and get the results as `json` or `xml`. The tool also stores the searched query string in a MongoDB database for analytical purposes.
+> The query server can be used to search a keyword/phrase on a search engine (Google, Yahoo, Bing, Ask, DuckDuckGo, Baidu, Exalead, Quora, Parsijoo, Dailymotion, Mojeek and Youtube) and get the results as `json` or `xml`. The tool also stores the searched query string in a MongoDB database for analytical purposes.
 
 [![Deploy to Docker Cloud](https://files.cloud.docker.com/images/deploy-to-dockercloud.svg)](https://cloud.docker.com/stack/deploy/?repo=https://github.com/fossasia/query-server) [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/fossasia/query-server) [![Deploy on Scalingo](https://cdn.scalingo.com/deploy/button.svg)](https://my.scalingo.com/deploy?source=https://github.com/fossasia/query-server#master) [![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/fossasia/query-server&branch=master)
 
@@ -23,7 +23,7 @@ The API(s) provided by query-server are as follows:
 
 ` GET /api/v1/search/<search-engine>?query=query&format=format `
 
-> *search-engine* : [`google`, `ask`, `bing`, `duckduckgo`, `yahoo`, `yandex`, `baidu`, `exalead`, `quora`, `youtube`, `parsijoo`, `mojeek`, `dailymotion`]
+> *search-engine* : [`google`, `ask`, `bing`, `duckduckgo`, `yahoo`, `baidu`, `exalead`, `quora`, `youtube`, `parsijoo`, `mojeek`, `dailymotion`]
 
 > *query* : query can be any string 
 
