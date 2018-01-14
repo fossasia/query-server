@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/fossasia/query-server.svg?branch=master)](https://travis-ci.org/fossasia/query-server)
 [![Dependency Status](https://david-dm.org/fossasia/query-server.svg)](https://david-dm.org/ossasia/query-server)
 [![Join the chat at https://gitter.im/fossasia/query-server](https://badges.gitter.im/fossasia/query-server.svg)](https://gitter.im/fossasia/query-server?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![codecov](https://codecov.io/gh/fossasia/query-server/branch/master/graph/badge.svg)](https://codecov.io/gh/fossasia/query-server)
 
 > The query server can be used to search a keyword/phrase on a search engine (Google, Yahoo, Bing, Ask, DuckDuckGo, Yandex, Baidu, Exalead, Quora, Parsijoo, Twitter, Dailymotion, Mojeek and Youtube) and get the results as `json` or `xml`. The tool also stores the searched query string in a MongoDB database for analytical purposes.
 
