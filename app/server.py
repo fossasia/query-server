@@ -6,8 +6,17 @@ from dicttoxml import dicttoxml
 from flask import (Flask, Response, abort, jsonify, make_response,
                    render_template, request)
 
-from query_cache import lookup, store
 from scrapers import feed_gen, scrapers
+
+DISABLE_CACHE = True  # Temporarily disable the MongoDB cache
+if DISABLE_CACHE:
+    def lookup(url):
+        return False
+
+    def store(url, links):
+        pass
+else:
+    from query_cache import lookup, store
 
 app = Flask(__name__)
 err = ""
@@ -23,14 +32,10 @@ help_msg = "Start the server in development mode with debug=True"
 parser.add_argument("--dev", help=help_msg, action="store_true")
 args = parser.parse_args()
 
-search_engines = ["google", "yahoo", "bing", "ask", "duckduckgo", "yandex",
-                  "youtube", "exalead", "mojeek", "dailymotion", "parsijoo",
-                  "quora", "baidu"]
-
 
 @app.route('/')
 def index():
-    return render_template('index.html', engines_list=search_engines)
+    return render_template('index.html', engines_list=scrapers.keys())
 
 
 def bad_request(error):

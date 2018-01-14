@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/fossasia/query-server.svg?branch=master)](https://travis-ci.org/fossasia/query-server)
 [![Dependency Status](https://david-dm.org/fossasia/query-server.svg)](https://david-dm.org/ossasia/query-server)
 [![Join the chat at https://gitter.im/fossasia/query-server](https://badges.gitter.im/fossasia/query-server.svg)](https://gitter.im/fossasia/query-server?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![codecov](https://codecov.io/gh/fossasia/query-server/branch/master/graph/badge.svg)](https://codecov.io/gh/fossasia/query-server)
 
 > The query server can be used to search a keyword/phrase on a search engine (Google, Yahoo, Bing, Ask, DuckDuckGo, Yandex, Baidu, Exalead, Quora, Parsijoo, Dailymotion, Mojeek and Youtube) and get the results as `json` or `xml`. The tool also stores the searched query string in a MongoDB database for analytical purposes.
 
@@ -55,9 +56,6 @@ A sample query : `/api/v1/search/bing?query=fossasia&format=xml&num=10`
 
 3. [Deployment with Docker](/docs/installation/docker.md)
 
-One-click Docker and Heroku deployment is also available:
-
-[![Deploy to Docker Cloud](https://files.cloud.docker.com/images/deploy-to-dockercloud.svg)](https://cloud.docker.com/stack/deploy/?repo=https://github.com/fossasia/query-server) [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/fossasia/query-server)
 
 ## Contribute
 
