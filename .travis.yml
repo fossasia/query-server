@@ -11,7 +11,7 @@ before_script:
   - flake8 . --count --max-complexity=15 --show-source --statistics
 script:
   - python -m app.server > /dev/null &
-  - pytest --capture=sys
+  - pytest --capture=sys --showlocals
   - kill $(lsof -t -i:7001)
 after_success:
   - bash <(curl -s https://codecov.io/bash)
