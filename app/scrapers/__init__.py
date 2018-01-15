@@ -11,7 +11,6 @@ from .mojeek import Mojeek
 from .parsijoo import Parsijoo
 from .quora import Quora
 from .yahoo import Yahoo
-from .yandex import Yandex
 from .youtube import Youtube
 
 scrapers = {
@@ -26,7 +25,6 @@ scrapers = {
     'parsijoo': Parsijoo(),
     'quora': Quora(),
     'yahoo': Yahoo(),
-    'yandex': Yandex(),
     'youtube': Youtube()
 }
 
