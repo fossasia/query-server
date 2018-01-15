@@ -30,10 +30,10 @@ scrapers = {
 
 
 def small_test():
-    assert isinstance(scrapers['google'].search('fossasia',  1), list)
+    assert isinstance(scrapers['google'].search('fossasia', 1), list)
 
 
-def feed_gen(query, engine, count=10):
+def feed_gen(query, engine, count=10, qtype=''):
     engine = engine.lower()
     # provide temporary backwards compatibility for old names
     old_names = {'ubaidu': 'baidu',
@@ -43,5 +43,5 @@ def feed_gen(query, engine, count=10):
     if engine in ('quora', 'youtube'):
         urls = scrapers[engine].search_without_count(query)
     else:
-        urls = scrapers[engine].search(query, count)
+        urls = scrapers[engine].search(query, count, qtype)
     return urls

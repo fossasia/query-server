@@ -10,6 +10,7 @@ class Google(Scraper):
         self.url = 'https://www.google.com/search'
         self.defaultStart = 0
         self.startKey = 'start'
+        self.qtype = 'tbm'
 
     def next_start(self, current_start, prev_results):
         return current_start + len(prev_results)
