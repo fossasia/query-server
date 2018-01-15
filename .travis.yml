@@ -1,18 +1,23 @@
 language: python
+
 python:
   - "2.7"
   - "3.6"
+
 services:
   - mongodb
+
 install:
   - pip install codecov flake8 pytest
   - pip install -r requirements.txt
 
 before_script:
   - flake8 . --count --max-complexity=15 --show-source --statistics
+
 script:
   - python app/server.py > /dev/null &
-  - pytest --cov=./ 
+  - pytest --cov=./
   - kill $(lsof -t -i:7001)
+
 after_success:
   - bash <(curl -s https://codecov.io/bash)
