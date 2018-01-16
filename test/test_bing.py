@@ -15,5 +15,4 @@ def test_parse_response():
         'link': u'mock_url',
         'desc': u'mock_desc'
     }]
-    if not expected_resp == resp:
-        raise AssertionError()
+    assert resp == expected_resp

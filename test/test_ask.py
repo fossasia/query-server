@@ -4,8 +4,7 @@ from app.scrapers import Ask
 
 
 def test_next_start():
-    if 3 != Ask().next_start(2, None):
-        raise AssertionError()
+    assert 3 == Ask().next_start(2, None)
 
 
 def test_parse_response_for_none():
@@ -18,8 +17,7 @@ def test_parse_response_for_none():
     </div>"""
     stub_soup = BeautifulSoup(html_text, 'html.parser')
     resp = Ask().parse_response(stub_soup)
-    if resp:
-        raise AssertionError()
+    assert resp is None
 
 
 def test_parse_response_with_desc():
@@ -39,8 +37,7 @@ def test_parse_response_with_desc():
             'desc': u'mock_desc'
         }
     ]
-    if not resp == expected_resp:
-        raise AssertionError()
+    assert resp == expected_resp
 
 
 def test_parse_response_without_desc():
@@ -58,5 +55,4 @@ def test_parse_response_without_desc():
             'title': u'mock_title'
         }
     ]
-    if not resp == expected_resp:
-        raise AssertionError()
+    assert resp == expected_resp

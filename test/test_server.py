@@ -21,14 +21,12 @@ def test_small_test():
 @pytest.mark.xfail(not TRAVIS_CI, reason=REASON)
 def test_invalid_url_api_call():
     response = requests.get('http://localhost:7001/api/v1/search/invalid_url')
-    if not response.json()['Status Code'] == 404:
-        raise AssertionError()
+    assert response.json()['Status Code'] == 404
 
 
 def make_engine_api_call(engine_name):
     url = 'http://localhost:7001/api/v1/search/' + engine_name
-    if requests.get(url).json()['Status Code'] != 400:
-        raise AssertionError()
+    assert requests.get(url).json()['Status Code'] == 400
 
 
 @pytest.mark.xfail(not TRAVIS_CI, reason=REASON)
@@ -40,8 +38,7 @@ def test_engine_api_calls(engine_names=None):
 
 
 def test_api_index():
-    if not app.test_client().get('/').status_code == 200:
-        raise AssertionError()
+    assert app.test_client().get('/').status_code == 200
 
 
 @patch('app.server.abort')
@@ -57,8 +54,7 @@ def test_api_search_invalid_engine(mock_bad_request):
     resp = app.test_client().get(url).get_data().decode('utf-8')
     mock_bad_request.assert_called_with(
         [404, 'Incorrect search engine', 'invalid'])
-    if not resp == "Mock Response":
-        raise AssertionError()
+    assert resp == "Mock Response"
 
 
 @patch('app.server.bad_request', return_value="Mock Response")
@@ -68,8 +64,7 @@ def test_api_search_missing_query(mock_bad_request):
     resp = app.test_client().get(url).get_data().decode('utf-8')
     mock_bad_request.assert_called_with(
         [400, 'Not Found - missing query', 'json'])
-    if not resp == "Mock Response":
-        raise AssertionError()
+    assert resp == "Mock Response"
 
 
 @patch('app.server.bad_request', return_value="Mock Response")
@@ -80,8 +75,7 @@ def test_api_search_for_no_response(mock_bad_request):
             resp = app.test_client().get(url).get_data().decode('utf-8')
             mock_bad_request.assert_called_with([404, 'No response',
                                                  'google:fossasia'])
-            if not resp == "Mock Response":
-                raise AssertionError()
+            assert resp == "Mock Response"
 
 
 def test_api_search_for_cache_hit():
@@ -89,8 +83,7 @@ def test_api_search_for_cache_hit():
     mock_result = [{'title': 'mock_title', 'link': 'mock_link'}]
     with patch('app.server.lookup', return_value=mock_result):
         resp = app.test_client().get(url).get_data().decode('utf-8')
-        if not json.loads(resp) == mock_result:
-            raise AssertionError()
+        assert json.loads(resp) == mock_result
 
 
 @patch('app.server.feed_gen')
@@ -118,8 +111,7 @@ def test_api_search_for_format(mock_lookup, mock_feed_gen):
         elif qformat == 'csv':
             resp = get_json_equivalent_from_csv_feed(resp)
             expected_resp = get_json_equivalent_from_csv_feed(expected_resp)
-        if not expected_resp == resp:
-            raise AssertionError()
+        assert expected_resp == resp
 
 
 def expected_response_for_format(qformat):

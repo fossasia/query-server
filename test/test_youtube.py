@@ -15,5 +15,4 @@ def test_parse_response():
         'link': u'https://www.youtube.com/watch?v=mock'
     }]
     resp = Youtube().parse_response(dummy_soup)
-    if not resp == expected_resp:
-        raise AssertionError()
+    assert resp == expected_resp

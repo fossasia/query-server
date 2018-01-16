@@ -13,5 +13,4 @@ def test_parse_response():
         'link': u'https://www.quora.com/mock_url'
     }]
     resp = Quora().parse_response(dummy_soup)
-    if not resp == expected_resp:
-        raise AssertionError()
+    assert resp == expected_resp

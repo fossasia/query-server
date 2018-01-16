@@ -19,5 +19,4 @@ def test_parse_response():
         'desc': u'mock_desc'
     }]
     resp = Parsijoo().parse_response(dummy_soup)
-    if not resp == expected_resp:
-        raise AssertionError()
+    assert resp == expected_resp
