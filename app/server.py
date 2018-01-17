@@ -85,6 +85,7 @@ def search(search_engine):
                     line['desc'] = line['desc'].encode('utf-8')
         except NameError:
             pass  # Python 3 strings are already Unicode
+
         if qformat == 'json':
             return jsonify(result)
         elif qformat == 'csv':
