@@ -15,7 +15,7 @@ before_script:
   - flake8 . --count --max-complexity=15 --show-source --statistics
 
 script:
-  - python app/server.py > /dev/null &
+  - python -m app.server > /dev/null &
   - pytest --cov=./
   - kill $(lsof -t -i:7001)
 

@@ -1,12 +1,13 @@
 import json
 import os
 from argparse import ArgumentParser
+
 from defusedxml.minidom import parseString
 from dicttoxml import dicttoxml
 from flask import (Flask, Response, abort, jsonify, make_response,
                    render_template, request)
 
-from scrapers import feed_gen, scrapers
+from app.scrapers import feed_gen, scrapers
 
 DISABLE_CACHE = True  # Temporarily disable the MongoDB cache
 if DISABLE_CACHE:
@@ -27,11 +28,6 @@ errorObj = {
     'error': 'Could not parse the page due to Internal Server Error'
 }
 
-parser = ArgumentParser()
-help_msg = "Start the server in development mode with debug=True"
-parser.add_argument("--dev", help=help_msg, action="store_true")
-args = parser.parse_args()
-
 
 @app.route('/')
 def index():
@@ -49,6 +45,7 @@ def search(search_engine):
     try:
         count = int(request.args.get('num', 10))
         qformat = request.args.get('format', 'json').lower()
+        qtype = request.args.get('type', '')
         if qformat not in ('json', 'xml', 'csv'):
             abort(400, 'Not Found - undefined format')
 
@@ -68,7 +65,7 @@ def search(search_engine):
         if result:
             print("cache hit: {}".format(engine_and_query))
         else:
-            result = feed_gen(query, engine, count)
+            result = feed_gen(query, engine, count, qtype)
             if result:
                 # store the result in the cache to speed up future searches
                 store(engine_and_query, result)
@@ -112,4 +109,8 @@ def set_header(r):
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 7001))
+    parser = ArgumentParser()
+    help_msg = "Start the server in development mode with debug=True"
+    parser.add_argument("--dev", help=help_msg, action="store_true")
+    args = parser.parse_args()
     app.run(host='0.0.0.0', port=port, debug=args.dev)
