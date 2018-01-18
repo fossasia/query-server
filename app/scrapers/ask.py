@@ -9,6 +9,7 @@ class Ask(Scraper):
         self.url = 'http://ask.com/web'
         self.defaultStart = 1
         self.startKey = 'page'
+        self.name = 'ask'
 
     def next_start(self, current_start, prev_results):
         return current_start + 1

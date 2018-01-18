@@ -9,6 +9,7 @@ class Youtube(Scraper):
         Scraper.__init__(self)
         self.url = 'https://www.youtube.com/results'
         self.queryKey = 'search_query'
+        self.name = 'youtube'
 
     def parse_response(self, soup):
         """ Parse the response and return list of urls

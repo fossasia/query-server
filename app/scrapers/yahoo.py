@@ -13,8 +13,10 @@ class Yahoo(Scraper):
     def __init__(self):
         Scraper.__init__(self)
         self.url = 'https://search.yahoo.com/search'
+        self.videoURL = 'https://video.search.yahoo.com/search/video'
         self.defaultStart = 1
         self.startKey = 'b'
+        self.name = 'yahoo'
 
     def parse_response(self, soup):
         """ Parse response and returns the urls
@@ -34,6 +36,27 @@ class Yahoo(Scraper):
                     'title': y.getText(),
                     'link': u
                 })
+
+        print('Yahoo parsed: ' + str(urls))
+
+        return urls
+
+    def parse_video_response(self, soup):
+        """ Parse response and returns the urls
+
+            Returns: urls (list)
+                    [[Tile1, url1], [Title2, url2], ...]
+        """
+        urls = []
+        for h in soup.findAll('li', attrs={'class': 'vr vres'}):
+            t = h.find('a', attrs={'class': 'ng'})
+            r = t.get('data-rurl')
+            titleDiv = t.find('div', attrs={'class': 'v-meta bx-bb'})
+            title = titleDiv.find('h3').getText()
+            urls.append({
+                'title': title,
+                'link': r
+            })
 
         print('Yahoo parsed: ' + str(urls))
 

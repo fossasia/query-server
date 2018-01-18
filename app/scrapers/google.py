@@ -11,6 +11,7 @@ class Google(Scraper):
         self.defaultStart = 0
         self.startKey = 'start'
         self.qtype = 'tbm'
+        self.name = 'google'
 
     def next_start(self, current_start, prev_results):
         return current_start + len(prev_results)

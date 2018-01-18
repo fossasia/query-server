@@ -12,6 +12,7 @@ class DailyMotion(Scraper):
         self.queryKey = 'search'
         self.startKey = 'page'
         self.defaultStart = 1
+        self.name = 'dailymotion'
 
     def parse_response(self, soup):
         """ Parse the response and return set of urls

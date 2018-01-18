@@ -10,6 +10,7 @@ class DuckDuckGo(Scraper):
         self.url = 'https://duckduckgo.com/html'
         self.defaultStart = 0
         self.startKey = 's'
+        self.name = 'duckduckgo'
 
     def parse_response(self, soup):
         """ Parse the response and return set of urls
