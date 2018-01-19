@@ -8,9 +8,13 @@ class Bing(Scraper):
     def __init__(self):
         Scraper.__init__(self)
         self.url = 'http://www.bing.com/search'
+        self.videoURL = 'https://www.bing.com/videos/search'
+        self.imageURL = 'https://www.bing.com/images/search'
         self.defaultStart = 1
         self.startKey = 'first'
         self.name = 'bing'
+        self.videoKey = 'FORM'
+        self.imageKey = 'FORM'
 
     def parse_response(self, soup):
         """ Parses the reponse and return set of urls
@@ -26,6 +30,42 @@ class Bing(Scraper):
                          'link': url,
                          'desc': desc}
             urls.append(url_entry)
+
+        print('Bing parsed: ' + str(urls))
+
+        return urls
+
+    def parse_video_response(self, soup):
+        """ Parse response and returns the urls
+
+            Returns: urls (list)
+                    [[Tile1, url1], [Title2, url2], ...]
+        """
+        urls = []
+        for a in soup.findAll('a', attrs={'class': 'mc_vtvc_link'}):
+            title = a.get('aria-label').split(' Duration')[0]
+            url = 'https://www.bing.com' + a.get('href')
+            urls.append({
+                'title': title,
+                'link': url
+            })
+
+        print('Bing parsed: ' + str(urls))
+
+        return urls
+
+    def parse_image_response(self, soup):
+        """ Parse response and returns the urls
+
+            Returns: urls (list)
+                    [[url1], [url2], ...]
+        """
+        urls = []
+        for a in soup.findAll('a', attrs={'class': 'iusc'}):
+            url = 'https://www.bing.com' + a.get('href')
+            urls.append({
+                'link': url
+            })
 
         print('Bing parsed: ' + str(urls))
 
