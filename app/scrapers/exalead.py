@@ -10,6 +10,7 @@ class ExaLead(Scraper):
         self.url = 'https://www.exalead.com/search/web/results/'
         self.defaultStart = 0
         self.startKey = 'start_index'
+        self.name = 'exalead'
 
     def parse_response(self, soup):
         """ Parse the response and return set of urls
