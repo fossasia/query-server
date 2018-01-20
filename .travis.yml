@@ -9,7 +9,7 @@ install:
   - pip install -r requirements.txt
 
 before_script:
-  - flake8 . --count --max-complexity=15 --show-source --statistics
+  - flake8 . --count --max-complexity=16 --show-source --statistics --max-line-length=100
 script:
   - python -m app.server > /dev/null &
   - pytest --cov=./

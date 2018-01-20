@@ -8,6 +8,8 @@ class Parsijoo(Scraper):
     def __init__(self):
         Scraper.__init__(self)
         self.url = 'https://parsijoo.ir/web'
+        self.imageURL = 'https://image.parsijoo.ir/image'
+        self.videoURL = 'https://video.parsijoo.ir/video'
         self.defaultStart = 0
         self.startKey = 'co'
         self.name = 'parsijoo'
@@ -24,6 +26,43 @@ class Parsijoo(Scraper):
             link = result_title.find('a').get('href')
             desc = div.find('span', {'class': 'result-desc'}).getText()[35:-1]
             urls.append({'title': title, 'link': link, 'desc': desc})
+
+        print('Parsijoo parsed: ' + str(urls))
+
+        return urls
+
+    def parse_video_response(self, soup):
+        """ Parse response and returns the urls
+
+            Returns: urls (list)
+                    [[Tile1, url1], [Title2, url2], ...]
+        """
+        urls = []
+        for a in soup.findAll('a', attrs={'class': 'over-page'}):
+            title = a.get('title')
+            url = self.videoURL + a.get('href')
+            urls.append({
+                'title': title,
+                'link': url
+            })
+
+        print('Parsijoo parsed: ' + str(urls))
+
+        return urls
+
+    def parse_image_response(self, soup):
+        """ Parse response and returns the urls
+
+            Returns: urls (list)
+                    [[url1], [url2], ...]
+        """
+        urls = []
+        for div in soup.findAll('div', attrs={'class': 'image-container overflow'}):
+            a = div.find('a')
+            url = 'https://image.parsijoo.ir' + a.get('href')
+            urls.append({
+                'link': url
+            })
 
         print('Parsijoo parsed: ' + str(urls))
 
