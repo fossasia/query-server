@@ -37,13 +37,16 @@ class Scraper:
         print(response.url)
         return response
 
-    def parse_response(self, soup):
+    @staticmethod
+    def parse_response(soup):
         raise NotImplementedError
 
-    def parse_video_response(self, soup):
+    @staticmethod
+    def parse_video_response(soup):
         raise NotImplementedError
 
-    def next_start(self, current_start, prev_results):
+    @staticmethod
+    def next_start(current_start, prev_results):
         return current_start + len(prev_results)
 
     def search(self, query, num_results, qtype=''):
