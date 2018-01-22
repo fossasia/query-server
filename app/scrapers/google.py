@@ -13,10 +13,12 @@ class Google(Scraper):
         self.qtype = 'tbm'
         self.name = 'google'
 
-    def next_start(self, current_start, prev_results):
+    @staticmethod
+    def next_start(current_start, prev_results):
         return current_start + len(prev_results)
 
-    def parse_response(self, soup):
+    @staticmethod
+    def parse_response(soup):
         """
         Parses the response and returns set of urls
         Returns: urls (list)
