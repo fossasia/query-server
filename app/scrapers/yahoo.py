@@ -14,6 +14,7 @@ class Yahoo(Scraper):
         Scraper.__init__(self)
         self.url = 'https://search.yahoo.com/search'
         self.videoURL = 'https://video.search.yahoo.com/search/video'
+        self.imageURL = 'https://images.search.yahoo.com/search/images'
         self.defaultStart = 1
         self.startKey = 'b'
         self.name = 'yahoo'
@@ -58,6 +59,24 @@ class Yahoo(Scraper):
             urls.append({
                 'title': title,
                 'link': r
+            })
+
+        print('Yahoo parsed: ' + str(urls))
+
+        return urls
+
+    @staticmethod
+    def parse_image_response(soup):
+        """ Parse response and returns the urls
+
+            Returns: urls (list)
+                    [[url1], [url2], ...]
+        """
+        urls = []
+        for li in soup.findAll('li', attrs={'class': 'ld'}):
+            url = 'https://images.search.yahoo.com' + li.a.get('href')
+            urls.append({
+                'link': url
             })
 
         print('Yahoo parsed: ' + str(urls))
