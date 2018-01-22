@@ -80,7 +80,7 @@ def search(search_engine):
             unicode  # unicode is undefined in Python 3 so NameError is raised
             for line in result:
                 line['link'] = line['link'].encode('utf-8')
-                if 'desc' in line:
+                if 'title' in line:
                     line['title'] = line['title'].encode('utf-8')
                 if 'desc' in line:
                     line['desc'] = line['desc'].encode('utf-8')
