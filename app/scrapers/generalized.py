@@ -84,3 +84,17 @@ class Scraper:
         soup = BeautifulSoup(response.text, 'html.parser')
         urls = self.parse_response(soup)
         return urls
+
+    def image_search_without_count(self, query):
+        """
+            Search for the query and return set of urls
+            Returns: list
+        """
+        urls = []
+        if self.name in ['yahoo']:
+            url = self.imageURL
+            payload = {'p': query}
+        response = requests.get(url, headers=self.headers, params=payload)
+        soup = BeautifulSoup(response.text, 'html.parser')
+        urls = self.parse_image_response(soup)
+        return urls
