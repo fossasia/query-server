@@ -31,7 +31,7 @@ class Parsijoo(Scraper):
         print('Parsijoo parsed: ' + str(urls))
 
         return urls
-    
+
     @staticmethod
     def parse_video_response(soup):
         """ Parse response and returns the urls
