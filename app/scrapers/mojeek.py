@@ -10,8 +10,10 @@ class Mojeek(Scraper):
         self.url = 'https://www.mojeek.co.uk/search'
         self.defaultStart = 1
         self.startKey = 's'
+        self.name = 'mojeek'
 
-    def parse_response(self, soup):
+    @staticmethod
+    def parse_response(soup):
         """ Parse the response and return set of urls
         Returns: urls (list)
                 [[Tile1,url1], [Title2, url2],..]

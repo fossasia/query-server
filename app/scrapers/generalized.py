@@ -25,16 +25,28 @@ class Scraper:
         """ Fetch the google search results page
         Returns : Results Page
         """
+        url = self.url
+        if qtype == 'vid':
+            if self.name in ['yahoo']:
+                url = self.videoURL
+            else:
+                url = self.url
         payload = {self.queryKey: query, self.startKey: startIndex,
                    self.qtype: qtype}
-        response = requests.get(self.url, headers=self.headers, params=payload)
+        response = requests.get(url, headers=self.headers, params=payload)
         print(response.url)
         return response
 
-    def parse_response(self, soup):
+    @staticmethod
+    def parse_response(soup):
         raise NotImplementedError
 
-    def next_start(self, current_start, prev_results):
+    @staticmethod
+    def parse_video_response(soup):
+        raise NotImplementedError
+
+    @staticmethod
+    def next_start(current_start, prev_results):
         return current_start + len(prev_results)
 
     def search(self, query, num_results, qtype=''):
@@ -48,7 +60,13 @@ class Scraper:
         while (len(urls) < num_results):
             response = self.get_page(query, current_start, qtype)
             soup = BeautifulSoup(response.text, 'html.parser')
-            new_results = self.parse_response(soup)
+            if qtype == 'vid':
+                if self.name in ['yahoo']:
+                    new_results = self.parse_video_response(soup)
+                else:
+                    new_results = self.parse_response(soup)
+            else:
+                new_results = self.parse_response(soup)
             if new_results is None:
                 break
             urls.extend(new_results)

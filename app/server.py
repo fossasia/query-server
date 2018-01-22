@@ -7,7 +7,10 @@ from dicttoxml import dicttoxml
 from flask import (Flask, Response, abort, jsonify, make_response,
                    render_template, request)
 
-from app.scrapers import feed_gen, scrapers
+try:
+    from scrapers import feed_gen, scrapers
+except Exception as e:
+    from app.scrapers import feed_gen, scrapers
 
 DISABLE_CACHE = True  # Temporarily disable the MongoDB cache
 if DISABLE_CACHE:
