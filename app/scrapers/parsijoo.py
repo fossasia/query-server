@@ -42,7 +42,7 @@ class Parsijoo(Scraper):
         urls = []
         for a in soup.findAll('a', attrs={'class': 'over-page'}):
             title = a.get('title')
-            url = 'https://video.parsijoo.ir/video' + a.get('href')
+            url = 'https://video.parsijoo.ir' + a.get('href')
             urls.append({
                 'title': title,
                 'link': url
