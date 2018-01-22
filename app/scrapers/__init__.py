@@ -42,6 +42,8 @@ def feed_gen(query, engine, count=10, qtype=''):
     engine = old_names.get(engine, engine)
     if engine in ('quora', 'youtube'):
         urls = scrapers[engine].search_without_count(query)
+    elif engine in ('ask',) and qtype == 'vid':
+        urls = scrapers[engine].video_search(query, count, qtype)
     else:
         urls = scrapers[engine].search(query, count, qtype)
     return urls
