@@ -42,9 +42,9 @@ def feed_gen(query, engine, count=10, qtype=''):
     engine = old_names.get(engine, engine)
     if engine in ('quora', 'youtube'):
         urls = scrapers[engine].search_without_count(query)
-    elif (engine in ['bing']) and (qtype == 'vid'):
+    elif engine in ('bing',) and qtype == 'vid':
         urls = scrapers[engine].video_search_without_count(query)
-    elif (engine in ['bing']) and (qtype == 'isch'):
+    elif engine in ('bing',) and qtype == 'isch':
         urls = scrapers[engine].image_search_without_count(query)
     else:
         urls = scrapers[engine].search(query, count, qtype)
