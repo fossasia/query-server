@@ -97,7 +97,7 @@ class Scraper:
         response = requests.get(url, headers=self.headers, params=payload)
         soup = BeautifulSoup(response.text, 'html.parser')
         urls = self.parse_video_response(soup)
-        if urls == []:
+        if len(urls) == 0:
             return "No video with this Keyword"
         else:
             return urls
