@@ -31,8 +31,9 @@ class Parsijoo(Scraper):
         print('Parsijoo parsed: ' + str(urls))
 
         return urls
-
-    def parse_video_response(self, soup):
+    
+    @staticmethod
+    def parse_video_response(soup):
         """ Parse response and returns the urls
 
             Returns: urls (list)
@@ -51,7 +52,8 @@ class Parsijoo(Scraper):
 
         return urls
 
-    def parse_image_response(self, soup):
+    @staticmethod
+    def parse_image_response(soup):
         """ Parse response and returns the urls
 
             Returns: urls (list)
