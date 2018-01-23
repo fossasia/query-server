@@ -22,8 +22,9 @@ def test_parse_image_response():
     html_text = """<a class="iusc" href="mock_url">mock_title</a>"""
     dummy_soup = BeautifulSoup(html_text, 'html.parser')
     resp = Bing().parse_image_response(dummy_soup)
+    link_image = 'https://www.bing.com' + 'mock_url'
     expected_resp = [{
-        'link': u'mock_url'
+        'link': link_image
     }]
     assert resp == expected_resp
 
@@ -33,8 +34,9 @@ def test_parse_video_response():
         href="mock_url"></a>"""
     dummy_soup = BeautifulSoup(html_text, 'html.parser')
     resp = Bing().parse_video_response(dummy_soup)
+    link_video = 'https://www.bing.com' + 'mock_url'
     expected_resp = [{
         'title': u'mock_title',
-        'link': u'mock_url',
+        'link': link_video,
     }]
     assert resp == expected_resp
