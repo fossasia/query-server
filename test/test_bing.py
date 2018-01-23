@@ -34,7 +34,7 @@ def test_parse_video_response():
     dummy_soup = BeautifulSoup(html_text, 'html.parser')
     resp = Bing().parse_video_response(dummy_soup)
     expected_resp = [{
-        'title': u'mock_title',
+        'title': u'mock_title .',
         'link': u'mock_url .',
     }]
     assert resp == expected_resp
