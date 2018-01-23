@@ -29,12 +29,12 @@ def test_parse_image_response():
 
 
 def test_parse_video_response():
-    html_text = """<a aria-label="mock_title · Duration" class="mc_vtvc_link"
+    html_text = """<a aria-label="mock_title Duration" class="mc_vtvc_link"
         href="mock_url"></a>"""
     dummy_soup = BeautifulSoup(html_text, 'html.parser')
     resp = Bing().parse_video_response(dummy_soup)
     expected_resp = [{
-        'title': u'mock_title .',
+        'title': u'mock_title',
         'link': u'mock_url',
     }]
     assert resp == expected_resp
