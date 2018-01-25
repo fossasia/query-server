@@ -29,6 +29,14 @@ class Scraper:
         if qtype == 'vid':
             if self.name in ['yahoo']:
                 url = self.videoURL
+        elif qtype == 'news':
+            if self.name in ['baidu']:
+                url = self.newsURL
+                payload = {'word': query, self.startKey: startIndex}
+                response = requests.get(
+                    url, headers=self.headers, params=payload
+                )
+                return response
             else:
                 url = self.url
         payload = {self.queryKey: query, self.startKey: startIndex,
@@ -84,3 +92,21 @@ class Scraper:
         soup = BeautifulSoup(response.text, 'html.parser')
         urls = self.parse_response(soup)
         return urls
+
+    def news_search(self, query, num_results, qtype=''):
+        """
+            Search for the query and return set of urls
+            Returns: list
+        """
+        urls = []
+        current_start = self.defaultStart
+
+        while (len(urls) < num_results):
+            response = self.get_page(query, current_start, qtype)
+            soup = BeautifulSoup(response.text, 'html.parser')
+            new_results = self.parse_news_response(soup)
+            if new_results is None:
+                break
+            urls.extend(new_results)
+            current_start = self.next_start(current_start, new_results)
+        return urls[: num_results]
