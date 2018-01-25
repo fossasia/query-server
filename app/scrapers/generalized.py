@@ -84,3 +84,17 @@ class Scraper:
         soup = BeautifulSoup(response.text, 'html.parser')
         urls = self.parse_response(soup)
         return urls
+
+    def news_search_without_count(self, query):
+        """
+            Search for the query and return set of urls
+            Returns: list
+        """
+        urls = []
+        if self.name in ['mojeek']:
+            url = self.newsURL
+            payload = {self.queryKey: query, 'fmt': 'news'}
+        response = requests.get(url, headers=self.headers, params=payload)
+        soup = BeautifulSoup(response.text, 'html.parser')
+        urls = self.parse_news_response(soup)
+        return urls
