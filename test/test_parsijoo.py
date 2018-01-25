@@ -20,3 +20,16 @@ def test_parse_response():
     }]
     resp = Parsijoo().parse_response(dummy_soup)
     assert resp == expected_resp
+
+
+def test_parse_news_response():
+    html_text = """<div class="news-title-link">
+    <a href="mock_url">mock_title</a>
+    </div>"""
+    dummy_soup = BeautifulSoup(html_text, 'html.parser')
+    expected_resp = [{
+        'title': u'mock_title',
+        'link': u'mock_url'
+    }]
+    resp = Parsijoo().parse_news_response(dummy_soup)
+    assert resp == expected_resp
