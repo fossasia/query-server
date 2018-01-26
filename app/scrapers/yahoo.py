@@ -19,7 +19,8 @@ class Yahoo(Scraper):
         self.startKey = 'b'
         self.name = 'yahoo'
 
-    def parse_response(self, soup):
+    @staticmethod
+    def parse_response(soup):
         """ Parse response and returns the urls
 
             Returns: urls (list)
@@ -42,7 +43,8 @@ class Yahoo(Scraper):
 
         return urls
 
-    def parse_video_response(self, soup):
+    @staticmethod
+    def parse_video_response(soup):
         """ Parse response and returns the urls
 
             Returns: urls (list)

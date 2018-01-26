@@ -7,7 +7,10 @@ from dicttoxml import dicttoxml
 from flask import (Flask, Response, abort, jsonify, make_response,
                    render_template, request)
 
-from app.scrapers import feed_gen, scrapers
+try:
+    from scrapers import feed_gen, scrapers
+except Exception as e:
+    from app.scrapers import feed_gen, scrapers
 
 DISABLE_CACHE = True  # Temporarily disable the MongoDB cache
 if DISABLE_CACHE:
@@ -77,7 +80,8 @@ def search(search_engine):
             unicode  # unicode is undefined in Python 3 so NameError is raised
             for line in result:
                 line['link'] = line['link'].encode('utf-8')
-                line['title'] = line['title'].encode('utf-8')
+                if 'title' in line:
+                    line['title'] = line['title'].encode('utf-8')
                 if 'desc' in line:
                     line['desc'] = line['desc'].encode('utf-8')
         except NameError:
