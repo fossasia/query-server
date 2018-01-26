@@ -64,7 +64,7 @@ class Yahoo(Scraper):
         return urls
 
     @staticmethod
-    def parse_image_response(self, soup):
+    def parse_image_response(soup):
         """ Parse response and returns the urls
 
             Returns: urls (list)
