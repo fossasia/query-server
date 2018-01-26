@@ -9,11 +9,14 @@ class Ask(Scraper):
         self.url = 'http://ask.com/web'
         self.defaultStart = 1
         self.startKey = 'page'
+        self.name = 'ask'
 
-    def next_start(self, current_start, prev_results):
+    @staticmethod
+    def next_start(current_start, prev_results):
         return current_start + 1
 
-    def parse_response(self, soup):
+    @staticmethod
+    def parse_response(soup):
         """ Parse the response and return set of urls
         Returns: urls (list)
                 [[Tile1,url1], [Title2, url2],..]

@@ -8,8 +8,10 @@ class Quora(Scraper):
     def __init__(self):
         Scraper.__init__(self)
         self.url = 'https://www.quora.com/search'
+        self.name = 'quora'
 
-    def parse_response(self, soup):
+    @staticmethod
+    def parse_response(soup):
         """ Parse the response and return set of urls
         Returns: urls (list)
                 [[Tile1,url1], [Title2, url2],..]
