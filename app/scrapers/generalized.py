@@ -112,7 +112,6 @@ class Scraper:
             current_start = self.next_start(current_start, new_results)
         return urls[: num_results]
 
-
     def video_search_without_count(self, query):
         """
             Search for the query and return set of urls
@@ -126,7 +125,7 @@ class Scraper:
         soup = BeautifulSoup(response.text, 'html.parser')
         urls = self.parse_video_response(soup)
         return urls
-        
+
     def image_search_without_count(self, query):
         """
             Search for the query and return set of urls
