@@ -40,3 +40,38 @@ def test_parse_video_response():
         'link': link_video,
     }]
     assert resp == expected_resp
+
+
+def test_search_bing_without_count():
+    query = 'fossasia'
+    expected_max_resp_count = 10
+    resp_count = len(Bing().search(query))
+    assert resp_count <= expected_max_resp_count
+
+
+def test_search_bing_with_small_count():
+    query = 'fossasia'
+    expected_resp_count = 2
+    resp_count = len(Bing().search(query, 2))
+    assert resp_count == expected_resp_count
+
+
+def test_search_bing_with_large_count():
+    query = 'fossasia'
+    expected_max_resp_count = 27
+    resp_count = len(Bing().search(query, 27))
+    assert resp_count <= expected_max_resp_count
+
+
+def test_parse_news_response():
+    html_text = """<div class="t_s"><div class="t_t"><a class="title"
+        href="mock_url">mock_title</a></div><div class="snippet">
+        mock_desc</div></div>"""
+    dummy_soup = BeautifulSoup(html_text, 'html.parser')
+    resp = Bing().parse_news_response(dummy_soup)
+    expected_resp = [{
+        'title': u'mock_title',
+        'link': u'mock_url',
+        'desc': u'mock_desc',
+    }]
+    assert resp == expected_resp
