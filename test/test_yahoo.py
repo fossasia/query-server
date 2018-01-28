@@ -14,3 +14,15 @@ def test_parse_response():
     }]
     resp = Yahoo().parse_response(dummy_soup)
     assert resp == expected_resp
+
+
+def test_parse_image_response():
+    html_text = """<li class="ld"><a aria-label="mock_title">
+                <img data-src='mock_url' class='process'/></a></div>"""
+    dummy_soup = BeautifulSoup(html_text, 'html.parser')
+    expected_resp = [{
+        'title': u'mock_title',
+        'link': u'mock_url'
+    }]
+    resp = Yahoo().parse_image_response(dummy_soup)
+    assert resp == expected_resp
