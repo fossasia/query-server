@@ -10,7 +10,7 @@ class Twitter(Scraper):
         Scraper.__init__(self)
         self.loklakURL = 'http://api.loklak.org/api/search.json?q='
 
-    def search(self, query, count, qtype=''):
+    def search(self, query, num_results, qtype=''):
         """ Makes a GET request to Loklak API and returns the URLs
         Returns: urls (list)
                 [[Title1,url1], [Title2, url2],..]
@@ -25,4 +25,4 @@ class Twitter(Scraper):
 
         print('Twitter parsed: ' + str(tweets))
 
-        return tweets[:count]
+        return tweets[:num_results]
