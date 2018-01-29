@@ -56,3 +56,21 @@ def test_parse_response_without_desc():
         }
     ]
     assert resp == expected_resp
+
+
+def test_parse_video_response():
+    html_div = """<div class="v-info"><div class="v-title">
+                  <a class="title" href="mock_url">mock_title</a></div>
+                  <div class="desc">mock_desc</div>
+                  </div>"""
+    stub_soup_div = BeautifulSoup(html_div, 'html.parser')
+    resp = Ask().parse_video_response(stub_soup_div)
+    url_video = 'https' + 'mock_url'
+    expected_resp = [
+        {
+            'link': url_video,
+            'title': u'mock_title',
+            'desc': u'mock_desc'
+        }
+    ]
+    assert resp == expected_resp
