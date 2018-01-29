@@ -58,6 +58,8 @@ class Scraper:
                     url, headers=self.headers, params=payload
                 )
                 return response
+            elif self.name == 'yahoo':
+                url = self.newsURL
         payload = {self.queryKey: query, self.startKey: startIndex,
                    self.qtype: qtype}
         response = requests.get(url, headers=self.headers, params=payload)
