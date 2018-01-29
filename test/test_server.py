@@ -124,9 +124,9 @@ def expected_response_for_format(qformat):
     elif qformat == 'csv':
         return '"link","title","desc"\n"mock_link","mock_title","mock_desc"'
     elif qformat == 'xml':
-        return '<?xml version="1.0" ?><channel><item>' \
-               '<desc>mock_desc</desc><link>mock_link</link>' \
-               '<title>mock_title</title></item></channel>'
+        return ('<?xml version="1.0" ?><channel><item>'
+                '<desc>mock_desc</desc><link>mock_link</link>'
+                '<title>mock_title</title></item></channel>')
 
 
 def get_json_equivalent_from_csv_feed(feed):
