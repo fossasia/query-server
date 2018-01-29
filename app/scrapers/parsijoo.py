@@ -46,7 +46,6 @@ class Parsijoo(Scraper):
         for div in soup.findAll('div', {'class': 'news-title-link'}):
             title = div.a.getText()
             link = unquote(div.a.get('href'))
-            result_link = unquote(link)
             urls.append({'title': title, 'link': link})
 
         print('Baidu parsed: ' + str(urls))
