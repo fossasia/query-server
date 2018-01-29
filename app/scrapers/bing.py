@@ -13,8 +13,6 @@ class Bing(Scraper):
         self.defaultStart = 1
         self.startKey = 'first'
         self.name = 'bing'
-        self.videoKey = 'FORM'
-        self.imageKey = 'FORM'
 
     @staticmethod
     def parse_response(soup):
