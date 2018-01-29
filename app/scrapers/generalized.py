@@ -32,7 +32,9 @@ class Scraper:
             elif self.name in ['ask']:
                 url = self.videoURL
                 payload = {self.queryKey: query, self.startKey: startIndex}
-                response = requests.get(url, headers=self.headers, params=payload)
+                response = requests.get(
+                    url, headers=self.headers, params=payload
+                )
                 return response
             else:
                 url = self.url
@@ -40,7 +42,9 @@ class Scraper:
             if self.name in ['baidu']:
                 url = self.newsURL
                 payload = {'word': query, self.startKey: startIndex}
-                response = requests.get(url, headers=self.headers, params=payload)
+                response = requests.get(
+                    url, headers=self.headers, params=payload
+                )
                 return response
         elif qtype == 'isch':
             if self.name in ['yahoo']:
