@@ -133,13 +133,19 @@ class Scraper:
             Returns: list
         """
         urls = []
-        if self.name in ['bing']:
+        if self.name in ['parsijoo']:
+            url = self.videoURL
+            payload = {self.queryKey: query}
+        elif self.name in ['bing']:
             url = self.videoURL
             payload = {self.queryKey: query, self.videoKey: 'HDRSC3'}
         response = requests.get(url, headers=self.headers, params=payload)
         soup = BeautifulSoup(response.text, 'html.parser')
         urls = self.parse_video_response(soup)
-        return urls
+        if len(urls) == 0:
+            return "No video with this Keyword"
+        else:
+            return urls
 
     def image_search_without_count(self, query):
         """
@@ -147,7 +153,10 @@ class Scraper:
             Returns: list
         """
         urls = []
-        if self.name in ['bing']:
+        if self.name in ['parsijoo']:
+            url = self.imageURL
+            payload = {self.queryKey: query}
+        elif self.name in ['bing']:
             url = self.imageURL
             payload = {self.queryKey: query, self.imageKey: 'HDRSC2'}
         response = requests.get(url, headers=self.headers, params=payload)
