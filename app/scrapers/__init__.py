@@ -42,7 +42,7 @@ def feed_gen(query, engine, count=10, qtype=''):
     engine = old_names.get(engine, engine)
     if engine in ('quora', 'youtube'):
         urls = scrapers[engine].search_without_count(query)
-    elif engine in ('mojeek',) and qtype == 'news':
+    elif engine == 'mojeek' and qtype == 'news':
         urls = scrapers[engine].news_search_without_count(query)
     else:
         urls = scrapers[engine].search(query, count, qtype)
