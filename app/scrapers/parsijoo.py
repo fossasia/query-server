@@ -47,8 +47,8 @@ class Parsijoo(Scraper):
             title = div.a.getText()
             link = unquote(div.a.get('href'))
             result_link = unquote(link)
-            urls.append({'title': title, 'link': result_link})
+            urls.append({'title': title, 'link': link})
 
-        print('Parsijoo parsed: ' + str(urls))
+        print('Baidu parsed: ' + str(urls))
 
         return urls
