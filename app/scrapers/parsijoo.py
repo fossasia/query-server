@@ -1,5 +1,9 @@
 from __future__ import print_function
 from .generalized import Scraper
+try:
+    from urllib.parse import unquote  # Python 3
+except ImportError:
+    from urllib import unquote        # Python 2
 
 
 class Parsijoo(Scraper):
@@ -10,7 +14,9 @@ class Parsijoo(Scraper):
         self.url = 'https://parsijoo.ir/web'
         self.imageURL = 'https://image.parsijoo.ir/image'
         self.videoURL = 'https://video.parsijoo.ir/video'
+        self.newsURL = 'http://khabar.parsijoo.ir/search/'
         self.defaultStart = 0
+        self.newsStart = 1
         self.startKey = 'co'
         self.name = 'parsijoo'
 
@@ -67,6 +73,22 @@ class Parsijoo(Scraper):
             urls.append({
                 'link': url
             })
+
+        print('Parsijoo parsed: ' + str(urls))
+
+        return urls
+
+    @staticmethod
+    def parse_news_response(soup):
+        """ Parse the response and return set of urls
+        Returns: urls (list)
+                [[Tile1,url1], [Title2, url2],..]
+        """
+        urls = []
+        for div in soup.findAll('div', {'class': 'news-title-link'}):
+            title = div.a.getText()
+            link = unquote(div.a.get('href'))
+            urls.append({'title': title, 'link': link})
 
         print('Parsijoo parsed: ' + str(urls))
 

@@ -43,6 +43,21 @@ class Scraper:
                 url = self.imageURL
             else:
                 url = self.url
+        elif qtype == 'news':
+            if self.name == 'baidu':
+                url = self.newsURL
+                payload = {'word': query, self.startKey: startIndex}
+                response = requests.get(
+                    url, headers=self.headers, params=payload
+                )
+                return response
+            elif self.name == 'parsijoo':
+                url = self.newsURL
+                payload = {self.queryKey: query, 'page': startIndex}
+                response = requests.get(
+                    url, headers=self.headers, params=payload
+                )
+                return response
         payload = {self.queryKey: query, self.startKey: startIndex,
                    self.qtype: qtype}
         response = requests.get(url, headers=self.headers, params=payload)
@@ -162,4 +177,39 @@ class Scraper:
         response = requests.get(url, headers=self.headers, params=payload)
         soup = BeautifulSoup(response.text, 'html.parser')
         urls = self.parse_image_response(soup)
+        return urls
+
+    def news_search(self, query, num_results, qtype=''):
+        """
+            Search for the query and return set of urls
+            Returns: list
+        """
+        urls = []
+        if self.name == 'parsijoo':
+            current_start = self.newsStart
+        else:
+            current_start = self.defaultStart
+
+        while (len(urls) < num_results):
+            response = self.get_page(query, current_start, qtype)
+            soup = BeautifulSoup(response.text, 'html.parser')
+            new_results = self.parse_news_response(soup)
+            if new_results is None:
+                break
+            urls.extend(new_results)
+            current_start = self.next_start(current_start, new_results)
+        return urls[: num_results]
+
+    def news_search_without_count(self, query):
+        """
+            Search for the query and return set of urls
+            Returns: list
+        """
+        urls = []
+        if self.name == 'mojeek':
+            url = self.newsURL
+            payload = {self.queryKey: query, 'fmt': 'news'}
+        response = requests.get(url, headers=self.headers, params=payload)
+        soup = BeautifulSoup(response.text, 'html.parser')
+        urls = self.parse_news_response(soup)
         return urls
