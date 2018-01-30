@@ -12,3 +12,14 @@ def test_parse_response():
     }]
     resp = Mojeek().parse_response(dummy_soup)
     assert resp == expected_resp
+
+
+def test_parse_news_response():
+    html_text = '<a href="mock_url" class="ob">mock_title</a>'
+    dummy_soup = BeautifulSoup(html_text, 'html.parser')
+    expected_resp = [{
+        'title': u'mock_title',
+        'link': u'mock_url'
+    }]
+    resp = Mojeek().parse_news_response(dummy_soup)
+    assert resp == expected_resp
