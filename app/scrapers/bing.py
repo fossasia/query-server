@@ -84,7 +84,6 @@ class Bing(Scraper):
             link = div.find('a', {'class': 'title'})
             url = link['href']
             title = link.getText()
-            print (title)
             title = title.replace('\n', '').replace('  ', '')
             desc = div.find('div', {'class': 'snippet'}).getText()
             desc = desc.replace('\n', '').replace('  ', '')
