@@ -10,7 +10,7 @@ class Baidu(Scraper):
         self.url = 'https://www.baidu.com/s'
         self.newsURL = 'http://news.baidu.com/ns'
         self.defaultStart = 0
-        self.queryKey = 'wd'
+        self.queryKey = 'word'
         self.startKey = 'pn'
         self.name = 'baidu'
 
