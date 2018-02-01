@@ -15,6 +15,7 @@ class Yahoo(Scraper):
         self.url = 'https://search.yahoo.com/search'
         self.videoURL = 'https://video.search.yahoo.com/search/video'
         self.imageURL = 'https://images.search.yahoo.com/search/images'
+        self.newsURL = 'https://news.search.yahoo.com/search'
         self.defaultStart = 1
         self.startKey = 'b'
         self.name = 'yahoo'
@@ -85,6 +86,29 @@ class Yahoo(Scraper):
             urls.append({
                 'title': r,
                 'link': url
+            })
+
+        print('Yahoo parsed: ' + str(urls))
+
+        return urls
+
+    @staticmethod
+    def parse_news_response(soup):
+        """ Parse response and returns the urls
+            Returns: urls (list)
+                    [[Tile1, url1], [Title2, url2], ...]
+        """
+        urls = []
+        for div in soup.findAll('div', attrs={'class': 'dd algo NewsArticle'}):
+            link = div.find('a', attrs={'class': 'fz-m'})
+            descDiv = div.find('div', attrs={'class': 'compText'})
+            unparsedURL = link.get('href')
+            urlSearch = re.search('/RU=(.*?)/', unparsedURL, re.I)
+            url = unquote(urlSearch.group(1))
+            urls.append({
+                'title': link.getText(),
+                'link': url,
+                'desc': descDiv.find('p').getText()
             })
 
         print('Yahoo parsed: ' + str(urls))

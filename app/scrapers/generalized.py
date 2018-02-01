@@ -32,7 +32,7 @@ class Scraper:
                 url = self.videoURL
         elif qtype == 'isch' and self.name in ['yahoo', 'parsijoo', 'bing']:
                 url = self.imageURL
-        elif qtype == 'news' and self.name in ['baidu', 'parsijoo', 'mojeek']:
+        elif qtype == 'news' and self.name in ['baidu', 'parsijoo', 'mojeek', 'bing']:
             url = self.newsURL
         payload = {self.queryKey: query, self.startKey: startIndex,
                    self.qtype: qtype}
@@ -79,7 +79,7 @@ class Scraper:
                 new_results = self.parse_video_response(soup)
         elif qtype == 'isch' and self.name in ['yahoo', 'parsijoo', 'bing']:
                 new_results = self.parse_image_response(soup)
-        elif qtype == 'news' and self.name in ['parsijoo', 'mojeek', 'baidu']:
+        elif qtype == 'news' and self.name in ['parsijoo', 'mojeek', 'baidu', 'bing']:
                 new_results = self.parse_news_response(soup)
         else:
             new_results = self.parse_response(soup)
