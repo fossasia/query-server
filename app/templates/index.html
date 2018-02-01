@@ -42,14 +42,14 @@
                 Query server that stores a query string on a server.
             </p>
             <form id="searchForm">
-                <div class="container" style="padding:0; margin: 0 auto;">
+                <div class="container" id="search">
                     <div class="row">
                         <div class="col-sm-8">
-                            <div class="input-group input-group-lg" style="min-width:100%">
+                            <div class="input-group input-group-lg queryArea">
                                 <input id="query" type="text" class="center-block form-control" autocomplete="on" placeholder="Search with query-server">
                             </div>
                         </div>
-                        <div class="col-sm-4" style="display:inline-flex    ;">
+                        <div class="col-sm-4 responseType">
                             <div class="btn-group" role="group" id="format" data-toggle="buttons">
                                 <label class="btn btn-lg btn-primary active formatButton">
                                         <input type="radio" value="json" autocomplete="off">JSON
@@ -66,7 +66,7 @@
                     <br/>
 
                     <div class="row">
-                        <div class="col-sm-3 col-xs-6" style="padding:0; margin-right:30px; margin-left:16px; margin-bottom: 10px;">
+                        <div class="col-sm-3 col-xs-6 engineDrop">
                             <div class="dropdown">
                                 <label>Engine:</label><br/>
                                 <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
@@ -80,7 +80,7 @@
                                 <ul class="dropdown-menu">
                                     {% for engine in engines_list %}
                                         <li onClick="update_button('{{ engine }}')" id="{{engine}}">
-                                            <a style="cursor:pointer">
+                                            <a id="a1" >
                                                 {% if engine in ['ask', 'baidu', 'bing', 'yahoo'] %}
                                                     <img src="{{ url_for('static', filename='images/' + engine + '_icon.ico') }}" width="15px">
                                                 {% else %}
@@ -93,26 +93,26 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-sm-3 col-xs-6" style="padding:0; max-width:100%; margin-left:16px; margin-right:30px;">
+                        <div class="col-sm-3 col-xs-6 qType">
                                 <label>Type:</label><br/>
-                                <div id="type" class="btn-group btn-group-vertical" style="display:inline-flex;" data-toggle="buttons">
-                                    <label class=" active typeButton" style="padding: 0px 10px 10px;">General<br/>
+                                <div id="type" class="btn-group btn-group-vertical" data-toggle="buttons">
+                                    <label class=" active typeButton">General<br/>
                                             <input type="radio" name = "stype" value="" autocomplete="off" checked>
                                     </label>
-                                    <label class=" typeButton" style="padding: 0px 10px 10px;">Images<br/>
+                                    <label class="typeButton">Images<br/>
                                             <input type="radio" name = "stype" value="isch" autocomplete="off">
                                     </label>
-                                    <label class=" typeButton" style="padding: 0px 10px 10px;">
+                                    <label class="typeButton">
                                         Video<br/>
                                             <input type="radio" name = "stype" value="vid" autocomplete="off">
                                     </label>
-                                    <label class=" typeButton" style="padding: 0px 10px 10px;">News<br/>
+                                    <label class="typeButton ">News<br/>
                                             <input type="radio" name = "stype" value="news" autocomplete="off">
                                     </label>
                                 </div>
                         </div>
                         <div class="col-sm-2 col-xs-6">
-                            <div class="form-group" style="display:inline-block; margin: 0 ; min-width:50%;">
+                            <div class="form-group qCount">
                                 <label for="resp">Max:</label>
                                 <select class="form-control" id="resp">
                                     <option>10</option>
@@ -128,7 +128,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-sm-2 col-xs-6" style="margin-top:20px;">
+                        <div class="col-sm-2 col-xs-6" id="submit">
                             <input type="submit" value="Submit" id="submitter" class="btn btn-primary"/>
                         </div>
                     </div>
@@ -139,11 +139,11 @@
     <div class="pagination-centered">
         <img id="load" src="{{ url_for('static', filename='images/ripple.gif') }}">
     </div>
-    <pre id="feed" style="display:none;"><code class="language-xml"></code></pre>
+    <pre id="feed"><code class="language-xml"></code></pre>
     <br/><br/>
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-sm-12 col-xs-12" style="margin: 0 auto;display: table;">
+            <div class="col-md-8 col-sm-12 col-xs-12 miscInfo">
                 <div class="panel panel-primary">
                     <div class="panel-heading">Project Information</div>
                     <div class="panel-body">
