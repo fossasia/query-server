@@ -26,3 +26,19 @@ def test_parse_image_response():
     }]
     resp = Yahoo().parse_image_response(dummy_soup)
     assert resp == expected_resp
+
+
+def test_parse_news_response():
+    html_text = '<div class="dd algo NewsArticle"><div class="layoutLeft">' \
+        '<div class="compTitle"><h3><a class="fz-m" href="http://' \
+        'r.search.yahoo.com/_ylt=Awr;_ylu=X3--/RV=2/RE=15/RO=10/RU=mock_url/' \
+        'RK=2/RS=Gne">mock_title</a></h3><div class="compText" ><p>mock_desc'\
+        '</p></div></div>'
+    dummy_soup = BeautifulSoup(html_text, 'html.parser')
+    expected_resp = [{
+        'title': u'mock_title',
+        'link': u'mock_url',
+        'desc': u'mock_desc'
+    }]
+    resp = Yahoo().parse_news_response(dummy_soup)
+    assert resp == expected_resp
