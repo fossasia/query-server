@@ -10,11 +10,10 @@ class Bing(Scraper):
         self.url = 'http://www.bing.com/search'
         self.videoURL = 'https://www.bing.com/videos/search'
         self.imageURL = 'https://www.bing.com/images/search'
+        self.newsURL = 'https://www.bing.com/news/search'
         self.defaultStart = 1
         self.startKey = 'first'
         self.name = 'bing'
-        self.videoKey = 'FORM'
-        self.imageKey = 'FORM'
 
     @staticmethod
     def parse_response(soup):
@@ -69,6 +68,29 @@ class Bing(Scraper):
             urls.append({
                 'link': url
             })
+
+        print('Bing parsed: ' + str(urls))
+
+        return urls
+
+    @staticmethod
+    def parse_news_response(soup):
+        """ Parses the reponse and return set of urls
+        Returns: urls (list)
+                [[Tile1,url1], [Title2, url2],..]
+        """
+        urls = []
+        for div in soup.findAll('div', {'class': 't_s'}):
+            link = div.find('a', {'class': 'title'})
+            url = link['href']
+            title = link.getText()
+            title = title.replace('\n', '').replace('  ', '')
+            desc = div.find('div', {'class': 'snippet'}).getText()
+            desc = desc.replace('\n', '').replace('  ', '')
+            url_entry = {'title': title,
+                         'link': url,
+                         'desc': desc}
+            urls.append(url_entry)
 
         print('Bing parsed: ' + str(urls))
 
