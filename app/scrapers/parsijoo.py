@@ -66,8 +66,7 @@ class Parsijoo(Scraper):
                     [[url1], [url2], ...]
         """
         urls = []
-        for div in \
-                soup.findAll('div', attrs={'class': 'image-container overflow'}):
+        for div in soup.find_all('div', class_='image-container overflow'):
             a = div.find('a')
             url = 'https://image.parsijoo.ir' + a.get('href')
             urls.append({
