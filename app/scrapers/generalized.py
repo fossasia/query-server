@@ -2,6 +2,10 @@ from __future__ import print_function
 import requests
 from bs4 import BeautifulSoup
 
+VID_SCRAPERS = ('ask', 'bing', 'parsijoo', 'yahoo')
+ISCH_SCRAPERS = ('bing', 'parsijoo', 'yahoo')
+NEWS_SCRAPERS = ('baidu', 'bing', 'parsijoo', 'mojeek')
+
 
 class Scraper:
     """Generalized scraper"""
@@ -27,12 +31,11 @@ class Scraper:
         Returns : Results Page
         """
         url = self.url
-        if qtype == 'vid' and self.name in ['yahoo', 'ask', 'parsijoo',
-                                                            'bing']:
+        if qtype == 'vid' and self.name in VID_SCRAPERS:
                 url = self.videoURL
-        elif qtype == 'isch' and self.name in ['yahoo', 'parsijoo', 'bing']:
+        elif qtype == 'isch' and self.name in ISCH_SCRAPERS:
                 url = self.imageURL
-        elif qtype == 'news' and self.name in ['baidu', 'parsijoo', 'mojeek', 'bing']:
+        elif qtype == 'news' and self.name in NEWS_SCRAPERS:
             url = self.newsURL
         payload = {self.queryKey: query, self.startKey: startIndex,
                    self.qtype: qtype}
@@ -74,12 +77,11 @@ class Scraper:
 
     def call_appropriate_parser(self, qtype, soup):
         new_results = ''
-        if qtype == 'vid' and self.name in ['yahoo', 'ask', 'parsijoo',
-                                                            'bing']:
+        if qtype == 'vid' and self.name in VID_SCRAPERS:
                 new_results = self.parse_video_response(soup)
-        elif qtype == 'isch' and self.name in ['yahoo', 'parsijoo', 'bing']:
+        elif qtype == 'isch' and self.name in ISCH_SCRAPERS:
                 new_results = self.parse_image_response(soup)
-        elif qtype == 'news' and self.name in ['parsijoo', 'mojeek', 'baidu', 'bing']:
+        elif qtype == 'news' and self.name in NEWS_SCRAPERS:
                 new_results = self.parse_news_response(soup)
         else:
             new_results = self.parse_response(soup)
