@@ -10,6 +10,7 @@ from .google import Google
 from .mojeek import Mojeek
 from .parsijoo import Parsijoo
 from .quora import Quora
+from .twitter import Twitter
 from .yahoo import Yahoo
 from .youtube import Youtube
 
@@ -24,6 +25,7 @@ scrapers = {
     'mojeek': Mojeek(),
     'parsijoo': Parsijoo(),
     'quora': Quora(),
+    'twitter': Twitter(),
     'yahoo': Yahoo(),
     'youtube': Youtube()
 }
@@ -42,12 +44,6 @@ def feed_gen(query, engine, count=10, qtype=''):
     engine = old_names.get(engine, engine)
     if engine in ('quora', 'youtube'):
         urls = scrapers[engine].search_without_count(query)
-    elif engine in ('bing',) and qtype == 'vid':
-        urls = scrapers[engine].video_search_without_count(query)
-    elif engine in ('bing',) and qtype == 'isch':
-        urls = scrapers[engine].image_search_without_count(query)
-    elif engine in ('ask',) and qtype == 'vid':
-        urls = scrapers[engine].video_search(query, count, qtype)
     else:
         urls = scrapers[engine].search(query, count, qtype)
     return urls

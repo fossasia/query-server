@@ -2,6 +2,10 @@ from __future__ import print_function
 import requests
 from bs4 import BeautifulSoup
 
+VID_SCRAPERS = ('ask', 'bing', 'parsijoo', 'yahoo')
+ISCH_SCRAPERS = ('bing', 'parsijoo', 'yahoo')
+NEWS_SCRAPERS = ('baidu', 'bing', 'parsijoo', 'mojeek')
+
 
 class Scraper:
     """Generalized scraper"""
@@ -19,6 +23,7 @@ class Scraper:
     }
 
     def __init__(self):
+        self.name = "general"
         pass
 
     def get_page(self, query, startIndex=0, qtype=''):
@@ -26,25 +31,16 @@ class Scraper:
         Returns : Results Page
         """
         url = self.url
-        if qtype == 'vid':
-            if self.name in ['yahoo']:
+        if qtype == 'vid' and self.name in VID_SCRAPERS:
                 url = self.videoURL
-            elif self.name in ['ask']:
-                url = self.videoURL
-                payload = {self.queryKey: query, self.startKey: startIndex}
-                response = requests.get(
-                    url, headers=self.headers, params=payload
-                )
-                return response
-            else:
-                url = self.url
-        elif qtype == 'isch':
-            if self.name in ['yahoo']:
+        elif qtype == 'isch' and self.name in ISCH_SCRAPERS:
                 url = self.imageURL
-            else:
-                url = self.url
+        elif qtype == 'news' and self.name in NEWS_SCRAPERS:
+            url = self.newsURL
         payload = {self.queryKey: query, self.startKey: startIndex,
                    self.qtype: qtype}
+        if self.name == 'mojeek' and qtype == 'news':
+            payload['fmt'] = 'news'
         response = requests.get(url, headers=self.headers, params=payload)
         print(response.url)
         return response
@@ -81,16 +77,12 @@ class Scraper:
 
     def call_appropriate_parser(self, qtype, soup):
         new_results = ''
-        if qtype == 'vid':
-            if self.name in ['yahoo']:
+        if qtype == 'vid' and self.name in VID_SCRAPERS:
                 new_results = self.parse_video_response(soup)
-            else:
-                new_results = self.parse_response(soup)
-        elif qtype == 'isch':
-            if self.name in ['yahoo']:
+        elif qtype == 'isch' and self.name in ISCH_SCRAPERS:
                 new_results = self.parse_image_response(soup)
-            else:
-                new_results = self.parse_response(soup)
+        elif qtype == 'news' and self.name in NEWS_SCRAPERS:
+                new_results = self.parse_news_response(soup)
         else:
             new_results = self.parse_response(soup)
         return new_results
@@ -105,52 +97,4 @@ class Scraper:
         response = requests.get(self.url, headers=self.headers, params=payload)
         soup = BeautifulSoup(response.text, 'html.parser')
         urls = self.parse_response(soup)
-        return urls
-
-    def video_search(self, query, num_results, qtype=''):
-        urls = []
-        current_start = self.defaultStart
-
-        while (len(urls) < num_results):
-            response = self.get_page(query, current_start, qtype)
-            soup = BeautifulSoup(response.text, 'html.parser')
-            if qtype == 'vid':
-                if self.name in ['yahoo', 'ask']:
-                    new_results = self.parse_video_response(soup)
-                else:
-                    new_results = self.parse_response(soup)
-            else:
-                new_results = self.parse_response(soup)
-            if new_results is None:
-                break
-            urls.extend(new_results)
-            current_start = self.next_start(current_start, new_results)
-        return urls[: num_results]
-
-    def video_search_without_count(self, query):
-        """
-            Search for the query and return set of urls
-            Returns: list
-        """
-        urls = []
-        if self.name in ['bing']:
-            url = self.videoURL
-            payload = {self.queryKey: query, self.videoKey: 'HDRSC3'}
-        response = requests.get(url, headers=self.headers, params=payload)
-        soup = BeautifulSoup(response.text, 'html.parser')
-        urls = self.parse_video_response(soup)
-        return urls
-
-    def image_search_without_count(self, query):
-        """
-            Search for the query and return set of urls
-            Returns: list
-        """
-        urls = []
-        if self.name in ['bing']:
-            url = self.imageURL
-            payload = {self.queryKey: query, self.imageKey: 'HDRSC2'}
-        response = requests.get(url, headers=self.headers, params=payload)
-        soup = BeautifulSoup(response.text, 'html.parser')
-        urls = self.parse_image_response(soup)
         return urls
