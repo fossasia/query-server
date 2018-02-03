@@ -22,6 +22,27 @@ def test_parse_response():
     assert resp == expected_resp
 
 
+def test_search_parsijoo_without_count():
+    query = 'fossasia'
+    expected_max_resp_count = 10
+    resp_count = len(Parsijoo().search(query))
+    assert resp_count <= expected_max_resp_count
+
+
+def test_search_parsijoo_with_small_count():
+    query = 'fossasia'
+    expected_resp_count = 2
+    resp_count = len(Parsijoo().search(query, 2))
+    assert resp_count == expected_resp_count
+
+
+def test_search_parsijoo_with_large_count():
+    query = 'fossasia'
+    expected_max_resp_count = 27
+    resp_count = len(Parsijoo().search(query, 27))
+    assert resp_count <= expected_max_resp_count
+
+
 def test_parse_video_response():
     html_text = """<a href="mock_url" class="over-page"
     title="mock_title">mock_title</a>"""
