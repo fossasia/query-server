@@ -36,6 +36,7 @@ def test_search_baidu_with_large_count():
     resp_count = len(Baidu().search(query, 27))
     assert resp_count <= expected_max_resp_count
 
+
 def test_parse_news_response():
     html_text = """<h3 class="c-title">
         <a href="mock_url" target="_blank">mock_title</a>

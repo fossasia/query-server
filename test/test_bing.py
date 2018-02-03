@@ -42,6 +42,7 @@ def test_parse_video_response():
     assert resp == expected_resp
 
 
+<<<<<<< HEAD
 def test_search_bing_without_count():
     query = 'fossasia'
     expected_max_resp_count = 10
@@ -63,6 +64,8 @@ def test_search_bing_with_large_count():
     assert resp_count <= expected_max_resp_count
 
 
+=======
+>>>>>>> 3f52d86dc680cf3653001de825a75826f18ce651
 def test_parse_news_response():
     html_text = """<div class="t_s"><div class="t_t"><a class="title"
         href="mock_url">mock_title</a></div><div class="snippet">
