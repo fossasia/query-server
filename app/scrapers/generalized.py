@@ -23,8 +23,8 @@ class Scraper:
     }
 
     def __init__(self):
+        # To avoid AttributeError when checking for self.name
         self.name = "general"
-        pass
 
     def get_page(self, query, startIndex=0, qtype=''):
         """ Fetch the google search results page
@@ -37,12 +37,17 @@ class Scraper:
                 url = self.imageURL
         elif qtype == 'news' and self.name in NEWS_SCRAPERS:
             url = self.newsURL
-        payload = {self.queryKey: query, self.startKey: startIndex,
-                   self.qtype: qtype}
+
+        if self.name in ('quora', 'youtube'):
+            payload = {self.queryKey: query}
+        else:
+            payload = {self.queryKey: query, self.startKey: startIndex,
+                       self.qtype: qtype}
+
         if self.name == 'mojeek' and qtype == 'news':
             payload['fmt'] = 'news'
         response = requests.get(url, headers=self.headers, params=payload)
-        print(response.url)
+        print(response)
         return response
 
     @staticmethod
@@ -57,7 +62,7 @@ class Scraper:
     def next_start(current_start, prev_results):
         return current_start + len(prev_results)
 
-    def search(self, query, num_results, qtype=''):
+    def search(self, query, num_results=10, qtype=''):
         """
             Search for the query and return set of urls
             Returns: list
@@ -72,29 +77,21 @@ class Scraper:
             if new_results is None:
                 break
             urls.extend(new_results)
+            # Quora and youtube return all results on the same page
+            if self.name in ('quora', 'youtube'):
+                break
             current_start = self.next_start(current_start, new_results)
+
         return urls[: num_results]
 
     def call_appropriate_parser(self, qtype, soup):
         new_results = ''
         if qtype == 'vid' and self.name in VID_SCRAPERS:
-                new_results = self.parse_video_response(soup)
+            new_results = self.parse_video_response(soup)
         elif qtype == 'isch' and self.name in ISCH_SCRAPERS:
-                new_results = self.parse_image_response(soup)
+            new_results = self.parse_image_response(soup)
         elif qtype == 'news' and self.name in NEWS_SCRAPERS:
-                new_results = self.parse_news_response(soup)
+            new_results = self.parse_news_response(soup)
         else:
             new_results = self.parse_response(soup)
         return new_results
-
-    def search_without_count(self, query):
-        """
-            Search for the query and return set of urls
-            Returns: list
-        """
-        urls = []
-        payload = {self.queryKey: query}
-        response = requests.get(self.url, headers=self.headers, params=payload)
-        soup = BeautifulSoup(response.text, 'html.parser')
-        urls = self.parse_response(soup)
-        return urls

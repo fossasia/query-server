@@ -61,28 +61,3 @@ def test_search_parsed_response_none(mock_resp, mock_get):
                return_value=None):
         resp = Scraper().search('dummy_query', 1)
         assert resp == []
-
-
-@patch('app.scrapers.generalized.requests.get')
-@patch('app.scrapers.generalized.Scraper.parse_response')
-@patch('requests.models.Response')
-def test_search_without_count(mock_resp, mock_parse_resp, mock_get):
-    mock_get.return_value = mock_resp
-    mock_resp.text = 'mock response'
-    expected_resp = [{
-        'title': 'mock_title',
-        'link': 'mock_url'
-    }]
-    expected_payload = {'q': 'dummy_query'}
-    expected_headers = {
-        'User-Agent': (
-            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) '
-            'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 '
-            'Safari/537.36'
-        )
-    }
-    mock_parse_resp.return_value = expected_resp
-    resp = Scraper().search_without_count('dummy_query')
-    assert resp == expected_resp
-    mock_get.assert_called_with(
-        '', headers=expected_headers, params=expected_payload)
