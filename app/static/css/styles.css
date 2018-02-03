@@ -20,7 +20,57 @@ body {
     border: 0;
 }
 
+.queryArea {
+    min-width: 100%;
+}
+
+.responseType {
+    display: inline-flex;
+}
+
+.engineDrop {
+    padding: 0;
+    margin-right: 30px;
+    margin-left: 16px;
+    margin-bottom: 10px;    
+}
+
+.qType {
+	padding: 0;
+    margin-right: 30px;
+    margin-left: 16px;
+}
+
+.miscInfo {
+    margin: 0 auto;
+    display: table;
+}
+
+.typeButton {
+    padding: 0px 10px 10px;
+}
+
+.qCount {
+    display: inline-block;
+    margin: 0;
+    min-width: 50%;
+}
+
+#submit {
+    margin-top: 20px;
+}
+
+#a1 {
+    cursor: pointer;
+}
+
+#search {
+    padding: 0;
+    margin: 0, auto;
+}
+
 #feed {
+    display: none;
     font-size: 1.2em;
     margin: 0em 2em 0 2em;
     padding: -3em 0 -3em 0;
@@ -44,6 +94,10 @@ p {
     font-size: 1.5em;
     display: inline-block;
     box-shadow: aliceblue;
+}
+
+.btn-group-vertical {
+    display: inline-flex;
 }
 
 .btn-toolbar {
