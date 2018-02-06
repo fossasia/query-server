@@ -43,7 +43,7 @@ def feed_gen(query, engine, count=10, qtype=''):
                  'tyoutube': 'youtube'}
     engine = old_names.get(engine, engine)
     if engine in ('quora', 'youtube'):
-        urls = scrapers[engine].search_without_count(query)
+        urls, status_code = scrapers[engine].search_without_count(query)
     else:
-        urls = scrapers[engine].search(query, count, qtype)
-    return urls
+        urls, status_code = scrapers[engine].search(query, count, qtype)
+    return (urls, status_code)

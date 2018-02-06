@@ -1,10 +1,9 @@
-import json
 import os
 from argparse import ArgumentParser
 
 from defusedxml.minidom import parseString
 from dicttoxml import dicttoxml
-from flask import (Flask, Response, abort, jsonify, make_response,
+from flask import (Flask, Response, abort, jsonify,
                    render_template, request)
 
 try:
@@ -39,8 +38,14 @@ def index():
 
 def bad_request(error):
     message = {'Error': error[1], 'Status Code': error[0]}
-    response = dicttoxml(message) if error[2] == 'xml' else json.dumps(message)
-    return make_response(response, error[0])
+    print(error[2])
+    if error[2] == 'xml':
+        return Response(dicttoxml(message), mimetype='text/xml')
+    elif error[2] == 'csv':
+        message = "'Error', 'Status Code' \n {}, {}".format(error[1], error[0])
+        return Response(message, mimetype='text/csv')
+    else:
+        return jsonify(message)
 
 
 @app.route('/api/v1/search/<search_engine>', methods=['GET'])
@@ -54,7 +59,7 @@ def search(search_engine):
 
         engine = search_engine
         if engine not in scrapers:
-            error = [404, 'Incorrect search engine', engine]
+            error = [404, 'Incorrect search engine', qformat]
             return bad_request(error)
 
         query = request.args.get('query')
@@ -68,12 +73,12 @@ def search(search_engine):
         if result:
             print("cache hit: {}".format(engine_and_query))
         else:
-            result = feed_gen(query, engine, count, qtype)
+            result, status_code = feed_gen(query, engine, count, qtype)
             if result:
                 # store the result in the cache to speed up future searches
                 store(engine_and_query, result)
             else:
-                error = [404, 'No response', engine_and_query]
+                error = [status_code, 'No response', qformat]
                 return bad_request(error)
 
         try:
