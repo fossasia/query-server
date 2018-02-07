@@ -63,7 +63,7 @@ class Scraper:
     def search(self, query, num_results, qtype=''):
         """
             Search for the query and return set of urls
-            Returns: list
+            Returns: list, status_code
         """
         urls = []
         current_start = self.defaultStart

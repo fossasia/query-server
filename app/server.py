@@ -59,7 +59,7 @@ def search(search_engine):
 
         engine = search_engine
         if engine not in scrapers:
-            error = [404, 'Incorrect search engine', qformat]
+            error = [404, 'Incorrect search engine', engine]
             return bad_request(error)
 
         query = request.args.get('query')
@@ -78,7 +78,7 @@ def search(search_engine):
                 # store the result in the cache to speed up future searches
                 store(engine_and_query, result)
             else:
-                error = [status_code, 'No response', qformat]
+                error = [status_code, 'No response', engine_and_query]
                 return bad_request(error)
 
         try:
