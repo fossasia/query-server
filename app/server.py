@@ -34,7 +34,7 @@ errorObj = {
 
 @app.route('/')
 def index():
-    return render_template('index.html', engines_list=scrapers.keys())
+    return render_template('index.html', engines_list=sorted(scrapers.keys()))
 
 
 def bad_request(error):
