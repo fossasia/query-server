@@ -97,17 +97,17 @@
                                 <label>Type:</label><br/>
                                 <div id="type" class="btn-group btn-group-vertical" data-toggle="buttons">
                                     <label class=" active typeButton">General<br/>
-                                            <input type="radio" name = "stype" value="" autocomplete="off" checked>
+                                            <input type="radio" id="general" name = "stype" value="" autocomplete="off" checked>
                                     </label>
                                     <label class="typeButton">Images<br/>
-                                            <input type="radio" name = "stype" value="isch" autocomplete="off">
+                                            <input type="radio" id="isch" name = "stype" value="isch" autocomplete="off" disabled>
                                     </label>
                                     <label class="typeButton">
                                         Video<br/>
-                                            <input type="radio" name = "stype" value="vid" autocomplete="off">
+                                            <input type="radio" id="vid" name = "stype" value="vid" autocomplete="off" disabled>
                                     </label>
                                     <label class="typeButton ">News<br/>
-                                            <input type="radio" name = "stype" value="news" autocomplete="off">
+                                            <input type="radio" id="news" name = "stype" value="news" autocomplete="off" disabled>
                                     </label>
                                 </div>
                         </div>
@@ -179,8 +179,38 @@
         </div>
     </footer>
     <script>
+    
+        var qtype_scraper_map = {
+            'isch' : ['bing', 'parsijoo', 'yahoo'],
+            'vid' : ['ask', 'bing', 'parsijoo', 'yahoo'],
+            'news' : ['baidu', 'bing', 'parsijoo', 'mojeek']
+        };
+    
+        function activate_qtype(active_engine) {          
+            
+            $('#isch').prop('disabled', true);
+            $('#vid').prop('disabled', true);
+            $('#news').prop('disabled', true);
+            
+            $.each( qtype_scraper_map, function (qtype, scrapers) {
+                $.each( scrapers, function (index, engine) {
+                    if (engine == active_engine) {
+                        if(qtype == 'isch') {
+                            $('#isch').prop('disabled', false);
+                        }
+                        else if(qtype == 'vid') {
+                            $('#vid').prop('disabled', false);
+                        }
+                        else {
+                            $('#news').prop('disabled', false);
+                        }
+                        return false;
+                    }
+                })
+            })    
+        }
         function update_button(engine) {
-            var html = ""
+            var html = "";
             if(engine == "bing" || engine == "baidu" ||
                engine == "ask" || engine == "yahoo")
                 html = "<img src='static/images/"+engine+"_icon.ico' width='25px'>";
@@ -189,6 +219,8 @@
             html += "&nbsp;"+engine;
             $("#drop_down_text").html(html);
             $("#engine").val(engine);
+            $("#general").prop('checked', true);
+            activate_qtype(engine);
         }
         $(function () {
             $('#submitter').click(function (e) {
