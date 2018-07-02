@@ -15,6 +15,6 @@
 git clone https://github.com/fossasia/query-server.git && cd query-server
 ```
 
-* In the terminal window, run `docker build -t query-server:latest` to build badgeyay's docker image. This process can take some time.
+* In the terminal window, run `docker build -t query-server:latest .` to build badgeyay's docker image. This process can take some time.
 
 * After build is done, run `docker run -d -p 7001:7001 query-server` to start the server.
