@@ -9,7 +9,7 @@ from app.scrapers.generalized import Scraper
 def test_get_page(mock_request_get, mock_response):
     mock_request_get.return_value = mock_response
     mock_response.url = "Mock Url"
-    response = Scraper().get_page("dummy_query")
+    response, _ = Scraper().get_page("dummy_query")
     assert response == mock_response
     expected_payload = {'q': 'dummy_query', '': ''}
     expected_headers = {
@@ -38,7 +38,7 @@ def test_next_start():
 @patch('app.scrapers.generalized.Scraper.get_page')
 @patch('requests.models.Response')
 def test_search(mock_resp, mock_get_page, mock_parse_resp):
-    mock_get_page.return_value = mock_resp
+    mock_get_page.return_value = mock_resp, 200
     mock_resp.text = "Mock response"
     expected_resp = [{
         'title': 'mock_title',
@@ -48,18 +48,18 @@ def test_search(mock_resp, mock_get_page, mock_parse_resp):
     # classes inheriting Scraper. Thus, returning dummy
     # response instead of raising NotImplementedError
     mock_parse_resp.return_value = expected_resp
-    resp = Scraper().search('dummy_query', 1)
+    resp, _ = Scraper().search('dummy_query', 1)
     assert resp == expected_resp
 
 
 @patch('app.scrapers.generalized.Scraper.get_page')
 @patch('requests.models.Response')
 def test_search_parsed_response_none(mock_resp, mock_get):
-    mock_get.return_value = mock_resp
+    mock_get.return_value = mock_resp, 200
     mock_resp.text = "Mock Response"
     with patch('app.scrapers.generalized.Scraper.parse_response',
                return_value=None):
-        resp = Scraper().search('dummy_query', 1)
+        resp, _ = Scraper().search('dummy_query', 1)
         assert resp == []
 
 
@@ -82,7 +82,7 @@ def test_search_without_count(mock_resp, mock_parse_resp, mock_get):
         )
     }
     mock_parse_resp.return_value = expected_resp
-    resp = Scraper().search_without_count('dummy_query')
+    resp, _ = Scraper().search_without_count('dummy_query')
     assert resp == expected_resp
     mock_get.assert_called_with(
         '', headers=expected_headers, params=expected_payload)

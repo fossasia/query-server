@@ -42,8 +42,11 @@ class Scraper:
         if self.name == 'mojeek' and qtype == 'news':
             payload['fmt'] = 'news'
         response = requests.get(url, headers=self.headers, params=payload)
+        status_code = response.status_code
+        if(status_code == 400 or status_code == 404):
+            return (None, status_code)
         print(response.url)
-        return response
+        return (response, status_code)
 
     @staticmethod
     def parse_response(soup):
@@ -60,20 +63,25 @@ class Scraper:
     def search(self, query, num_results, qtype=''):
         """
             Search for the query and return set of urls
-            Returns: list
+            Returns: list, status_code
         """
         urls = []
         current_start = self.defaultStart
-
         while (len(urls) < num_results):
-            response = self.get_page(query, current_start, qtype)
+            response, status_code = self.get_page(query, current_start, qtype)
+            if response is None:
+                if(len(urls) == 0):
+                    return (None, status_code)
+                else:
+                    print("Couldn't fetch more results.")
+                    return (urls, 200)
             soup = BeautifulSoup(response.text, 'html.parser')
             new_results = self.call_appropriate_parser(qtype, soup)
-            if new_results is None:
+            if new_results is None or len(new_results) == 0:
                 break
             urls.extend(new_results)
             current_start = self.next_start(current_start, new_results)
-        return urls[: num_results]
+        return (urls[: num_results], 200)
 
     def call_appropriate_parser(self, qtype, soup):
         new_results = ''
@@ -95,6 +103,9 @@ class Scraper:
         urls = []
         payload = {self.queryKey: query}
         response = requests.get(self.url, headers=self.headers, params=payload)
+        status_code = response.status_code
+        if(status_code == 400 or status_code == 404):
+            return(None, status_code)
         soup = BeautifulSoup(response.text, 'html.parser')
         urls = self.parse_response(soup)
-        return urls
+        return (urls, 200)
