@@ -17,7 +17,7 @@ class Reddit(Scraper):
         """
         url = self.redditURL + requests.utils.quote(query, safe='')
         url += '&limit={}'.format(num_results)
-        
+
         responses = requests.get(url, headers=Scraper.headers).json()
 
         links = []
