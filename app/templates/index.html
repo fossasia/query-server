@@ -229,7 +229,7 @@
                     $('#load').show();
                     $('#feed').hide();
                     var sengine = $("#engine").val();
-                    var squery = $('#query').val();
+                    var squery = encodeURIComponent($('#query').val());
                     var stype = $("input[name=stype]:checked").val()
                     var sformat = $(' #format label.active input').val();
                     var count = $('#resp').val();
