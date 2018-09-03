@@ -11,7 +11,7 @@ The query server can be used to search a keyword/phrase on a search engine (Goog
 
 ## Table of Contents
 
-- [Test Deployment](test-deployment)
+- [Test Deployment](#test-deployment)
 - [API](#api)
 - [Error Codes](#error-codes)
 - [Dependencies](#dependencies)
