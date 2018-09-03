@@ -11,11 +11,16 @@ The query server can be used to search a keyword/phrase on a search engine (Goog
 
 ## Table of Contents
 
+- [Test Deployment](test-deployment)
 - [API](#api)
 - [Error Codes](#error-codes)
 - [Dependencies](#dependencies)
 - [Installation](#installation)
 - [Contribute](#contribute)
+
+## Test Deployment
+
+A test deployment of the project is available here: https://query-server.herokuapp.com
 
 ## API
 
