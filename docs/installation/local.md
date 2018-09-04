@@ -39,7 +39,7 @@ pipenv install -r requirements.txt
 pipenv shell # To activate virtual environment
 ```
 
-To set up MongoDB on your server on ubuntu machine :
+To set up MongoDB on your server on ubuntu :
 
 ```bash
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
@@ -49,7 +49,7 @@ sudo apt-get install -y mongodb
 sudo service mongod start
 ```
 
-To set up MongoDB on your server on mac machine :
+To set up MongoDB on your server on mac :
 
 ```
 brew install mongo
