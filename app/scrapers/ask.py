@@ -4,6 +4,7 @@ from .generalized import Scraper
 
 class Ask(Scraper):
     """Scrapper class for Ask"""
+
     def __init__(self):
         Scraper.__init__(self)
         self.url = 'http://ask.com/web'

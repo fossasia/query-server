@@ -79,7 +79,7 @@ class Yahoo(Scraper):
             r = t.get('aria-label')
             cleanr = re.compile('<.*?>')
             r = re.sub(cleanr, '', r)
-            cleanl = re.compile('&#[\d]+(;)')
+            cleanl = re.compile(r'&#[\d]+(;)')
             r = re.sub(cleanl, '\'', r)
             img = t.find('img', attrs={'class': 'process'})
             url = img.get('data-src')

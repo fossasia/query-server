@@ -1,3 +1,4 @@
+autopep8==1.4
 beautifulsoup4>=4.5.1
 coverage>=4.3.4
 coveralls>=1.1

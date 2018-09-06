@@ -16,7 +16,7 @@ class Twitter(Scraper):
                 [[Title1,url1], [Title2, url2],..]
         """
         encodedQuery = requests.utils.quote(query, safe='')
-        url = self.loklakURL+encodedQuery
+        url = self.loklakURL + encodedQuery
 
         responses = requests.get(url).json()
 
