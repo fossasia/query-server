@@ -277,12 +277,19 @@
         });
 */
 
-
+/*
         $(window).keydown(function (event) {
             if (event.keyCode == 13) {
                 event.preventDefault();
                 return false;
             }
+        });
+*/
+        $('#center-block form-control').keypress(function (e) {
+        if (e.which == 13) {
+            $('form.searchForm').submit();
+            return false; 
+        }
         });
 
         var apiUrl = "https://api.github.com/repos/fossasia/query-server/git/refs/heads/master";
