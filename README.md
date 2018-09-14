@@ -66,30 +66,27 @@ A sample query : `/api/v1/search/bing?query=fossasia&format=xml&num=10`
 
 Found an issue? Post it in the [issue tracker](https://github.com/fossasia/query-server/issues)  For pull requests please read [Open Source Developer Guide and Best Practices at FOSSASIA](https://blog.fossasia.org/open-source-developer-guide-and-best-practices-at-fossasia/)
 
-## Keeping A Fork Up To Date
+## Fork This Repository
 
-#### 	1. Configuring a remote for a fork
+#### 	1. Fork and setting upstream
 You must configure a remote that points to this repository in Git to sync changes made in this repository with the fork.
-1. Open Terminal (Linux/Mac)
-	Open Git Bash (Windows)
-2. List the current configured remote repository for your fork.
+1. Create your own fork of this repo with the fork button below navigation bar.
+2. Clone this repo to your machine.
 
-		  $ git origin -v
-		  origin  https://github.com/YOUR_USERNAME/query-server.git (fetch)
-		  origin  https://github.com/YOUR_USERNAME/query-server.git (push)
+		  $ git clone git@github.com:${YOUR_GITHUB_USERNAME}/query-server.git
+
+3. Change current directory to this project.
+
+          $ cd query-server
 
 3. Add this as a new remote upstream repository.
 
 		  $ git remote add upstream https://github.com/fossasia/query-server.git
 
-4. Verify new upstream repository.
+4. Set the push URL to the upstream to no_push. (The following command will let pulls work, but pushes will try to use the URL no_push and fail)
 
-	  	  $ git remote -v
-		  origin    https://github.com/YOUR_USERNAME/query-server.git (fetch)
-		  origin    https://github.com/YOUR_USERNAME/query-server.git (push)
-		  upstream  https://github.com/fossasia/query-server.git (fetch)
-		  upstream  https://github.com/fossasia/query-server.git (push)
-
+	  	  $ git remote set-url --push upstream no_push
+          
 
 #### 	2. Syncing a fork
 1. Open Terminal (Linux/Mac)
