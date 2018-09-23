@@ -50,16 +50,16 @@
                             </div>
                         </div>
                         <div class="col-sm-4 responseType">
-                            <div class="btn-group" role="group" id="format" data-toggle="buttons">
-                                <label class="btn btn-lg btn-primary active formatButton">
-                                        <input type="radio" value="json" autocomplete="off">JSON
-                                    </label>
-                                <label class="btn btn-lg btn-primary formatButton">
-                                        <input type="radio" value="xml" autocomplete="off">XML
-                                    </label>
-                                <label class="btn btn-lg btn-primary formatButton">
-                                        <input type="radio" value="csv" autocomplete="off">CSV
-                                    </label>
+                            <div class="btn-group" role="group" id="format">
+                                <div class="col-sm-4 col-xs-6" id="submit_json">
+                                    <input type="submit" value="JSON" id="json_submitter" class="btn btn-primary"/>
+                                </div>
+                                <div class="col-sm-4 col-xs-6" id="submit_xml">
+                                    <input type="submit" value="XML" id="xml_submitter" class="btn btn-primary"/>
+                                </div>
+                                <div class="col-sm-4 col-xs-6" id="submit_csv">
+                                    <input type="submit" value="CSV" id="csv_submitter" class="btn btn-primary"/>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -127,9 +127,6 @@
                                     <option>100</option>
                                 </select>
                             </div>
-                        </div>
-                        <div class="col-sm-2 col-xs-6" id="submit">
-                            <input type="submit" value="Submit" id="submitter" class="btn btn-primary"/>
                         </div>
                     </div>
                 </div>
@@ -223,7 +220,7 @@
             activate_qtype(engine);
         }
         $(function () {
-            $('#submitter').click(function (e) {
+            $('#json_submitter').click(function (e) {
                 e.preventDefault();
                 if ($('#query').val()) {
                     $('#load').show();
@@ -231,7 +228,75 @@
                     var sengine = $("#engine").val();
                     var squery = encodeURIComponent($('#query').val());
                     var stype = $("input[name=stype]:checked").val()
-                    var sformat = $(' #format label.active input').val();
+                    var sformat = "json";
+                    var count = $('#resp').val();
+                    var urlloc = window.location.href.split(/\?|#/)[0] + "api/v1/search/" + sengine + "?query=" + squery + "&type=" + stype + "&format=" + sformat + "&num=" + count;
+                    $.ajax({
+                        url: urlloc,
+                        type: 'GET',
+                        success: function (response) {
+                            $('#load').hide();
+                            if (sformat == "json") {
+                                $(".code").attr("class", "language-json");
+                                response = JSON.stringify(response, null, 4);
+                            } else if (sformat == "csv") {
+                                $('#feed').show();
+                                $('#feed').text(response);
+                            } else
+                                response = new XMLSerializer().serializeToString(response);
+                            $('#feed').show();
+                            $('#feed').text(response);
+                            Prism.highlightElement($('#feed')[0]);
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    });
+                };
+            });
+            $('#xml_submitter').click(function (e) {
+                e.preventDefault();
+                if ($('#query').val()) {
+                    $('#load').show();
+                    $('#feed').hide();
+                    var sengine = $("#engine").val();
+                    var squery = encodeURIComponent($('#query').val());
+                    var stype = $("input[name=stype]:checked").val()
+                    var sformat = "xml";
+                    var count = $('#resp').val();
+                    var urlloc = window.location.href.split(/\?|#/)[0] + "api/v1/search/" + sengine + "?query=" + squery + "&type=" + stype + "&format=" + sformat + "&num=" + count;
+                    $.ajax({
+                        url: urlloc,
+                        type: 'GET',
+                        success: function (response) {
+                            $('#load').hide();
+                            if (sformat == "json") {
+                                $(".code").attr("class", "language-json");
+                                response = JSON.stringify(response, null, 4);
+                            } else if (sformat == "csv") {
+                                $('#feed').show();
+                                $('#feed').text(response);
+                            } else
+                                response = new XMLSerializer().serializeToString(response);
+                            $('#feed').show();
+                            $('#feed').text(response);
+                            Prism.highlightElement($('#feed')[0]);
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    });
+                };
+            });
+            $('#csv_submitter').click(function (e) {
+                e.preventDefault();
+                if ($('#query').val()) {
+                    $('#load').show();
+                    $('#feed').hide();
+                    var sengine = $("#engine").val();
+                    var squery = encodeURIComponent($('#query').val());
+                    var stype = $("input[name=stype]:checked").val()
+                    var sformat = "csv";
                     var count = $('#resp').val();
                     var urlloc = window.location.href.split(/\?|#/)[0] + "api/v1/search/" + sengine + "?query=" + squery + "&type=" + stype + "&format=" + sformat + "&num=" + count;
                     $.ajax({
@@ -259,13 +324,6 @@
             });
         });
 
-        $('.formatButton').click(function (e) {
-            e.preventDefault();
-            if (!$(this).hasClass('active')) {
-                $(".formatButton .active").removeClass("active");
-                $(this).addClass('active')
-            }
-        });
 
 /*
         $('.typeButton').click(function (e) {
