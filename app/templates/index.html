@@ -49,6 +49,7 @@
                                 <input id="query" type="text" class="center-block form-control" autocomplete="on" placeholder="Search with query-server">
                             </div>
                         </div>
+                        
                         <div class="col-sm-4 responseType">
                             <div class="btn-group" role="group" id="format">
                                 <div class="col-sm-4 col-xs-6" id="submit_json">
@@ -137,26 +138,7 @@
         <img id="load" src="{{ url_for('static', filename='images/ripple.gif') }}">
     </div>
     <pre id="feed"><code class="language-xml"></code></pre>
-    <br/><br/>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-sm-12 col-xs-12 miscInfo">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">Project Information</div>
-                    <div class="panel-body">
-                        <strong>Git Commit/Version number: </strong><a class="version"></a><br>
-                        <strong>Python version: </strong> 2.x or 3.x<br>
-                        <strong>Packages: </strong>
-                        <code><span class="label label-primary">Node.js</span></code>
-                        <code><span class="label label-primary">Pip</span></code>
-                        <code><span class="label label-primary">Flask</span></code>
-                        <code><span class="label label-primary">BeautifulSoup4</span></code><br>
-                        <strong>Maintainer: </strong><a href="https://github.com/nikhilrayaprolu" target="_blank">Nikhil Rayaprolu</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    
     <footer class="footer">
         <div class="container">
             <p class="text-muted">Want to contribute? <a href="https://gitter.im/fossasia/query-server" target="_blank"><img src="https://badges.gitter.im/gitterHQ/gitter.png" alt="gitter badge"></a>                to get started.</p>
@@ -173,6 +155,12 @@
                 </div>
 
             </p>
+            <br>
+            <p class="text-center miscInfo">
+            	<strong>Git Commit/Version number: <strong>
+            	<a class="version"></a>
+            </p>
+            <br>
         </div>
     </footer>
     <script>
