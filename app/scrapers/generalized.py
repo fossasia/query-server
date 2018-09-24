@@ -112,7 +112,3 @@ class Scraper:
         soup = BeautifulSoup(response.text, 'html.parser')
         urls = self.parse_response(soup)
         return urls
-
-
-
-
