@@ -42,6 +42,14 @@ class Scraper:
         if self.name == 'mojeek' and qtype == 'news':
             payload['fmt'] = 'news'
         response = requests.get(url, headers=self.headers, params=payload)
+        if "dailymotion" in response.url:
+            url = response.url
+            index = url.index('?')
+            url = url[0:index + 1] + url[index + 3:len(url)]
+            response = requests.get(
+                url=url,
+                headers=self.headers
+            )
         print(response.url)
         return response
 
