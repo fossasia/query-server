@@ -21,6 +21,7 @@ class DailyMotion(Scraper):
                 [[Tile1,url1], [Title2, url2],..]
         """
         urls = []
+
         video_list = json.loads(str(soup))['list']
         for item in video_list:
             title = item['title']
