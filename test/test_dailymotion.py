@@ -4,10 +4,12 @@ from app.scrapers import DailyMotion
 
 def test_parse_response():
     json_data = '{"list":[{"id":"x6ilw2u",' \
-                '"title":"Job Interviews - Stand Up Comedy by Piyush Sharma",' \
+                '"title":"Job Interviews - Stand Up Comedy by ' \
+                'Piyush Sharma",' \
                 '"channel":"fun",' \
                 '"owner":"x24pst6"},{"id":"x65slib",' \
-                '"title":"Beyhadh actor Piyush Sahdev(Samay) will soon enter' \
+                '"title":"Beyhadh actor Piyush Sahdev(Samay) will ' \
+                'soon enter' \
                 ' colors Devanshi opposite Helly shah",' \
                 '"channel":"fun","owner":"x21w079"},{"id":"x5fj9kg",' \
                 '"title":"Deepika-Piyush Se Mulaqat - Dhhai Kilo Prem",' \
