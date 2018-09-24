@@ -26,6 +26,21 @@ class Scraper:
         self.name = "general"
         pass
 
+    def get_dailymotion_page(self, query, startIndex=0, qtype=''):
+        url = self.url
+        payload = {self.queryKey: query, self.startKey: startIndex,
+                   self.qtype: qtype}
+        response = requests.get(url, headers=self.headers, params=payload)
+        url = response.url
+        index = url.index('?')
+        url = url[0:index + 1] + url[index + 3:len(url)]
+        response = requests.get(
+            url=url,
+            headers=self.headers
+        )
+        print(response.url)
+        return response
+
     def get_page(self, query, startIndex=0, qtype=''):
         """ Fetch the google search results page
         Returns : Results Page
@@ -67,6 +82,24 @@ class Scraper:
 
         while (len(urls) < num_results):
             response = self.get_page(query, current_start, qtype)
+            soup = BeautifulSoup(response.text, 'html.parser')
+            new_results = self.call_appropriate_parser(qtype, soup)
+            if new_results is None:
+                break
+            urls.extend(new_results)
+            current_start = self.next_start(current_start, new_results)
+        return urls[: num_results]
+
+    def dailymotion_search(self, query, num_results, qtype=''):
+        """
+            Search for the query and return set of urls
+            Returns: list
+        """
+        urls = []
+        current_start = self.defaultStart
+
+        while (len(urls) < num_results):
+            response = self.get_dailymotion_page(query, current_start, qtype)
             soup = BeautifulSoup(response.text, 'html.parser')
             new_results = self.call_appropriate_parser(qtype, soup)
             if new_results is None:
