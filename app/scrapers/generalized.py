@@ -63,7 +63,9 @@ class Scraper:
     def refactor_url(url):
         url = str(url)
         index_of_question_mark = url.index('?')
-        url = url[0:index_of_question_mark + 1] + url[index_of_question_mark + 3:]
+        first_part = url[0:index_of_question_mark+1]
+        second_part = url[index_of_question_mark+3:len(url)]
+        url = first_part + second_part
         return url
 
     def search(self, query, num_results, qtype=''):
