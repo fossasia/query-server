@@ -43,7 +43,10 @@ class Scraper:
             payload['fmt'] = 'news'
         response = requests.get(url, headers=self.headers, params=payload)
         if "dailymotion" in url:
-            response = requests.get(url=self.refactor_url(response.url), headers=self.headers)
+            response = requests.get(
+                url=self.refactor_url(response.url),
+                headers=self.headers
+            )
         print(response.url)
         return response
 
