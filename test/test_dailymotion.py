@@ -34,7 +34,6 @@ def test_parse_response():
                 ' Prachand (Live At Hindu College)",' \
                 '"channel":"fun","owner":"x21w0ck"}]}'
 
-    video_list = json.loads(json_data)['list']
     expected_resp = [{
         'link': 'https://www.dailymotion.com/video/x6ilw2u',
         'title': u'Job Interviews - Stand Up Comedy by Piyush Sharma'},
