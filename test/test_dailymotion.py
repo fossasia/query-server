@@ -1,4 +1,3 @@
-import json
 from app.scrapers import DailyMotion
 
 
