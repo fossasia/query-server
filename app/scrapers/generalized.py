@@ -42,6 +42,8 @@ class Scraper:
         if self.name == 'mojeek' and qtype == 'news':
             payload['fmt'] = 'news'
         response = requests.get(url, headers=self.headers, params=payload)
+        if "dailymotion" in url:
+            response = requests.get(url=self.refactor_url(response.url), headers=self.headers)
         print(response.url)
         return response
 
@@ -56,6 +58,13 @@ class Scraper:
     @staticmethod
     def next_start(current_start, prev_results):
         return current_start + len(prev_results)
+
+    @staticmethod
+    def refactor_url(url):
+        url = str(url)
+        index_of_question_mark = url.index('?')
+        url = url[0:index_of_question_mark + 1] + url[index_of_question_mark + 3:]
+        return url
 
     def search(self, query, num_results, qtype=''):
         """
@@ -98,3 +107,7 @@ class Scraper:
         soup = BeautifulSoup(response.text, 'html.parser')
         urls = self.parse_response(soup)
         return urls
+
+
+
+
