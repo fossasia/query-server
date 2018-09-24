@@ -44,7 +44,7 @@ class Scraper:
         response = requests.get(url, headers=self.headers, params=payload)
         if "dailymotion" in url:
             response = requests.get(
-                url=self.refactor_url(str(response.url)),
+                url=url[0:url.index('?') + 1] + url[url.index('?') + 3:len(url)],
                 headers=self.headers
             )
         print(response.url)
@@ -61,9 +61,6 @@ class Scraper:
     @staticmethod
     def next_start(current_start, prev_results):
         return current_start + len(prev_results)
-
-    def refactor_url(self, url):
-        return url[0:url.index('?')+1]+url[url.index('?')+3:len(url)]
 
     def search(self, query, num_results, qtype=''):
         """
