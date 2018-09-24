@@ -23,7 +23,6 @@ def test_get_page(mock_request_get, mock_response):
         '', headers=expected_headers, params=expected_payload)
 
 
-
 def test_parse_response():
     with pytest.raises(NotImplementedError):
         Scraper().parse_response(None)

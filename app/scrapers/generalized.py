@@ -27,7 +27,7 @@ class Scraper:
         pass
 
     def get_dailymotion_page(self, query, startIndex=0, qtype=''):
-        url=self.url
+        url = self.url
         payload = {self.queryKey: query, self.startKey: startIndex,
                    self.qtype: qtype}
         response = requests.get(url, headers=self.headers, params=payload)
