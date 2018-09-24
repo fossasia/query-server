@@ -44,7 +44,7 @@ class Scraper:
         response = requests.get(url, headers=self.headers, params=payload)
         if "dailymotion" in url:
             response = requests.get(
-                url=url[0:url.index('?') + 1] + url[url.index('?') + 3:len(url)],
+                url=url[0:url.index('?')+ 1] + url[url.index('?')+3:len(url)],
                 headers=self.headers
             )
         print(response.url)
