@@ -3,7 +3,7 @@ from .generalized import Scraper
 import json
 
 
-class DailyMotion(Scraper):
+class Dailyion(Scraper):
     """Scraper class for DailyMotion"""
 
     def __init__(self):
