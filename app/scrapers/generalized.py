@@ -72,8 +72,13 @@ class Scraper:
         """
         urls = []
         current_start = self.defaultStart
-
+        cnt = 0
         while (len(urls) < num_results):
+            if cnt == 1 and len(urls) == 0:
+                return []
+            if len(urls) > 0 and len(urls) < 10:
+                return urls[: num_results]
+            cnt = 1
             response = self.get_page(query, current_start, qtype)
             soup = BeautifulSoup(response.text, 'html.parser')
             new_results = self.call_appropriate_parser(qtype, soup)
