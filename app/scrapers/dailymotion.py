@@ -23,6 +23,7 @@ class Dailyion(Scraper):
         urls = []
 
         video_list = json.loads(str(soup))['list']
+
         for item in video_list:
             title = item['title']
             link = 'https://www.dailymotion.com/video/' + str(item['id'])
