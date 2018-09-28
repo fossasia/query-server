@@ -68,6 +68,7 @@ def search(search_engine):
         if result:
             print("cache hit: {}".format(engine_and_query))
         else:
+            print("ergergegegegreeeeeeeddwofhwefhwflwfwlfhwoghpwgwjfgwjgl;wfnwl;fn;wng;fw;gwg;wg;we");
             result = feed_gen(query, engine, count, qtype)
             if result:
                 # store the result in the cache to speed up future searches
