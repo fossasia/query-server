@@ -68,13 +68,14 @@ def search(search_engine):
         if result:
             print("cache hit: {}".format(engine_and_query))
         else:
+
             result = feed_gen(query, engine, count, qtype)
-            if result:
+            if len(result):
                 # store the result in the cache to speed up future searches
                 store(engine_and_query, result)
             else:
                 error = [404, 'No response', engine_and_query]
-                return bad_request(error)
+                return make_response("No response")
 
         try:
             unicode  # unicode is undefined in Python 3 so NameError is raised
