@@ -13,6 +13,7 @@ from .quora import Quora
 from .twitter import Twitter
 from .yahoo import Yahoo
 from .youtube import Youtube
+from .searx import Searx
 
 scrapers = {
     'ask': Ask(),
@@ -27,7 +28,8 @@ scrapers = {
     'quora': Quora(),
     'twitter': Twitter(),
     'yahoo': Yahoo(),
-    'youtube': Youtube()
+    'youtube': Youtube(),
+    'searx': Searx()
 }
 
 
