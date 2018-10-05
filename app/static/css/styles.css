@@ -24,6 +24,11 @@ body {
     min-width: 100%;
 }
 
+.custom{
+    padding-left: 0px!important;
+    padding-right: 0px!important;
+}
+
 .responseType {
     display: inline-flex;
 }
