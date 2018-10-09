@@ -1,5 +1,6 @@
 from __future__ import print_function
 
+from .aol import Aol
 from .ask import Ask
 from .baidu import Baidu
 from .bing import Bing
@@ -15,6 +16,7 @@ from .yahoo import Yahoo
 from .youtube import Youtube
 
 scrapers = {
+    'aol': Aol(),
     'ask': Ask(),
     'baidu': Baidu(),
     'bing': Bing(),
