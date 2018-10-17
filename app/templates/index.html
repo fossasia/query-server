@@ -52,7 +52,7 @@
                         
                         <div class="col-sm-4 custom responseType">
                         	<div class="btn-group" role="group" id="format" data-toggle="buttons">
-                                <label class="btn btn-lg btn-primary active formatButton">
+                                <label class="btn btn-lg btn-primary formatButton">
                                 	<input type="radio" value="json" autocomplete="off">JSON
                                 </label>
                                 <label class="btn btn-lg btn-primary formatButton">
@@ -129,9 +129,9 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-sm-2 col-xs-6" id="submit">
+                        <!--div class="col-sm-2 col-xs-6" id="submit">
                             <input type="submit" value="Submit" id="submitter" class="btn btn-primary"/>
-                        </div>
+                        </div-->
                     </div>
                 </div>
             </form>
@@ -211,7 +211,7 @@
             activate_qtype(engine);
         }
         $(function () {
-            $('#submitter').click(function (e) {
+            $('.formatButton').click(function (e) {
                 e.preventDefault();
                 if ($('#query').val()) {
                     $('#load').show();
