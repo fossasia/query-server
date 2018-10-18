@@ -219,7 +219,7 @@
                     var sengine = $("#engine").val();
                     var squery = encodeURIComponent($('#query').val());
                     var stype = $("input[name=stype]:checked").val()
-                    var sformat = $(' #format label.active input').val();
+                    var sformat = $(this).children().val();
                     var count = $('#resp').val();
                     var urlloc = window.location.href.split(/\?|#/)[0] + "api/v1/search/" + sengine + "?query=" + squery + "&type=" + stype + "&format=" + sformat + "&num=" + count;
                     $.ajax({
