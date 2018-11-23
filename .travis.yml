@@ -9,6 +9,7 @@ services:
 
 install:
   - pip install codecov flake8 pytest
+  - pip install -r requirements-dev.txt
   - pip install -r requirements.txt
 
 before_script:

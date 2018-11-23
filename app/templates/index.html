@@ -44,22 +44,23 @@
             <form id="searchForm">
                 <div class="container" id="search">
                     <div class="row">
-                        <div class="col-sm-8">
+                        <div class="col-sm-8 custom">
                             <div class="input-group input-group-lg queryArea">
                                 <input id="query" type="text" class="center-block form-control" autocomplete="on" placeholder="Search with query-server">
                             </div>
                         </div>
-                        <div class="col-sm-4 responseType">
-                            <div class="btn-group" role="group" id="format" data-toggle="buttons">
+                        
+                        <div class="col-sm-4 custom responseType">
+                        	<div class="btn-group" role="group" id="format" data-toggle="buttons">
                                 <label class="btn btn-lg btn-primary active formatButton">
-                                        <input type="radio" value="json" autocomplete="off">JSON
-                                    </label>
+                                	<input type="radio" value="json" autocomplete="off">JSON
+                                </label>
                                 <label class="btn btn-lg btn-primary formatButton">
-                                        <input type="radio" value="xml" autocomplete="off">XML
-                                    </label>
+                                	<input type="radio" value="xml" autocomplete="off">XML
+                                </label>
                                 <label class="btn btn-lg btn-primary formatButton">
-                                        <input type="radio" value="csv" autocomplete="off">CSV
-                                    </label>
+                                	<input type="radio" value="csv" autocomplete="off">CSV
+                                </label>
                             </div>
                         </div>
                     </div>
@@ -128,9 +129,6 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-sm-2 col-xs-6" id="submit">
-                            <input type="submit" value="Submit" id="submitter" class="btn btn-primary"/>
-                        </div>
                     </div>
                 </div>
             </form>
@@ -140,26 +138,7 @@
         <img id="load" src="{{ url_for('static', filename='images/ripple.gif') }}">
     </div>
     <pre id="feed"><code class="language-xml"></code></pre>
-    <br/><br/>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-sm-12 col-xs-12 miscInfo">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">Project Information</div>
-                    <div class="panel-body">
-                        <strong>Git Commit/Version number: </strong><a class="version"></a><br>
-                        <strong>Python version: </strong> 2.x or 3.x<br>
-                        <strong>Packages: </strong>
-                        <code><span class="label label-primary">Node.js</span></code>
-                        <code><span class="label label-primary">Pip</span></code>
-                        <code><span class="label label-primary">Flask</span></code>
-                        <code><span class="label label-primary">BeautifulSoup4</span></code><br>
-                        <strong>Maintainer: </strong><a href="https://github.com/nikhilrayaprolu" target="_blank">Nikhil Rayaprolu</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    
     <footer class="footer">
         <div class="container">
             <p class="text-muted">Want to contribute? <a href="https://gitter.im/fossasia/query-server" target="_blank"><img src="https://badges.gitter.im/gitterHQ/gitter.png" alt="gitter badge"></a>                to get started.</p>
@@ -176,6 +155,12 @@
                 </div>
 
             </p>
+            <br>
+            <p class="text-center miscInfo">
+            	<strong>Git Commit/Version number: <strong>
+            	<a class="version"></a>
+            </p>
+            <br>
         </div>
     </footer>
     <script>
@@ -223,7 +208,7 @@
             activate_qtype(engine);
         }
         $(function () {
-            $('#submitter').click(function (e) {
+            $('#format label').click(function (e) {
                 e.preventDefault();
                 if ($('#query').val()) {
                     $('#load').show();
@@ -231,7 +216,7 @@
                     var sengine = $("#engine").val();
                     var squery = encodeURIComponent($('#query').val());
                     var stype = $("input[name=stype]:checked").val()
-                    var sformat = $(' #format label.active input').val();
+                    var sformat = e.target.firstElementChild.value;
                     var count = $('#resp').val();
                     var urlloc = window.location.href.split(/\?|#/)[0] + "api/v1/search/" + sengine + "?query=" + squery + "&type=" + stype + "&format=" + sformat + "&num=" + count;
                     $.ajax({
