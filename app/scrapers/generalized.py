@@ -24,21 +24,25 @@ class Scraper:
 
     def __init__(self):
         self.name = "general"
-        pass
 
     def get_page(self, query, startIndex=0, qtype=''):
         """ Fetch the google search results page
         Returns : Results Page
         """
         url = self.url
+        if not qtype or self.name == 'dailymotion':
+            payload = {self.queryKey: query, self.startKey: startIndex}
+        else:
+            payload = {self.queryKey: query, self.startKey: startIndex,
+                       self.qtype: qtype}
+
         if qtype == 'vid' and self.name in VID_SCRAPERS:
                 url = self.videoURL
         elif qtype == 'isch' and self.name in ISCH_SCRAPERS:
                 url = self.imageURL
         elif qtype == 'news' and self.name in NEWS_SCRAPERS:
             url = self.newsURL
-        payload = {self.queryKey: query, self.startKey: startIndex,
-                   self.qtype: qtype}
+
         if self.name == 'mojeek' and qtype == 'news':
             payload['fmt'] = 'news'
         response = requests.get(url, headers=self.headers, params=payload)
