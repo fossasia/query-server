@@ -76,15 +76,13 @@ class Yahoo(Scraper):
         urls = []
         for h in soup.findAll('li', attrs={'class': 'ld'}):
             t = h.find('a')
-            r = t.get('aria-label')
+            ri = t.get('aria-label')
             cleanr = re.compile('<.*?>')
-            r = re.sub(cleanr, '', r)
-            cleanl = re.compile('&#[\d]+(;)')
-            r = re.sub(cleanl, '\'', r)
+            ri = re.sub(cleanr, '', ri)
             img = t.find('img', attrs={'class': 'process'})
             url = img.get('data-src')
             urls.append({
-                'title': r,
+                'title': ri,
                 'link': url
             })
 
