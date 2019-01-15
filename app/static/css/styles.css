@@ -33,17 +33,28 @@ body {
     display: inline-flex;
 }
 
+.responseType #format {
+    margin-top: 10px;
+}
+
 .engineDrop {
-    padding: 0;
-    margin-right: 30px;
-    margin-left: 16px;
-    margin-bottom: 10px;    
+    /* padding: 0; */
+    /* margin: 0; */
+}
+
+.engineDrop button {
+    margin-bottom: 10px;
+    width: 100%;
 }
 
 .qType {
 	padding: 0;
     margin-right: 30px;
     margin-left: 16px;
+}
+
+.qCount {
+    padding: 0;
 }
 
 .miscInfo {
@@ -53,12 +64,6 @@ body {
 
 .typeButton {
     padding: 0px 10px 10px;
-}
-
-.qCount {
-    display: inline-block;
-    margin: 0;
-    min-width: 50%;
 }
 
 #submit {
@@ -75,11 +80,11 @@ body {
 }
 
 #feed {
-    display: none;
     font-size: 1.2em;
-    margin: 0em 2em 0 2em;
-    padding: -3em 0 -3em 0;
-    z-index: -100000;
+}
+
+#feed-container {
+    display: none;
 }
 
 #load {
@@ -193,21 +198,32 @@ p {
 
 /* Media Queries */
 
-@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+@media only screen and (max-width: 768px) {
     .github-fork-ribbon img {
         width: 120px;
     }
+
     h1 {
         font-size: 2.5em;
     }
+
     .jumbotron p {
         font-size: 1.5em;
     }
+
     #query {
-        width: 90%;
+        /* width: 90%; */
     }
-    .btn-group {
-        margin-top: 10px;
-        line-height: 20px;
+
+    .qCount {
+        padding-left: 15px;
+    }
+
+    .qCount button {
+        margin-bottom: 10px;
+    }
+
+    #searchForm {
+        padding: 3%;
     }
 }
