@@ -44,32 +44,8 @@
             <form id="searchForm">
                 <div class="container" id="search">
                     <div class="row">
-                        <div class="col-sm-8 custom">
-                            <div class="input-group input-group-lg queryArea">
-                                <input id="query" type="text" class="center-block form-control" autocomplete="on" placeholder="Search with query-server">
-                            </div>
-                        </div>
-                        
-                        <div class="col-sm-4 custom responseType">
-                        	<div class="btn-group" role="group" id="format" data-toggle="buttons">
-                                <label class="btn btn-lg btn-primary active formatButton">
-                                	<input type="radio" value="json" autocomplete="off">JSON
-                                </label>
-                                <label class="btn btn-lg btn-primary formatButton">
-                                	<input type="radio" value="xml" autocomplete="off">XML
-                                </label>
-                                <label class="btn btn-lg btn-primary formatButton">
-                                	<input type="radio" value="csv" autocomplete="off">CSV
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <br/>
-
-                    <div class="row">
-                        <div class="col-sm-3 col-xs-6 engineDrop">
+                        <div class="col-xs-12 col-sm-4 col-lg-3 engineDrop">
                             <div class="dropdown">
-                                <label>Engine:</label><br/>
                                 <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
                                     <span id="drop_down_text">
                                         <img src='static/images/google_icon.png' width='25px'>&nbsp;google
@@ -94,39 +70,40 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-sm-3 col-xs-6 qType">
-                                <label>Type:</label><br/>
-                                <div id="type" class="btn-group btn-group-vertical" data-toggle="buttons">
-                                    <label class=" active typeButton">General<br/>
-                                            <input type="radio" id="general" name = "stype" value="" autocomplete="off" checked>
-                                    </label>
-                                    <label class="typeButton">Images<br/>
-                                            <input type="radio" id="isch" name = "stype" value="isch" autocomplete="off" disabled>
-                                    </label>
-                                    <label class="typeButton">
-                                        Video<br/>
-                                            <input type="radio" id="vid" name = "stype" value="vid" autocomplete="off" disabled>
-                                    </label>
-                                    <label class="typeButton ">News<br/>
-                                            <input type="radio" id="news" name = "stype" value="news" autocomplete="off" disabled>
-                                    </label>
-                                </div>
+                        <div class="col-xs-12 col-sm-2 col-lg-1 qCount">
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                    <span id="max_dropdown_text">10</span>
+                                    <span class="caret"></span>
+                                </button>
+                                <input type="hidden" id="resp" value="10">
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-header">Max</li>
+                                    {% for i in range(10, 101, 10) %}
+                                        <li onclick="update_max('{{ i }}')"><a>{{ i }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
                         </div>
-                        <div class="col-sm-2 col-xs-6">
-                            <div class="form-group qCount">
-                                <label for="resp">Max:</label>
-                                <select class="form-control" id="resp">
-                                    <option>10</option>
-                                    <option>20</option>
-                                    <option>30</option>
-                                    <option>40</option>
-                                    <option>50</option>
-                                    <option>60</option>
-                                    <option>70</option>
-                                    <option>80</option>
-                                    <option>90</option>
-                                    <option>100</option>
-                                </select>
+                        <div class="col-xs-12 col-lg-8">
+                            <div class="input-group input-group-lg queryArea">
+                                <input id="query" type="text" class="center-block form-control" autocomplete="on" placeholder="Search with query-server">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12 responseType">
+                            <div class="btn-group" role="group" id="format" data-toggle="buttons">
+                                <label class="btn btn-lg btn-primary active formatButton">
+                                    <input type="radio" value="json" autocomplete="off">JSON
+                                </label>
+                                <label class="btn btn-lg btn-primary formatButton">
+                                    <input type="radio" value="xml" autocomplete="off">XML
+                                </label>
+                                <label class="btn btn-lg btn-primary formatButton">
+                                    <input type="radio" value="csv" autocomplete="off">CSV
+                                </label>
                             </div>
                         </div>
                     </div>
@@ -137,7 +114,17 @@
     <div class="pagination-centered">
         <img id="load" src="{{ url_for('static', filename='images/ripple.gif') }}">
     </div>
-    <pre id="feed"><code class="language-xml"></code></pre>
+
+    <div class="container" id="feed-container">
+        <input hidden id="stype" value="">
+        <ul class="nav nav-tabs">
+            <li role="presentation" id="general" data-type="" class="stypeButton active"><a>General</a></li>
+            <li role="presentation" id="isch" data-type="isch" class="stypeButton"><a>Images</a></li>
+            <li role="presentation" id="vid" data-type="vid" class="stypeButton"><a>Videos</a></li>
+            <li role="presentation" id="news" data-type="news" class="stypeButton"><a>News</a></li>
+        </ul>
+        <pre id="feed"><code class="language-xml"></code></pre>
+    </div>
     
     <footer class="footer">
         <div class="container">
@@ -173,21 +160,24 @@
     
         function activate_qtype(active_engine) {          
             
-            $('#isch').prop('disabled', true);
-            $('#vid').prop('disabled', true);
-            $('#news').prop('disabled', true);
+            $("#stype").val('');
+            update_type_tabs();
+            $("#feed-container").hide()
+            $('#isch').addClass('disabled');
+            $('#vid').addClass('disabled');
+            $('#news').addClass('disabled');
             
             $.each( qtype_scraper_map, function (qtype, scrapers) {
                 $.each( scrapers, function (index, engine) {
                     if (engine == active_engine) {
                         if(qtype == 'isch') {
-                            $('#isch').prop('disabled', false);
+                            $('#isch').removeClass('disabled');
                         }
                         else if(qtype == 'vid') {
-                            $('#vid').prop('disabled', false);
+                            $('#vid').removeClass('disabled');
                         }
                         else {
-                            $('#news').prop('disabled', false);
+                            $('#news').removeClass('disabled');
                         }
                         return false;
                     }
@@ -207,15 +197,30 @@
             $("#general").prop('checked', true);
             activate_qtype(engine);
         }
+        function update_max(max) {
+            var html = max;
+            $("#max_dropdown_text").html(html);
+            $("#resp").val(max);
+        }
+        function update_type_tabs(e) {
+            var type = $("#stype").val();
+            $('.stypeButton').removeClass('active')
+            $('.stypeButton').each(function (el) {
+                console.log($(this).data('type'), $('#stype').val())
+                if ($(this).data('type') === $('#stype').val()) {
+                    $(this).addClass('active')
+                }
+            })
+        }
         $(function () {
             $('#format label').click(function (e) {
                 e.preventDefault();
                 if ($('#query').val()) {
                     $('#load').show();
-                    $('#feed').hide();
+                    $('#feed-container').hide();
                     var sengine = $("#engine").val();
                     var squery = encodeURIComponent($('#query').val());
-                    var stype = $("input[name=stype]:checked").val()
+                    var stype = $("#stype").val()
                     var sformat = e.target.firstElementChild.value;
                     var count = $('#resp').val();
                     var urlloc = window.location.href.split(/\?|#/)[0] + "api/v1/search/" + sengine + "?query=" + squery + "&type=" + stype + "&format=" + sformat + "&num=" + count;
@@ -228,11 +233,11 @@
                                 $(".code").attr("class", "language-json");
                                 response = JSON.stringify(response, null, 4);
                             } else if (sformat == "csv") {
-                                $('#feed').show();
+                                $('#feed-container').show();
                                 $('#feed').text(response);
                             } else
                                 response = new XMLSerializer().serializeToString(response);
-                            $('#feed').show();
+                            $('#feed-container').show();
                             $('#feed').text(response);
                             Prism.highlightElement($('#feed')[0]);
                         },
@@ -251,6 +256,23 @@
                 $(this).addClass('active')
             }
         });
+
+        $('.stypeButton').click(function (e) {
+            e.preventDefault();
+            if ($(this).hasClass('disabled')) {
+                return;
+            }
+            var type = $(this).data('type');
+            console.log(type)
+            $('#stype').val(type);
+            
+            if(!$(this).hasClass('active')) {
+                $('.stypeButton.active').removeClass('active');
+                $(this).addClass('active')
+            }
+
+            $(".formatButton.active").click()
+        })
 
 /*
         $('.typeButton').click(function (e) {
