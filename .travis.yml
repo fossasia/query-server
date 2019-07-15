@@ -1,4 +1,5 @@
 language: python
+dist: xenial  # required for Python >= 3.7 on Travis CI
 
 python:
   - "2.7"
