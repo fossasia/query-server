@@ -32,9 +32,9 @@ class Scraper:
         """
         url = self.url
         if qtype == 'vid' and self.name in VID_SCRAPERS:
-                url = self.videoURL
+            url = self.videoURL
         elif qtype == 'isch' and self.name in ISCH_SCRAPERS:
-                url = self.imageURL
+            url = self.imageURL
         elif qtype == 'news' and self.name in NEWS_SCRAPERS:
             url = self.newsURL
         payload = {self.queryKey: query, self.startKey: startIndex,
@@ -78,11 +78,11 @@ class Scraper:
     def call_appropriate_parser(self, qtype, soup):
         new_results = ''
         if qtype == 'vid' and self.name in VID_SCRAPERS:
-                new_results = self.parse_video_response(soup)
+            new_results = self.parse_video_response(soup)
         elif qtype == 'isch' and self.name in ISCH_SCRAPERS:
-                new_results = self.parse_image_response(soup)
+            new_results = self.parse_image_response(soup)
         elif qtype == 'news' and self.name in NEWS_SCRAPERS:
-                new_results = self.parse_news_response(soup)
+            new_results = self.parse_news_response(soup)
         else:
             new_results = self.parse_response(soup)
         return new_results
