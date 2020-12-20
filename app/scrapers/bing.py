@@ -17,7 +17,7 @@ class Bing(Scraper):
 
     @staticmethod
     def parse_response(soup):
-        """ Parses the reponse and return set of urls
+        """ Parses the response and return set of urls
         Returns: urls (list)
                 [[Tile1,url1], [Title2, url2],..]
         """
@@ -75,7 +75,7 @@ class Bing(Scraper):
 
     @staticmethod
     def parse_news_response(soup):
-        """ Parses the reponse and return set of urls
+        """ Parses the response and return set of urls
         Returns: urls (list)
                 [[Tile1,url1], [Title2, url2],..]
         """
