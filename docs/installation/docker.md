@@ -2,7 +2,7 @@
 
 [![Deploy to Docker Cloud](https://files.cloud.docker.com/images/deploy-to-dockercloud.svg)](https://cloud.docker.com/stack/deploy/?repo=https://github.com/fossasia/query-server)
 
-* Get the latest version of docker. See the [offical site](https://docs.docker.com/engine/installation/) for installation info for your platform.
+* Get the latest version of docker. See the [official site](https://docs.docker.com/engine/installation/) for installation info for your platform.
 
 * Install the latest version of docker-compose. Windows and Mac users should have docker-compose by default as it is part of Docker toolbox. For Linux users, see the
 [official guide](https://docs.docker.com/compose/install/).
