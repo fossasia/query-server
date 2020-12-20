@@ -4,7 +4,7 @@ import os
 import pytest
 import requests
 from defusedxml import ElementTree
-from mock import patch
+from unittest.mock import patch
 
 from app.scrapers import small_test
 from app.server import app
