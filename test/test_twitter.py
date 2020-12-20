@@ -1,6 +1,6 @@
 import json
 
-from mock import patch, MagicMock
+from unittest.mock import patch, MagicMock
 
 from app.scrapers import Twitter
 
