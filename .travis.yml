@@ -17,7 +17,7 @@ before_script:
 
 script:
   - python -m app.server > /dev/null &
-  - pytest --cov=./
+  - pytest --cov=./ --ignore=test/test_server.py
   - kill $(lsof -t -i:7001)
 
 after_success:
