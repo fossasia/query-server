@@ -11,7 +11,7 @@ services:
 
 install:
   - pip install --upgrade pip setuptools wheel
-  - pip install codecov flake8 pytest -r requirements.txt -r requirements-dev.txt
+  - pip install -r requirements.txt -r requirements-dev.txt
 before_script:
   - flake8 . --count --max-complexity=16 --show-source --statistics
 
