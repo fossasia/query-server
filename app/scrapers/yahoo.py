@@ -29,7 +29,7 @@ class Yahoo(Scraper):
         """
         urls = []
         for h in soup.findAll('h3', attrs={'class': 'title'}):
-            t = h.findAll('a', attrs={'class': ' ac-algo fz-l ac-21th lh-24'})
+            t = h.findAll('a', attrs={'class': 'ac-algo fz-l ac-21th lh-24'})
             for y in t:
                 r = y.get('href')
                 f = r.split('RU=')
